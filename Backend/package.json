@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Back en nodejs utilisant express, et mysql en lien avec phpmyadmin sans utilisation d'ORM pour les requêtes à la BDD",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "run": "nodemon server.js"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "BDD",
+    "MySql"
+  ],
+  "author": "Maxime Bélard",
+  "license": "ISC"
+}
