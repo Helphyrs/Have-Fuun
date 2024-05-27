@@ -11,8 +11,8 @@ module.exports = {
 
     addUser: async (db, user) => {
         try {
-            const [results] = await db.execute('INSERT INTO Users (name, email, has_accepted_terms) VALUES (?, ?, ?)',
-                [user.name, user.email, user.has_accepted_terms]);
+            const [results] = await db.execute('INSERT INTO Users (pseudo, email, password, avatar) VALUES (?, ?, ?)',
+                [user.pseudo, user.email, user.password, user.avatar]);
             return results.insertId;
         } catch (error) {
             console.error('Erreur lors de la création de l\'utilisateur :', error);
@@ -22,8 +22,8 @@ module.exports = {
 
     editUserById: async (db, userId, user) => {
         try {
-            await db.execute('UPDATE Users SET name = ?, email = ?, has_accepted_terms = ? WHERE ID = ?',
-                [user.name, user.email, user.has_accepted_terms, userId]);
+            await db.execute('UPDATE Users SET pseudo = ?, email = ?, password = ?, avatar = ? WHERE ID = ?',
+                [user.pseudo, user.email, user.password, user.avatar, userId]);
         } catch (error) {
             console.error('Erreur lors de la mise à jour de l\'utilisateur :', error);
             throw error;

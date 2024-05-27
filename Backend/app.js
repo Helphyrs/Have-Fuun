@@ -13,7 +13,6 @@ const userRoads = require('./Routes/userRoad');
 const authRoads = require('./Routes/authRoad');
 const articleRoads = require('./Routes/articleRoad');
 const commentRoads = require('./Routes/commentRoad');
-const adminRoads = require('./Routes/adminRoad');
 
 app.use(express.static('public'))
 app.use(bodyParser.json())
@@ -26,8 +25,7 @@ app.use(dbMiddleware);
 
 app.use('/api/connect', authRoads);
 app.use('/api/users', userRoads);
-// app.use('/api/articles', articleRoads);
-// app.use('/api/comments', commentRoads);
-// app.use('/api/admin', adminRoads);
+app.use('/api/articles', articleRoads);
+app.use('/api/comments', commentRoads);
 
 module.exports = app

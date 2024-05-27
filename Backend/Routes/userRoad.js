@@ -3,9 +3,10 @@ const router = express.Router();
 const userController = require('../Controllers/userController')
 const { auth } = require('../Middlewares/auth');
 
-router.get('/:id', auth, userController.getUserById)
 router.post('/', userController.addUser)
-router.put('/:id', auth, userController.editUserById)
-router.delete('/:id', auth, userController.deleteUserById)
+
+router.get('/', auth, userController.getUserById)
+router.put('/', auth, userController.editUserById)
+router.delete('/', auth, userController.deleteUserById)
 
 module.exports = router

@@ -1,0 +1,21 @@
+const { getUserById } = require('../Models/user');
+
+const admin = async (req, res, next) => {
+    try {
+        const userId = req.userInfo.userId;
+        const user = await getUserById(req.db, userId);
+        if (user && user.role === 1) {
+            console.log('bonjour Mr l\'admin');
+            next();
+        } else {
+            res.status(403).send('Access forbidden: Admins only');
+        }
+    } catch (error) {
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+module.exports = { admin };
+
+
+
