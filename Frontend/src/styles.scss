@@ -1,1 +1,230 @@
 /* You can add global styles to this file, and also import other style files */
+
+html {
+    font-size: 62.5%; // le font-size est à 10 px maintenant par défaut donc en faisant 1.2rem on obtient 12px
+    box-sizing: content-box;
+    margin: 0;
+}
+
+// DISPLAY
+
+.none {
+    display: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.grid {
+    display: grid;
+}
+
+.block {
+    display: block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+// POSITION ; Z-INDEX
+
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+// WIDTH ; HEIGHT 
+
+.max-width {
+    max-width: 100%;
+}
+
+.half-width {
+    max-width: 50%;
+}
+
+.half-height {
+    max-height: 50%;
+}
+
+.quarter-width {
+    max-height: 25%;
+}
+
+.quarter-height {
+    max-height: 25%;
+}
+
+// MARGIN PADDING 
+
+.no-margin {
+    margin: 0;
+}
+
+.margin-vertical {
+    margin: 1rem 0;
+}
+
+.margin-horizontal {
+    margin: 0 1rem;
+}
+
+.margin-top {
+    margin-top: 1.5rem;
+}
+
+.margin-bottom {
+    margin-bottom: 1.5rem;
+}
+
+.margin-left {
+    margin-left: 1.5rem;
+}
+
+.margin-right {
+    margin-right: 1.5rem;
+}
+
+.margin,
+.adaptative-margin {
+    margin: 1rem;
+}
+
+.padding-vertical {
+    padding: 1rem 0;
+}
+
+.padding-horizontal {
+    padding: 0 1rem;
+}
+
+.padding,
+.adaptative-padding {
+    padding: 1rem;
+}
+
+// FLEX 
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-justify-around {
+    justify-content: space-around;
+}
+
+.flex-justify-evenly {
+    justify-content: space-evenly;
+}
+
+.flex-justify-between {
+    justify-content: space-between;
+}
+
+.flex-justify-center {
+    justify-content: center;
+}
+
+.flex-align-center {
+    align-items: center;
+}
+
+// TAILLES ; COULEURS ; STYLES DE TEXTES
+
+.text-center {
+    text-align: center;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.small-size {
+    font-size: 1.2rem;
+}
+
+.medium-size {
+    font-size: 1.8rem;
+}
+
+.large-size {
+    font-size: 2.4rem;
+}
+
+.adaptative-size {
+    font-size: 1.6rem;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.text-decoration-none {
+    text-decoration: none;
+}
+
+// BOUTONS 
+
+button {
+    cursor: pointer;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.shadow-box {
+    box-shadow: 0.4rem 0.4rem 0.4rem 0rem rgba(0, 0, 0, 0.1);
+}
+
+
+@media screen and (min-width: 540px) {
+
+    .adaptative-size {
+        font-size: 1.8rem;
+    }
+
+    .adaptative-padding {
+        padding: 1.5rem;
+    }
+
+    .adaptative-margin {
+        margin: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+
+    .adaptative-size {
+        font-size: 2rem;
+    }
+
+    .adaptative-padding {
+        padding: 1.5rem;
+    }
+
+    .adaptative-margin {
+        margin: 1.5rem;
+    }
+}
