@@ -15,12 +15,8 @@ module.exports = {
     getAllArticleInfoByName: async (req, res) => {
         try {
             const articleName = req.params.name;
-            const article = await articleModel.getArticleWithComments(req.db, articleName);
-            if (article) {
-                res.status(200).send(article);
-            } else {
-                res.status(404).send('Article not found');
-            }
+            const articleWithComment = await articleModel.getArticleWithComments(req.db, articleName);
+            articleWithComment ? res.status(200).send(articleWithComment) : res.status(404).send('Article not found');
         } catch (error) {
             console.error('Error while fetching article by name:', error);
             res.status(500).send('Internal Server Error');

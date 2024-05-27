@@ -6,11 +6,7 @@ module.exports = {
         try {
             const userId = req.userInfo.userId;
             const user = await userModel.getUserById(req.db, userId);
-            if (user) {
-                res.status(200).send(user);
-            } else {
-                res.status(404).send('User not found');
-            }
+            user ? res.status(200).send(user) : res.status(404).send('User not found');
         } catch (error) {
             res.status(500).send('Internal Server Error');
         }
