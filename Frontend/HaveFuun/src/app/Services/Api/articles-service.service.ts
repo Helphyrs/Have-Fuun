@@ -17,10 +17,10 @@ export class ArticlesServiceService {
     return this.http.get<Article[]>(`${this.apiUrlArticle}/all`)
   }
   getArticleById(articleId: number): Observable<Article> {
-    return this.http.get<Article>(`${this.apiUrlArticle}/${articleId}`)
+    return this.http.get<Article>(`${this.apiUrlArticle}/article/${articleId}`)
   }
-  getArticleByName(name: string): Observable<Article> {
-    return this.http.get<Article>(`${this.apiUrlArticle}/${name}`)
+  getAllArticleInfoByName(name: string): Observable<Article> {
+    return this.http.get<Article>(`${this.apiUrlArticle}/name/${name}`)
   }
 
   addArticle(article: Article): Observable<any> {

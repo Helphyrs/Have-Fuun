@@ -10,7 +10,7 @@ module.exports = {
                 return res.status(400).send('Invalid result. Must be a number between -10 and 10.');
             }
 
-            const formResultId = await formResultModel.addFormResult(req.db, formId, userId, result);
+            const formResultId = await formResultModel.addFormResult(req.app.locals.db, formId, userId, result);
             res.status(201).send(`Form result added with ID: ${formResultId}`);
         } catch (error) {
             console.error(error);

@@ -14,10 +14,15 @@ export class ArticlesComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
-  articles!: Observable<Article[]>;
+  data!: Observable<Article[]>;
+  articles: Article[] = [];
 
   ngOnInit(): void {
-    this.articles = this.activatedRoute.data.pipe(map((data: { [x: string]: any; }) => data['articles']));
+    this.data = this.activatedRoute.data.pipe(map((data: { [x: string]: any; }) => data['articles']));
+    this.data.forEach(info => {
+      this.articles = info
+
+    });
     console.log(this.articles);
   }
 

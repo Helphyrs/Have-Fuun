@@ -1,4 +1,4 @@
-module.exports = (req, next) => {
-    req.db = req.app.locals.db;
+module.exports = (dbConnection) => (req, res, next) => {
+    req.db = dbConnection
     next();
 };

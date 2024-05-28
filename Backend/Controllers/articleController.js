@@ -5,7 +5,7 @@ module.exports = {
     getArticleById: async (req, res) => {
         try {
             const articleId = req.params.articleId;
-            const article = await articleModel.getArticleById(req.db, articleId);
+            const article = await articleModel.getArticleById(req.app.locals.db, articleId);
             article ? res.status(200).send(article) : res.status(404).send('Article not found');
         } catch (error) {
             res.status(500).send('Internal Server Error');
@@ -15,8 +15,11 @@ module.exports = {
     getAllArticleInfoByName: async (req, res) => {
         try {
             const articleName = req.params.name;
-            const articleWithComment = await articleModel.getArticleWithComments(req.db, articleName);
-            articleWithComment ? res.status(200).send(articleWithComment) : res.status(404).send('Article not found');
+            const article = await articleModel.getArticleByName(req.app.locals.db, articleName)
+            if (!article) res.status(404).send('Article not found')
+            const commentInfoByArticle = await articleModel.getCommentInfoByArticleName(req.app.locals.db, articleName);
+            let info = { article, commentInfoByArticle }
+            res.status(200).send(info)
         } catch (error) {
             console.error('Error while fetching article by name:', error);
             res.status(500).send('Internal Server Error');
@@ -25,7 +28,7 @@ module.exports = {
 
     getAllArticles: async (req, res) => {
         try {
-            const articles = await articleModel.getAllArticles(req.db);
+            const articles = await articleModel.getAllArticles(req.app.locals.db);
             res.status(200).send(articles);
         } catch (error) {
             console.error('Error while fetching all articles:', error);
@@ -36,7 +39,7 @@ module.exports = {
     addArticle: async (req, res) => {
         try {
             const article = req.body;
-            const articleId = await articleModel.addArticle(req.db, article);
+            const articleId = await articleModel.addArticle(req.app.locals.db, article);
             res.status(201).send(`Article added with ID: ${articleId}`);
         } catch (error) {
             res.status(500).send('Internal Server Error');
@@ -47,7 +50,7 @@ module.exports = {
         try {
             const articleId = req.params.articleId;
             const article = req.body;
-            await articleModel.editArticleById(req.db, articleId, article);
+            await articleModel.editArticleById(req.app.locals.db, articleId, article);
             res.status(200).send('Article updated successfully');
         } catch (error) {
             res.status(500).send('Internal Server Error');
@@ -57,7 +60,7 @@ module.exports = {
     deleteArticleById: async (req, res) => {
         try {
             const articleId = req.params.articleId;
-            await articleModel.deleteArticleById(req.db, articleId);
+            await articleModel.deleteArticleById(req.app.locals.db, articleId);
             res.status(200).send('Article deleted successfully');
         } catch (error) {
             res.status(500).send('Internal Server Error');

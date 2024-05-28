@@ -3,7 +3,7 @@ const formModel = require('../Models/form');
 module.exports = {
     getAllForms: async (req, res) => {
         try {
-            const forms = await formModel.getAllForms(req.db);
+            const forms = await formModel.getAllForms(req.app.locals.db);
             res.status(200).send(forms);
         } catch (error) {
             console.error('Error while fetching all forms:', error);
@@ -14,7 +14,7 @@ module.exports = {
     getFormById: async (req, res) => {
         try {
             const formId = req.params.formId;
-            const form = await formModel.getFormById(req.db, formId);
+            const form = await formModel.getFormById(req.app.locals.db, formId);
             form ? res.status(200).send(form) : res.status(404).send('Form not found');
         } catch (error) {
             console.error('Error while fetching form by ID:', error);
@@ -25,7 +25,7 @@ module.exports = {
     getFormByName: async (req, res) => {
         try {
             const formName = req.params.name;
-            const form = await formModel.getFormByName(req.db, formName);
+            const form = await formModel.getFormByName(req.app.locals.db, formName);
             form ? res.status(200).send(form) : res.status(404).send('Form not found');
         } catch (error) {
             console.error('Error while fetching form by name:', error);
@@ -36,7 +36,7 @@ module.exports = {
     addForm: async (req, res) => {
         try {
             const form = req.body;
-            const formId = await formModel.addForm(req.db, form);
+            const formId = await formModel.addForm(req.app.locals.db, form);
             res.status(201).send(`Form added with ID: ${formId}`);
         } catch (error) {
             console.error('Error while adding form:', error);
@@ -48,7 +48,7 @@ module.exports = {
         try {
             const formId = req.params.formId;
             const form = req.body;
-            await formModel.editFormById(req.db, formId, form);
+            await formModel.editFormById(req.app.locals.db, formId, form);
             res.status(200).send('Form updated successfully');
         } catch (error) {
             console.error('Error while updating form:', error);
@@ -59,7 +59,7 @@ module.exports = {
     deleteFormById: async (req, res) => {
         try {
             const formId = req.params.formId;
-            await formModel.deleteFormById(req.db, formId);
+            await formModel.deleteFormById(req.app.locals.db, formId);
             res.status(200).send('Form deleted successfully');
         } catch (error) {
             console.error('Error while deleting form:', error);

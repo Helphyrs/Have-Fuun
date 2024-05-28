@@ -56,6 +56,21 @@ module.exports = {
             throw error;
         }
     },
+    getCommentInfoByArticleName: async (db, articleName) => {
+        try {
+            const [results] = await db.execute(`
+            SELECT c.content, u.pseudo, u.avatar
+            FROM Articles a
+            LEFT JOIN Comments c ON a.ID_article = c.ID_article
+            LEFT JOIN Users u ON c.ID_user = u.ID
+            WHERE a.name = ?
+        `, [articleName]);
+            return results
+        } catch (error) {
+            console.error('Error while fetching comments by articleName:', error);
+            throw error;
+        }
+    },
 
     editArticleById: async (db, articleId, article) => {
         try {

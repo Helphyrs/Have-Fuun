@@ -8,7 +8,7 @@ const port = process.env.PORT
 const startServer = async port => {
     try {
         const connection = await bd.connectDB();
-        app.locals.bd = connection;
+        app.locals.db = connection
         app.listen(port, () => {
             console.log(`Server is listening on http://localhost:${port}/api`);
         }).on('error', (err) => {
@@ -27,4 +27,3 @@ const startServer = async port => {
 }
 
 startServer(port)
-

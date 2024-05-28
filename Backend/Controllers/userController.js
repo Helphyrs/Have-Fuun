@@ -5,7 +5,7 @@ module.exports = {
     getUserById: async (req, res) => {
         try {
             const userId = req.params.userId;
-            const user = await userModel.getUserById(req.db, userId);
+            const user = await userModel.getUserById(req.app.locals.db, userId);
             user ? res.status(200).send(user) : res.status(404).send('User not found');
         } catch (error) {
             res.status(500).send('Internal Server Error');
@@ -19,7 +19,7 @@ module.exports = {
             if (user.hasAcceptedTerms === true) {
                 const hashedPassword = await bcrypt.hash(user.password, 10);
                 user.password = hashedPassword
-                const userId = await userModel.addUser(req.db, user, role);
+                const userId = await userModel.addUser(req.app.locals.db, user, role);
                 res.status(201).send(`User added with ID: ${userId}`);
             }
             res.status(403).send('Terms have not been accepted')
@@ -33,13 +33,13 @@ module.exports = {
             const userId = req.params.userId;
             const user = req.body;
             if (!user.password) {
-                const currentUser = await userModel.getUserPassword(req.db, userId);
+                const currentUser = await userModel.getUserPassword(req.app.locals.db, userId);
                 user.password = currentUser.password;
             } else {
                 const hashedPassword = await bcrypt.hash(user.password, 10);
                 user.password = hashedPassword;
             }
-            await userModel.editUserById(req.db, userId, user);
+            await userModel.editUserById(req.app.locals.db, userId, user);
             res.status(200).send('User updated successfully');
         } catch (error) {
             res.status(500).send('Internal Server Error');
@@ -49,7 +49,7 @@ module.exports = {
     deleteUserById: async (req, res) => {
         try {
             const userId = req.params.userId;
-            await userModel.deleteUserById(req.db, userId);
+            await userModel.deleteUserById(req.app.locals.db, userId);
             res.status(200).send('User deleted successfully');
         } catch (error) {
             res.status(500).send('Internal Server Error');
