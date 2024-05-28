@@ -1,4 +1,4 @@
-const formModel = require('../models/formModel');
+const formModel = require('../Models/form');
 
 module.exports = {
     getAllForms: async (req, res) => {
@@ -67,4 +67,3 @@ module.exports = {
         }
     }
 };
-s

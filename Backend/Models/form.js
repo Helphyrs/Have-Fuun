@@ -2,10 +2,10 @@ module.exports = {
 
     addForm: async (db, form) => {
         try {
-            const { name, description, topic_A, topic_B, topic_C } = form;
+            const { name, description, question, topic_A, topic_B, topic_C } = form;
             const [results] = await db.execute(
-                'INSERT INTO Form (name, description, topic_A, topic_B, topic_C) VALUES (?, ?, ?, ?, ?)',
-                [name, description, topic_A, topic_B, topic_C]
+                'INSERT INTO Form (name, description, question, topic_A, topic_B, topic_C) VALUES (?, ?, ?, ?, ?, ?)',
+                [name, description, question, topic_A, topic_B, topic_C]
             );
             return results.insertId;
         } catch (error) {
@@ -19,6 +19,7 @@ module.exports = {
             const [results] = await db.execute('SELECT * FROM Form WHERE ID_form = ?', [formId]);
             const form = results[0];
             if (form) {
+                form.question = form.question ? form.question.split(',') : [];
                 form.topic_A = form.topic_A ? form.topic_A.split(',') : [];
                 form.topic_B = form.topic_B ? form.topic_B.split(',') : [];
                 form.topic_C = form.topic_C ? form.topic_C.split(',') : [];
@@ -35,6 +36,7 @@ module.exports = {
             const [results] = await db.execute('SELECT * FROM Form WHERE name = ?', [formName]);
             const form = results[0];
             if (form) {
+                form.question = form.question ? form.question.split(',') : [];
                 form.topic_A = form.topic_A ? form.topic_A.split(',') : [];
                 form.topic_B = form.topic_B ? form.topic_B.split(',') : [];
                 form.topic_C = form.topic_C ? form.topic_C.split(',') : [];
@@ -48,12 +50,7 @@ module.exports = {
 
     getAllForms: async (db) => {
         try {
-            const [results] = await db.execute('SELECT * FROM Form');
-            results.forEach(form => {
-                form.topic_A = form.topic_A ? form.topic_A.split(',') : [];
-                form.topic_B = form.topic_B ? form.topic_B.split(',') : [];
-                form.topic_C = form.topic_C ? form.topic_C.split(',') : [];
-            });
+            const [results] = await db.execute('SELECT name FROM Form');
             return results;
         } catch (error) {
             console.error('Error while fetching all forms:', error);
@@ -63,10 +60,10 @@ module.exports = {
 
     editFormById: async (db, formId, form) => {
         try {
-            const { name, description, topic_A, topic_B, topic_C } = form;
+            const { name, description, question, topic_A, topic_B, topic_C } = form;
             await db.execute(
-                'UPDATE Form SET name = ?, description = ?, topic_A = ?, topic_B = ?, topic_C = ? WHERE ID_form = ?',
-                [name, description, topic_A, topic_B, topic_C, formId]
+                'UPDATE Form SET name = ?, description = ?, question = ?, topic_A = ?, topic_B = ?, topic_C = ? WHERE ID_form = ?',
+                [name, description, question, topic_A, topic_B, topic_C, formId]
             );
         } catch (error) {
             console.error('Error while updating form:', error);
