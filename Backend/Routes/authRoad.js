@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const authController = require('../Controllers/authController')
+const authController = require('../Controllers/authController');
+const { sanitize } = require('../Middlewares/sanitize');
 
-router.post('/login', authController.loginUser)
+router.post('/login', authController.loginUser);
 
-module.exports = router
+module.exports = router;

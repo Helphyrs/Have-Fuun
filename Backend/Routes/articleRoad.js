@@ -5,7 +5,7 @@ const { auth } = require('../Middlewares/auth');
 const { admin } = require('../Middlewares/admin')
 
 router.get('/:articleId', articleController.getArticleById);
-router.get('/:name', articleController.getAllArticleInfoByName);
+router.get('/name/:name', articleController.getAllArticleInfoByName);
 router.get('/all', articleController.getAllArticles);
 
 

@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 module.exports = {
     getUserById: async (req, res) => {
         try {
-            const userId = req.userInfo.userId;
+            const userId = req.params.userId;
             const user = await userModel.getUserById(req.db, userId);
             user ? res.status(200).send(user) : res.status(404).send('User not found');
         } catch (error) {
@@ -15,10 +15,13 @@ module.exports = {
     addUser: async (req, res) => {
         try {
             const user = req.body;
-            const hashedPassword = await bcrypt.hash(user.password, 10);
-            user.password = hashedPassword
-            const userId = await userModel.addUser(req.db, user);
-            res.status(201).send(`User added with ID: ${userId}`);
+            if (user.hasAcceptedTerms === true) {
+                const hashedPassword = await bcrypt.hash(user.password, 10);
+                user.password = hashedPassword
+                const userId = await userModel.addUser(req.db, user);
+                res.status(201).send(`User added with ID: ${userId}`);
+            }
+            res.status(403).send('Terms have not been accepted')
         } catch (error) {
             res.status(500).send('Internal Server Error');
         }
@@ -26,7 +29,7 @@ module.exports = {
 
     editUserById: async (req, res) => {
         try {
-            const userId = req.userInfo.userId;
+            const userId = req.params.userId;
             const user = req.body;
             if (!user.password) {
                 const currentUser = await userModel.getUserById(req.db, userId);
@@ -44,7 +47,7 @@ module.exports = {
 
     deleteUserById: async (req, res) => {
         try {
-            const userId = req.userInfo.userId;
+            const userId = req.params.userId;
             await userModel.deleteUserById(req.db, userId);
             res.status(200).send('User deleted successfully');
         } catch (error) {
