@@ -38,7 +38,7 @@ module.exports = {
 
     getCommentsByUser: async (req, res) => {
         try {
-            const userId = req.userInfos.userId;
+            const userId = req.params.userId;
             const comments = await commentModel.getCommentsByUser(req.db, userId);
             res.status(200).send(comments);
         } catch (error) {

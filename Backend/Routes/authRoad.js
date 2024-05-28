@@ -3,6 +3,6 @@ const router = express.Router();
 const authController = require('../Controllers/authController');
 const { sanitize } = require('../Middlewares/sanitize');
 
-router.post('/login', authController.loginUser);
+router.post('/', sanitize, authController.loginUser);
 
 module.exports = router;

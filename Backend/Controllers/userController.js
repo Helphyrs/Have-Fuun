@@ -15,10 +15,11 @@ module.exports = {
     addUser: async (req, res) => {
         try {
             const user = req.body;
+            const role = 3;
             if (user.hasAcceptedTerms === true) {
                 const hashedPassword = await bcrypt.hash(user.password, 10);
                 user.password = hashedPassword
-                const userId = await userModel.addUser(req.db, user);
+                const userId = await userModel.addUser(req.db, user, role);
                 res.status(201).send(`User added with ID: ${userId}`);
             }
             res.status(403).send('Terms have not been accepted')
@@ -32,7 +33,7 @@ module.exports = {
             const userId = req.params.userId;
             const user = req.body;
             if (!user.password) {
-                const currentUser = await userModel.getUserById(req.db, userId);
+                const currentUser = await userModel.getUserPassword(req.db, userId);
                 user.password = currentUser.password;
             } else {
                 const hashedPassword = await bcrypt.hash(user.password, 10);
