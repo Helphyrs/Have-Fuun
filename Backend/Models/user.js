@@ -11,7 +11,7 @@ module.exports = {
 
     addUser: async (db, user) => {
         try {
-            const [results] = await db.execute('INSERT INTO Users (pseudo, email, password, avatar) VALUES (?, ?, ?)',
+            const [results] = await db.execute('INSERT INTO Users (pseudo, email, password, avatar) VALUES (?, ?, ?, ?)',
                 [user.pseudo, user.email, user.password, user.avatar]);
             return results.insertId;
         } catch (error) {

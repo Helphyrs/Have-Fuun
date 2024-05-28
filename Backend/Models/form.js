@@ -2,10 +2,10 @@ module.exports = {
 
     addForm: async (db, form) => {
         try {
-            const { name, description, question, topic_A, topic_B, topic_C } = form;
+            const { name, question, topic_A, topic_B, topic_C } = form;
             const [results] = await db.execute(
-                'INSERT INTO Form (name, description, question, topic_A, topic_B, topic_C) VALUES (?, ?, ?, ?, ?, ?)',
-                [name, description, question, topic_A, topic_B, topic_C]
+                'INSERT INTO Form (name, question, topic_A, topic_B, topic_C) VALUES (?, ?, ?, ?, ?)',
+                [name, question, topic_A, topic_B, topic_C]
             );
             return results.insertId;
         } catch (error) {
@@ -60,10 +60,10 @@ module.exports = {
 
     editFormById: async (db, formId, form) => {
         try {
-            const { name, description, question, topic_A, topic_B, topic_C } = form;
+            const { name, question, topic_A, topic_B, topic_C } = form;
             await db.execute(
-                'UPDATE Form SET name = ?, description = ?, question = ?, topic_A = ?, topic_B = ?, topic_C = ? WHERE ID_form = ?',
-                [name, description, question, topic_A, topic_B, topic_C, formId]
+                'UPDATE Form SET name = ?, question = ?, topic_A = ?, topic_B = ?, topic_C = ? WHERE ID_form = ?',
+                [name, question, topic_A, topic_B, topic_C, formId]
             );
         } catch (error) {
             console.error('Error while updating form:', error);

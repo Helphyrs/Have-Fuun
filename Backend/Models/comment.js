@@ -1,7 +1,7 @@
 module.exports = {
     addComment: async (db, userId, articleId, content) => {
         try {
-            const [result] = await db.query('INSERT INTO Comments (ID_user,ID_article, content) VALUES (?, ?)', [userId, articleId, content]);
+            const [result] = await db.query('INSERT INTO Comments (ID_user,ID_article, content) VALUES (?, ?, ?)', [userId, articleId, content]);
             return result.insertId;
         } catch (error) {
             console.error('Error while adding comment:', error);
