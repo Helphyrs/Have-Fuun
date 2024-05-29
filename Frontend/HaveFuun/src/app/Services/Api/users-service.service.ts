@@ -14,13 +14,13 @@ export class UsersServiceService {
   apiUrlUsers: string = environment.apiUrlUsers
 
   addUser(user: UserWithCcg): Observable<any> {
-    return this.http.post<any>(`${this.apiUrlUsers}/`, { user })
+    return this.http.post<any>(`${this.apiUrlUsers}/`, user)
   }
   getUserById(userId: number): Observable<UserWithoutPassword> {
     return this.http.get<UserWithoutPassword>(`${this.apiUrlUsers}/${userId}`)
   }
   editUserById(userId: number, user: User | UserWithoutPassword): Observable<any> {
-    return this.http.put<any>(`${this.apiUrlUsers}/${userId}`, { user })
+    return this.http.put<any>(`${this.apiUrlUsers}/${userId}`, user)
   }
   deleteUserById(userId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrlUsers}/${userId}`)

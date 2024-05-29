@@ -14,7 +14,7 @@ export class AuthServiceService {
   apiUrlConnect: string = environment.apiUrlConnect;
 
   login(auth: Login): Observable<any> {
-    return this.http.post<any>(`${this.apiUrlConnect}/`, { auth })
+    return this.http.post<any>(`${this.apiUrlConnect}/`, auth)
   }
 
 }

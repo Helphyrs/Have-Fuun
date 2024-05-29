@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../../../Services/Api/auth-service.service';
 import { Login } from '../../../Models/userModel';
+import { LocalStorageService } from '../../../Services/Website/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,10 @@ export class LoginComponent implements OnInit {
   @ViewChild('container', { static: true }) container!: ElementRef;
   @ViewChild('modal', { static: true }) modal!: ElementRef;
 
-  constructor(private formBuilder: FormBuilder, private aS: AuthServiceService, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder, private aS: AuthServiceService,
+    private router: Router, private lS: LocalStorageService
+  ) { }
 
   signInForm!: FormGroup;
   errorMessage: string = "";
@@ -51,6 +55,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.aS.login(login).subscribe(data => {
+      this.lS.setLocalStorage("token", data.token)
       this.stopDisplay();
       this.router.navigate(['home']);
     })

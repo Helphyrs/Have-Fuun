@@ -16,13 +16,15 @@ module.exports = {
         try {
             const user = req.body;
             const role = 3;
-            if (user.hasAcceptedTerms === true) {
+            if (user.hasAcceptedTerms === 'true') {
                 const hashedPassword = await bcrypt.hash(user.password, 10);
                 user.password = hashedPassword
                 const userId = await userModel.addUser(req.app.locals.db, user, role);
                 res.status(201).send(`User added with ID: ${userId}`);
+            } else {
+                res.status(403).send('Terms have not been accepted')
             }
-            res.status(403).send('Terms have not been accepted')
+
         } catch (error) {
             res.status(500).send('Internal Server Error');
         }

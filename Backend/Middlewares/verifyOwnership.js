@@ -1,7 +1,7 @@
 const commentModel = require('../Models/comment');
 
 const verifyCommentOwnership = async (req, res, next) => {
-    const commentId = req.params.commentId;
+    const commentId = parseInt(req.params.commentId);
     const userId = req.userInfo.userId;
     try {
         const isOwner = await commentModel.verifyCommentOwnership(req.db, commentId, userId);
@@ -14,7 +14,7 @@ const verifyCommentOwnership = async (req, res, next) => {
 };
 
 const verifyUserOwnership = async (req, res, next) => {
-    const userId = req.params.userId;
+    const userId = parseInt(req.params.userId);
     const tokenUserId = req.userInfo.userId;
     userId === tokenUserId ? next() : res.status(403).send('Acces forbidden. You do not have the right ID');
 }

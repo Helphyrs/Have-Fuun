@@ -7,8 +7,8 @@ const { verifyUserOwnership } = require('../Middlewares/verifyOwnership');
 
 router.post('/', sanitize, userController.addUser);
 
-router.get('/:userId', auth, verifyUserOwnership, userController.getUserById);
-router.put('/:userId', auth, verifyUserOwnership, sanitize, userController.editUserById);
-router.delete('/:userId', auth, verifyUserOwnership, userController.deleteUserById);
+router.get('/:userId', auth, sanitize, verifyUserOwnership, userController.getUserById);
+router.put('/:userId', auth, sanitize, verifyUserOwnership, userController.editUserById);
+router.delete('/:userId', auth, sanitize, verifyUserOwnership, userController.deleteUserById);
 
 module.exports = router;
