@@ -1,1 +1,31 @@
-<p>header works!</p>
+<header class="flex flex-column flex-align-center">
+    <div class="flex flex-justify-between flex-align-center container">
+        <div class="flex flex-align-center">
+            <img src="../../../../assets/public/Have_Fuun_Doggo.webp" alt="Logo du site, chien dans une borne de jeu"
+                class="logo-image">
+            <h2 class="large-size text-capitalize text-color-purple">have fuun!</h2>
+        </div>
+        <div class="flex flex-align-center">
+            <i class="fa-solid fa-user margin-right text-color-purple large-size pointer" (click)="displayModal()"></i>
+        </div>
+    </div>
+    <nav class="flex flex-column flex-align-center container-nav margin-top">
+        <div class="container border-nav-a border-radius margin-bottom">
+            <a class="block pointer adaptative-size text-color-gray text-bold text-center text-capitalize border-radius"
+                routerLink="/forms">formulaires</a>
+        </div>
+        <div class="container border-nav-a border-radius margin-bottom ">
+            <a class="block pointer adaptative-size text-color-gray text-bold text-center text-capitalize border-radius"
+                routerLink="/articles">articles</a>
+        </div>
+    </nav>
+
+    @if(displayLogIn) {
+    <app-login (displaySignInChange)="display($event)" (displaySignUpChange)="startDisplaySignUp($event)"></app-login>
+    }
+
+    @if(displaySignUp) {
+    <app-sign-up (displaySignUpChange)="startDisplaySignUp($event)"></app-sign-up>
+    }
+
+</header>

@@ -1,7 +1,15 @@
+* {
+    margin: 0;
+    font-family: Montserrat, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
 html {
     font-size: 62.5%; // le font-size est à 10 px maintenant par défaut donc en faisant 1.2rem on obtient 12px
     box-sizing: content-box;
-    margin: 0;
 }
 
 // DISPLAY
@@ -72,6 +80,10 @@ html {
     margin: 0 1rem;
 }
 
+.small-margin-top {
+    margin-top: 0.5rem
+}
+
 .margin-top {
     margin-top: 1.5rem;
 }
@@ -91,6 +103,10 @@ html {
 .margin,
 .adaptative-margin {
     margin: 1rem;
+}
+
+.no-padding {
+    padding: 0;
 }
 
 .padding-vertical {
@@ -138,6 +154,30 @@ html {
 
 // TAILLES ; COULEURS ; STYLES DE TEXTES
 
+.text-color-gray {
+    color: #37332A;
+}
+
+.text-color-beige {
+    color: #E0CDA5;
+}
+
+.text-color-purple {
+    color: #7D0293;
+}
+
+.background-color {
+    background-color: #F1F1F1;
+}
+
+.background-color-button {
+    background-color: #E0CDA5;
+}
+
+.background-color-button-two {
+    background-color: #7D0293;
+}
+
 .text-center {
     text-align: center;
 }
@@ -170,16 +210,26 @@ html {
     font-size: 1.6rem;
 }
 
-.bold {
+.text-bold {
     font-weight: bold;
 }
 
-.uppercase {
+.text-uppercase {
     text-transform: uppercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
 }
 
 .text-decoration-none {
     text-decoration: none;
+}
+
+// BORDER
+
+.border-radius {
+    border-radius: 2rem;
 }
 
 // BOUTONS 

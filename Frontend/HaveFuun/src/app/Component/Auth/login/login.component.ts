@@ -1,0 +1,66 @@
+import { Component, Output, EventEmitter, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthServiceService } from '../../../Services/Api/auth-service.service';
+import { Login } from '../../../Models/userModel';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
+})
+export class LoginComponent implements OnInit {
+
+  @Output() displaySignInChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() displaySignUpChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @ViewChild('container', { static: true }) container!: ElementRef;
+  @ViewChild('modal', { static: true }) modal!: ElementRef;
+
+  constructor(private formBuilder: FormBuilder, private aS: AuthServiceService, private router: Router) { }
+
+  signInForm!: FormGroup;
+  errorMessage: string = "";
+
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  ngAfterViewInit(): void {
+    this.modal.nativeElement.addEventListener('click', (event: any) => {
+      if (!this.container.nativeElement.contains(event.target)) {
+        this.stopDisplay();
+      }
+    });
+  }
+
+  initForm(): void {
+    this.signInForm = this.formBuilder.group({
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
+    });
+  }
+
+  onSubmit(): void {
+    const email = this.signInForm.get("email")?.value;
+    const password = this.signInForm.get("password")?.value;
+
+    let login: Login = {
+      email: email,
+      password: password
+    }
+
+    this.aS.login(login).subscribe(data => {
+      this.stopDisplay();
+      this.router.navigate(['home']);
+    })
+  }
+
+  stopDisplay(): void {
+    this.displaySignInChange.emit(false);
+  }
+  signUp(): void {
+    this.displaySignUpChange.emit(true);
+    this.stopDisplay();
+  }
+}

@@ -1,0 +1,67 @@
+<div class="modal-overlay" #modalSignUp>
+    <section class=" container" #containerSignUp>
+        <h2 class="text-uppercase">S'inscrire</h2>
+        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+            <div class="margin-bottom flex flex-column flex-justify-between">
+                <label for="pseudo" aria-label="Saisissez votre pseudo">Pseudo:*</label>
+                <input class="field" type="text" id="pseudo" formControlName="pseudo">
+            </div>
+            <div class="margin-bottom">
+                <label for="email" aria-label="Saisissez votre email">Email:*</label>
+                <input class="field" type="text" id="email" formControlName="email">
+            </div>
+            <div class="margin-bottom flex flex-column flex-justify-between">
+                <p class="medium-size">Choisissez votre image d'avatar:</p>
+                <div class="flex flex-justify-between">
+                    @for(image of imageArray ; track image) {
+                    <img [src]="image" alt="Avatar" (click)="selectAvatar(image)" class="logo-image pointer"
+                        [ngClass]="imageAvatar === image ? 'border-green' : ''">
+                    }
+                </div>
+            </div>
+            <div class="margin-bottom">
+                <label for="password" aria-label="Saisissez un mot de passe">Mot de passe:*</label>
+                <input class="field" type="password" id="password" formControlName="password" (input)="checkPassword()">
+            </div>
+            <div class="margin-bottom">
+                <label for="confirmPassword" aria-label="Saisissez à nouveau votre mot de passe">Confirmer le mot de
+                    passe:*</label>
+                <input class="field" type="password" id="confirmPassword" formControlName="confirmPassword"
+                    (input)="checkConfirmPassword()">
+                <ul class="margin-list no-padding">
+                    <li [ngClass]="verifyArray.min === true ? 'text-color-green' : 'text-color-red'">Formé d'un minimum
+                        de 8 caractères</li>
+                    <li [ngClass]="verifyArray.upper === true ? 'text-color-green' : 'text-color-red'">Au moins une
+                        lettre majuscule</li>
+                    <li [ngClass]="verifyArray.lower === true ? 'text-color-green' : 'text-color-red'">Au moins une
+                        lettre minuscle</li>
+                    <li [ngClass]="verifyArray.num === true ? 'text-color-green' : 'text-color-red'">Au moins un chiffre
+                    </li>
+                    <li [ngClass]="verifyArray.special === true ? 'text-color-green' : 'text-color-red'">Au moins un
+                        caractère spécial, parmi ceux-là : [#?!$%^&*-]</li>
+                    <li [ngClass]="verifyArray.confirmPass === true ? 'text-color-green' : 'text-color-red'">Doit
+                        être identique au mot de passe à confirmer</li>
+                </ul>
+            </div>
+            <div class="margin-bottom flex">
+                <input formControlName="newlestter" type="checkbox" id="newlestter">
+                <label class="line-height small-margin-left" for="newlestter" aria-label="Accepter les newsletter">En
+                    cochant
+                    cette case,
+                    j'acceptes de
+                    recevoir la newlestter</label>
+            </div>
+            <div class="margin-bottom flex">
+                <input formControlName="ccg" type="radio" id="ccg" value="true">
+                <label class="line-height small-margin-left" for="ccg"
+                    aria-label="Conditions générales et politique de confidentialités">J'accepte la
+                    condition générales et la politique de confidentialité </label>
+            </div>
+            <div class="margin-bottom">
+                <button [disabled]="!signUpForm.valid" class="signin-button text-uppercase text-bold"
+                    aria-label="Bouton pour créer un compte" type="submit">Créer un compte</button>
+            </div>
+        </form>
+        <p class="error-message">{{ errorMessage }}</p>
+    </section>
+</div>

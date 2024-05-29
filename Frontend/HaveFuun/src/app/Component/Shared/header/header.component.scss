@@ -1,0 +1,38 @@
+// BALISES
+
+header {
+    background: linear-gradient(to bottom, #ffffff, #f1f0f1);
+}
+
+h2 {}
+
+a {
+    height: 3.5rem;
+    line-height: 3.5rem;
+    transition: all 0.35s linear;
+}
+
+a:hover {
+    background-color: #E0CDA5;
+    color: #7D0293;
+}
+
+// WIDTH ; HEIGHT 
+
+.logo-image {
+    max-width: 10rem;
+}
+
+.container {
+    width: 100%;
+}
+
+.container-nav {
+    width: 95%;
+}
+
+// BORDER
+
+.border-nav-a {
+    border: 0.2rem solid #E0CDA5;
+}

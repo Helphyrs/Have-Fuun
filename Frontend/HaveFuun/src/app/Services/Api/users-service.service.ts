@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User, UserWithoutPassword } from '../../Models/userModel';
+import { UserWithCcg, UserWithoutPassword, User } from '../../Models/userModel';
 
 
 @Injectable({
@@ -13,7 +13,7 @@ export class UsersServiceService {
   constructor(private http: HttpClient) { }
   apiUrlUsers: string = environment.apiUrlUsers
 
-  addUser(user: User): Observable<any> {
+  addUser(user: UserWithCcg): Observable<any> {
     return this.http.post<any>(`${this.apiUrlUsers}/`, { user })
   }
   getUserById(userId: number): Observable<UserWithoutPassword> {

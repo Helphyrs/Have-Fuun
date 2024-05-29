@@ -1,0 +1,52 @@
+<div class="modal-overlay" #modal>
+    <section class="container" #container>
+        <h2 class="text-uppercase">Se connecter</h2>
+        <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+            <div class="margin-bottom">
+                <label class="label-size" for="email" aria-label="Écrire votre email">Email:*</label>
+                <input class="field" type="text" id="email" formControlName="email">
+            </div>
+            <div class="margin-bottom">
+                <label class="label-size" for="password" aria-label="Écrire votre mot de passe">Mot de
+                    passe:*</label>
+                <input class="field" type="password" id="password" formControlName="password">
+                <div class="text-right small-margin-top">
+                    <a class="text-color-gray" routerLink="">Mot de passe oublié ?</a>
+                </div>
+            </div>
+
+            <div class="margin-bottom">
+                <button class="signin-button pointer text-uppercase text-bold" aria-label="Bouton pour se connecter"
+                    type="submit">Se
+                    connecter</button>
+            </div>
+            <div class="flex flex-justify-center margin-bottom">
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+                <span class="dotWhite"></span>
+            </div>
+            <button (click)="signUp()" class="create text-uppercase text-bold" aria-label="Se créer un compte">Se créer
+                un
+                compte</button>
+        </form>
+        <p class="color-red text-center">{{ errorMessage }}</p>
+    </section>
+</div>
