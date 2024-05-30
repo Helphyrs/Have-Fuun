@@ -6,15 +6,17 @@ import { ArticleComponent } from './Component/Article/article/article.component'
 import { FormComponent } from './Component/Forms/form/form.component';
 import { FormsComponent } from './Component/Forms/forms/forms.component';
 import { FormsResolverService } from './Services/Resolver/forms-resolver.service';
-import { ProfilComponent } from './Component/profil/profil.component';
+import { ProfilComponent } from './Component/Profil/profil.component';
 import { UsersResolverService } from './Services/Resolver/users-resolver.service';
+import { HomeComponent } from './Component/Home/home.component';
 
 const routes: Routes = [
   { path: "articles", component: ArticlesComponent, resolve: { articles: ArticlesResolver } },
   { path: "articles/:name", component: ArticleComponent, resolve: { articleInfo: ArticlesResolver } },
   { path: "forms", component: FormsComponent, resolve: { forms: FormsResolverService } },
   { path: "forms/:name", component: FormComponent, resolve: { form: FormsResolverService } },
-  { path: "profil/:userId", component: ProfilComponent, resolve: { user: UsersResolverService } }
+  { path: "profil/:userId", component: ProfilComponent, resolve: { user: UsersResolverService } },
+  { path: "**", component: HomeComponent }
 ];
 
 @NgModule({

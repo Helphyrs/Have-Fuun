@@ -9,6 +9,7 @@ import { HeaderComponent } from './Component/Shared/header/header.component';
 import { FooterComponent } from './Component/Shared/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './Services/Interceptor/auth.interceptor';
+import { HomeComponent } from './Component/Home/home.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { AuthInterceptor } from './Services/Interceptor/auth.interceptor';
     LoginComponent,
     SignupComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
