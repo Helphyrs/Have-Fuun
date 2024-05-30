@@ -41,6 +41,7 @@ export class SignupComponent implements AfterViewInit {
   ngOnInit(): void {
     this.initInscription();
   }
+
   ngAfterViewInit(): void {
     this.modal.nativeElement.addEventListener('click', (event: any) => {
       if (!this.container.nativeElement.contains(event.target)) {

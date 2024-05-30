@@ -10,6 +10,7 @@ import { FooterComponent } from './Component/Shared/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './Services/Interceptor/auth.interceptor';
 import { HomeComponent } from './Component/Home/home.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { HomeComponent } from './Component/Home/home.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot([])
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

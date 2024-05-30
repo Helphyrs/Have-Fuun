@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
       email: email,
       password: password
     }
-
+    this.lS.clearLocalStorage();
     this.aS.login(login).subscribe(data => {
       this.lS.setLocalStorage("token", data.token)
       this.stopDisplay();

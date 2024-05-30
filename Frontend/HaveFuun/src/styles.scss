@@ -12,6 +12,11 @@ html {
     box-sizing: content-box;
 }
 
+section {
+    background: linear-gradient(180deg, rgba(241, 240, 241, 1) 0%, rgba(255, 235, 205, 1) 50%, rgba(241, 240, 241, 1) 100%);
+    min-height: 50vh
+}
+
 // DISPLAY
 
 .none {
@@ -46,6 +51,15 @@ html {
 
 // WIDTH ; HEIGHT 
 
+.container {
+    width: 100%;
+}
+
+.container-home,
+.container-nav {
+    width: 95%;
+}
+
 .max-width {
     max-width: 100%;
 }
@@ -64,6 +78,14 @@ html {
 
 .quarter-height {
     max-height: 25%;
+}
+
+.logo-image {
+    max-width: 10rem;
+}
+
+.logo-image-home {
+    max-width: 25rem;
 }
 
 // MARGIN PADDING 
@@ -90,6 +112,10 @@ html {
 
 .margin-bottom {
     margin-bottom: 1.5rem;
+}
+
+.small-margin-left {
+    margin-left: 0.5rem;
 }
 
 .margin-left {
@@ -150,6 +176,10 @@ html {
 
 .flex-align-center {
     align-items: center;
+}
+
+.flex-align-left {
+    align-items: left;
 }
 
 // TAILLES ; COULEURS ; STYLES DE TEXTES
@@ -234,6 +264,10 @@ html {
 
 .border-bottom-beige {
     border-bottom: 0.1rem solid #E0CDA5;
+}
+
+.border-beige {
+    border: 0.5rem solid #E0CDA5;
 }
 
 // BOUTONS 

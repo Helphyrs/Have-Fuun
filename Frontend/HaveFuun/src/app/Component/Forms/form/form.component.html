@@ -1,1 +1,31 @@
-<p>form works!</p>
+<section class="flex flex-column flex-align-center">
+    <h2 class="medium-size text-bold text-color-purple text-center margin-vertical">{{form.name}}</h2>
+    <form (ngSubmit)="onSubmit()" class="container">
+        @for(question of questions; track question ; let index =$index){
+        <h3 class="medium-size text-color-purple margin">{{question}}</h3>
+
+        <div class="flex flex-column flex-align-left margin">
+            <div>
+                <input required [(ngModel)]="answer[index]" type="radio" [id]="topicA[index]" [name]="topicA[index]"
+                    value="1" (ngModelChange)="verifyAnswerLength()">
+                <label class="small-margin-left label-vertical-align" [for]="topicA[index]">{{ topicA[index] }}</label>
+            </div>
+            <div>
+                <input [(ngModel)]="answer[index]" type="radio" [id]="topicB[index]" [name]="topicB[index]" value="0"
+                    (ngModelChange)="verifyAnswerLength()">
+                <label class="small-margin-left label-vertical-align" [for]="topicB[index]">{{ topicB[index] }}</label>
+            </div>
+            <div>
+                <input [(ngModel)]="answer[index]" type="radio" [id]="topicC[index]" [name]="topicC[index]" value="-1"
+                    (ngModelChange)="verifyAnswerLength()">
+                <label class="small-margin-left label-vertical-align" [for]="topicC[index]">{{ topicC[index] }}</label>
+            </div>
+        </div>
+        }
+
+        <div class="margin-bottom">
+            <button [disabled]="!isVerified" class="signin-button text-uppercase text-bold"
+                aria-label="Bouton pour créer un compte" type="submit">Envoyer le résultat</button>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,21 @@
+.label-vertical-align {
+    vertical-align: 0.35rem;
+}
+
+.signin-button {
+    width: 90%;
+    margin-left: 5%;
+    padding: 0.5rem 1rem;
+    font-size: 1.4rem;
+    border: 0.3rem solid #7D0293;
+    border-radius: 1.8rem;
+    background-color: #E0CDA5;
+    color: #37332A;
+    transition: all 0.5s linear
+}
+
+.signin-button:hover {
+    background-color: #37332A;
+    color: #E0CDA5;
+    border-color: #ffffff;
+}

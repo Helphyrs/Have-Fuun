@@ -19,7 +19,7 @@ async function loadFixtures() {
     const connection = await bd.connectDB();
     await Promise.all(users.map(async user => {
         user.password = await bcrypt.hash(user.password, 10);
-        userModel.addUser(connection, user)
+        userModel.addUser(connection, user, user.role)
     }));
     await Promise.all(articles.map(article => articleModel.addArticle(connection, article)));
     await Promise.all(comments.map(comment => commentModel.addComment(connection, comment.userId, comment.articleId, comment.content)));

@@ -1,1 +1,10 @@
-<p>forms works!</p>
+<section class="flex flex-column flex-align-center">
+    <h2 class="medium-size text-color-purple text-center margin-bottom">Voici la page de Formulaire</h2>
+    @for(form of forms ; track form) {
+    <div class="position-relative pointer parent" [routerLink]="'/forms/' + form.name">
+        <img [src]="form.avatar" [alt]="form.name">
+        <div class="child">{{form.name}}</div>
+        <div class="border-child"></div>
+    </div>
+    }
+</section>

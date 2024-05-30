@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { TreatmentJwtErrorService } from '../../../Services/Website/treatment-jwt-error.service';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +11,12 @@ export class HeaderComponent implements OnInit {
   displayLogIn: boolean = false;
   displaySignUp: boolean = false;
 
-  constructor() { }
+  constructor(private treatmentJWT: TreatmentJwtErrorService) { }
 
   ngOnInit(): void {
-
+    this.treatmentJWT.errorMessage$.subscribe(() => {
+      this.displayLogIn = true;
+    });
   }
 
   display(event: any): void {
