@@ -3,7 +3,7 @@ const commentModel = require('../Models/comment');
 module.exports = {
     addComment: async (req, res) => {
         try {
-            const userId = req.userInfos.userId
+            const userId = req.userInfo.userId
             const { content, articleId } = req.body;
             const commentId = await commentModel.addComment(req.app.locals.db, userId, articleId, content);
             res.status(201).send(`Comment added with ID: ${commentId}`);
@@ -29,7 +29,7 @@ module.exports = {
         try {
             const commentId = req.params.commentId;
             await commentModel.deleteComment(req.app.locals.db, commentId);
-            res.status(200).send('Comment deleted successfully');
+            res.status(200).send({ text: 'Comment deleted successfully' });
         } catch (error) {
             console.error(error);
             res.status(500).send('Internal Server Error');

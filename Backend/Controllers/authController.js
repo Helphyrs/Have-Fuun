@@ -11,4 +11,11 @@ module.exports = {
             res.status(500).send('Internal Server Error');
         }
     },
+    isTokenValid: (req, res) => {
+        try {
+            res.status(200).send(true);
+        } catch (error) {
+            res.status(500).send('Internal Server Error');
+        }
+    }
 };

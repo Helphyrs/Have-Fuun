@@ -11,6 +11,26 @@ module.exports = {
             res.status(500).send('Internal Server Error');
         }
     },
+    getUserByToken: async (req, res) => {
+        try {
+            const userId = req.userInfo.userId;
+            const user = await userModel.getUserById(req.app.locals.db, userId);
+            user ? res.status(200).send(user) : res.status(404).send('User not found');
+        } catch (error) {
+            res.status(500).send('Internal Server Error');
+        }
+    },
+    getAllInfoUser: async (req, res) => {
+        try {
+            const userId = req.userInfo.userId;
+            const user = await userModel.getUserById(req.app.locals.db, userId);
+            const comment = await userModel.getCommentsWithArticleNameByUserId(req.app.locals.db, userId);
+            const formResult = await userModel.getFormResultsWithFormNameByUserId(req.app.locals.db, userId);
+            user ? res.status(200).send({ user, comment, formResult }) : res.status(404).send('Info user not found')
+        } catch (error) {
+            res.status(500).send('Internal Server Error');
+        }
+    },
 
     addUser: async (req, res) => {
         try {

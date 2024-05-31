@@ -55,9 +55,10 @@ export class LoginComponent implements OnInit {
     }
     this.lS.clearLocalStorage();
     this.aS.login(login).subscribe(data => {
-      this.lS.setLocalStorage("token", data.token)
+      this.lS.setLocalStorage("token", data.token);
+      this.aS.isAuth.next(true);
       this.stopDisplay();
-      this.router.navigate(['home']);
+      this.router.navigate(['/']);
     })
   }
 

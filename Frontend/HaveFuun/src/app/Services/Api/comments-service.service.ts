@@ -17,11 +17,11 @@ export class CommentsServiceService {
   }
 
   addComment(comment: Comment): Observable<any> {
-    return this.http.post<any>(`${this.apiUrlComment}/`, { comment })
+    return this.http.post<any>(`${this.apiUrlComment}/`, comment)
   }
 
   editComment(comment: Comment, commentId: number): Observable<any> {
-    return this.http.put<any>(`${this.apiUrlComment}/${commentId}`, { comment })
+    return this.http.put<any>(`${this.apiUrlComment}/${commentId}`, comment)
   }
   deleteComment(commentId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrlComment}/${commentId}`)

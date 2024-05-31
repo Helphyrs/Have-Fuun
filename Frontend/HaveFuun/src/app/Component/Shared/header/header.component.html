@@ -5,9 +5,19 @@
                 class="logo-image">
             <h1 class="large-size text-capitalize text-color-purple">have fuun!</h1>
         </div>
+        @if (isAuth) {
+        <div class="flex flex-align-center">
+            <a class="pointer adaptative-size text-color-gray text-bold text-capitalize" routerLink="/profil">profil</a>
+            <i (click)="logout()"
+                class="fa-solid fa-power-off margin-horizontal text-color-purple large-size pointer"></i>
+        </div>
+        }
+        @else {
         <div class="flex flex-align-center">
             <i class="fa-solid fa-user margin-right text-color-purple large-size pointer" (click)="displayModal()"></i>
         </div>
+        }
+
     </div>
     <nav class="flex flex-column flex-align-center container-nav margin-top">
         <div class="container border-nav-a border-radius margin-bottom">

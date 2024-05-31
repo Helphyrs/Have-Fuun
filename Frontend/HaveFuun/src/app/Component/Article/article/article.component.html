@@ -1,3 +1,46 @@
-@for (comment of comments; track comment) {
-<div>{{comment.content}}</div>
-}
+<section class="flex flex-column flex-align-center">
+    <h2 class="medium-size text-color-purple text-center margin-bottom">Vous êtes sur l'article : {{article.name}}</h2>
+
+    <div class="flex flex-column flex-align-center">
+        <img [src]="article.avatar" [alt]="article.name">
+
+        <p class="adaptative-size text-color-gray">{{article.description}}</p>
+        @for( tag of tags ; track tag ) {
+        <button [class]="tag">{{tag}}</button>
+        }
+
+    </div>
+
+    <article class="flex flex-column flex-align-center">
+
+        <h2 class="medium-size text-color-purple text-center margin-vertical">Les commentaires de l'article</h2>
+
+        @for (comment of comments; track comment) {
+        <div class="container flex flex-column flex-align-center comment margin-vertical">
+            <h3>{{comment.pseudo}}</h3>
+            <img class="logo-image margin-vertical" [src]="comment.avatar" [alt]="comment.pseudo">
+            {{comment.content}}
+        </div>
+        }
+    </article>
+
+    <article class="flex flex-column flex-align-center">
+        <h2 class="medium-size text-color-purple text-center margin-vertical">Vous avez aimé l'article ? Alors n'hésitez
+            pas à donner votre avis !</h2>
+        <form class="container-form-comment flex flex-column flex-align-center margin-vertical"
+            [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+            <div class='container flex flex-column flex-align-center margin-bottom'>
+                <label for="commentaire">Écrivez votre commentaire</label>
+                <textarea class="container" formControlName="comment" id="commentaire" name="commentaire"
+                    rows="5"></textarea>
+            </div>
+
+            <div class="margin-bottom">
+                <button [disabled]="!commentForm.valid" class="signin-button text-uppercase text-bold"
+                    aria-label="Ajout de votre commentaire" type="submit">Ajouter votre commentaire</button>
+            </div>
+            <p class="error-message">{{ errorMessage }}</p>
+        </form>
+    </article>
+
+</section>

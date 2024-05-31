@@ -89,8 +89,7 @@ export class FormComponent implements OnInit {
       formId: this.form.ID_form,
       result: resultForm
     }
-    this.fS.addResult(formResult).subscribe((response) => {
-      console.log('Réponse reçue :', response);
+    this.fS.addResult(formResult).subscribe(() => {
     },
       (error) => {
         if (error.status === 403 && error.error.error === 'Access forbidden token unvalid') this.treatmentJWT.handle403Error(error.error.error);

@@ -2,9 +2,9 @@ const commentModel = require('../Models/comment');
 
 const verifyCommentOwnership = async (req, res, next) => {
     const commentId = parseInt(req.params.commentId);
-    const userId = req.userInfo.userId;
+    const userId = parseInt(req.userInfo.userId);
     try {
-        const isOwner = await commentModel.verifyCommentOwnership(req.db, commentId, userId);
+        const isOwner = await commentModel.verifyCommentOwnership(req.app.locals.db, commentId, userId);
         if (!isOwner) return res.status(403).send({ error: 'Access forbidden. You do not own this comment.' });
         next();
     } catch (error) {
@@ -15,7 +15,7 @@ const verifyCommentOwnership = async (req, res, next) => {
 
 const verifyUserOwnership = async (req, res, next) => {
     const userId = parseInt(req.params.userId);
-    const tokenUserId = req.userInfo.userId;
+    const tokenUserId = parseInt(req.userInfo.userId);
     userId === tokenUserId ? next() : res.status(403).send('Acces forbidden. You do not have the right ID');
 }
 

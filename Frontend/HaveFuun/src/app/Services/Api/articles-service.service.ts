@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Article } from '../../Models/articleModel';
+import { Article, ArticleAll } from '../../Models/articleModel';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +13,21 @@ export class ArticlesServiceService {
 
   apiUrlArticle: string = environment.apiUrlArticles;
 
-  getAllArticles(): Observable<Article[]> {
-    return this.http.get<Article[]>(`${this.apiUrlArticle}/all`)
+  getAllArticles(): Observable<ArticleAll[]> {
+    return this.http.get<ArticleAll[]>(`${this.apiUrlArticle}/all`)
   }
-  getArticleById(articleId: number): Observable<Article> {
-    return this.http.get<Article>(`${this.apiUrlArticle}/article/${articleId}`)
+  getArticleById(articleId: number): Observable<ArticleAll> {
+    return this.http.get<ArticleAll>(`${this.apiUrlArticle}/article/${articleId}`)
   }
-  getAllArticleInfoByName(name: string): Observable<Article> {
-    return this.http.get<Article>(`${this.apiUrlArticle}/name/${name}`)
+  getAllArticleInfoByName(name: string): Observable<ArticleAll> {
+    return this.http.get<ArticleAll>(`${this.apiUrlArticle}/name/${name}`)
   }
 
   addArticle(article: Article): Observable<any> {
-    return this.http.post<any>(`${this.apiUrlArticle}/admin`, { article })
+    return this.http.post<any>(`${this.apiUrlArticle}/admin`, article)
   }
   editArticleById(article: Article, articleId: number): Observable<any> {
-    return this.http.put<any>(`${this.apiUrlArticle}/admin/${articleId}`, { article })
+    return this.http.put<any>(`${this.apiUrlArticle}/admin/${articleId}`, article)
   }
   deleteArticle(articleId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrlArticle}/admin/${articleId}`)

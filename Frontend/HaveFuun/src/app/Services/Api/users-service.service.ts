@@ -19,6 +19,12 @@ export class UsersServiceService {
   getUserById(userId: number): Observable<UserWithoutPassword> {
     return this.http.get<UserWithoutPassword>(`${this.apiUrlUsers}/${userId}`)
   }
+  getUserByToken(): Observable<UserWithoutPassword> {
+    return this.http.get<UserWithoutPassword>(`${this.apiUrlUsers}/token/`)
+  }
+  getUserAllInformationByToken(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlUsers}/allInfo/`);
+  }
   editUserById(userId: number, user: User | UserWithoutPassword): Observable<any> {
     return this.http.put<any>(`${this.apiUrlUsers}/${userId}`, user)
   }

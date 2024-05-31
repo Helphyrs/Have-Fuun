@@ -1,1 +1,14 @@
-<p>articles works!</p>
+<section class="flex flex-column flex-align-center">
+    <h2 class="medium-size text-color-purple text-center margin-bottom">Voici la page d'Articles</h2>
+    @for(article of articles ; track article ; let index = $index) {
+    <div class="position-relative pointer parent" [routerLink]="'/articles/' + article.name">
+        <img [src]="article.avatar" [alt]="article.name">
+        <div class="child">
+            {{article.name}}
+            <span>{{article.tags}}</span>
+        </div>
+        <div class="border-child"></div>
+    </div>
+    <p class="adaptative-size text-color-gray">{{article.description}}</p>
+    }
+</section>

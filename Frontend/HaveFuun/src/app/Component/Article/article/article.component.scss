@@ -1,0 +1,48 @@
+button {
+    border-radius: 2rem;
+    border: 0.25rem solid #F1F1F1;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+}
+
+.comment {
+    border-radius: 2rem;
+    background-color: #F1F1F1;
+    border: 0.5rem solid #F1F1F1;
+}
+
+.pâtisserie {
+    background-color: pink;
+}
+
+.sucrerie {
+    background-color: purple;
+}
+
+.chaise {
+    background-color: beige;
+}
+
+.signin-button {
+    width: 90%;
+    margin-left: 5%;
+    padding: 0.5rem 1rem;
+    font-size: 1.4rem;
+    border: 0.3rem solid #7D0293;
+    border-radius: 1.8rem;
+    background-color: #E0CDA5;
+    color: #37332A;
+    transition: all 0.5s linear
+}
+
+.signin-button:hover {
+    background-color: #37332A;
+    color: #E0CDA5;
+    border-color: #ffffff;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+}

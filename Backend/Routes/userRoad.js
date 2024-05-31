@@ -7,6 +7,8 @@ const { verifyUserOwnership } = require('../Middlewares/verifyOwnership');
 
 router.post('/', sanitize, userController.addUser);
 
+router.get('/token/', auth, userController.getUserByToken)
+router.get('/allInfo/', auth, userController.getAllInfoUser)
 router.get('/:userId', auth, sanitize, verifyUserOwnership, userController.getUserById);
 router.put('/:userId', auth, sanitize, verifyUserOwnership, userController.editUserById);
 router.delete('/:userId', auth, sanitize, verifyUserOwnership, userController.deleteUserById);

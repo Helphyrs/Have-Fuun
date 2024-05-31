@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: "articles/:name", component: ArticleComponent, resolve: { articleInfo: ArticlesResolver } },
   { path: "forms", component: FormsComponent, resolve: { forms: FormsResolverService } },
   { path: "forms/:name", component: FormComponent, resolve: { form: FormsResolverService } },
-  { path: "profil/:userId", component: ProfilComponent, resolve: { user: UsersResolverService } },
+  { path: "profil", component: ProfilComponent, resolve: { user: UsersResolverService } },
   { path: "**", component: HomeComponent }
 ];
 

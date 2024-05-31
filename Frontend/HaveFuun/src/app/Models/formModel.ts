@@ -12,3 +12,7 @@ export interface FormResult {
     formId: number;
     result: number;
 }
+export interface FormResultWithFormName {
+    name: string;
+    result: number;
+}
