@@ -1,4 +1,5 @@
 <section class="flex flex-column flex-align-center">
+    @if(display === "home") {
     <h2 class="medium-size text-color-purple text-center margin-bottom">Bonjour utilisateur : {{user.pseudo}}</h2>
     <div class="container-home flex flex-column flex-justify-between flex-align-center">
         <p class="adaptative-size text-justify">
@@ -7,7 +8,9 @@
             Sans oublier la possibilité d'à la fois modifié et supprimer votre compte.
             En vous souhaitant un bon moment sur notre site.
         </p>
-        <article>
+
+
+        <article class="margin-vertical">
             <h3 class="adaptative-size text-color-purple">Vos données personnelles :</h3>
             <p class="adaptative-size text-color-gray">Votre pseudo :{{user.pseudo}}</p>
             <p class="adaptative-size text-color-gray">Votre email :{{user.email}}</p>
@@ -15,6 +18,10 @@
                 <p class="adaptative-size text-color-gray">Votre avatar :</p>
                 <img class="logo-image" [src]="user.avatar" alt="avatar de profil">
             </div>
+            <button class="signin-button" (click)="switchDisplay('editUser')">Modifier vos données ? <i
+                    class="adaptative-size pointer text-color-purple fa-solid fa-pen-to-square"></i></button>
+            <button class="signin-button" (click)="deleteUser()">Supprimer votre compte ? <i
+                    class="adaptative-size pointer text-color-purple fa-solid fa-trash"></i></button>
         </article>
         <article>
             @if(comments.length>0) {
@@ -29,13 +36,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for(comment of comments ; track comment) {
+                    @for(comment of comments ; track comment ; let index =$index) {
                     <tr>
                         <td>{{ comment.content }}</td>
                         <td>{{ comment.name }}</td>
-                        <td><i (click)="switchDisplay('editComment', comment.ID_comment)"
+                        <td><i (click)="switchDisplay('editComment', comment.ID_comment, index, comment.content)"
                                 class="adaptative-size pointer text-color-purple fa-solid fa-pen-to-square"></i></td>
-                        <td><i (click)="switchDisplay('deleteComment',comment.ID_comment)"
+                        <td><i (click)="switchDisplay('deleteComment',comment.ID_comment, index)"
                                 class="adaptative-size pointer text-color-purple fa-solid fa-delete-left"></i></td>
                     </tr>
                     }
@@ -69,6 +76,79 @@
             } @else {
             <h3 class="adaptative-size text-color-purple">Vous n'avez encore répondu à aucun formulaire</h3>
             }
+
+
         </article>
     </div>
+    } @else if (display === 'editComment') {
+    <article class="flex flex-column flex-align-center margin-vertical">
+        <button class="signin-button" (click)="switchDisplay('home')"> <i class="fa-solid fa-arrow-left-long"></i>
+            Revenir avant
+        </button>
+        <h3 class="adaptative-size text-color-purple">Modifier votre commentaire</h3>
+        <form class="container-form-comment flex flex-column flex-align-center margin-vertical"
+            [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+            <div class='container flex flex-column flex-align-center margin-bottom'>
+                <label for="commentaire">Écrivez votre commentaire</label>
+                <textarea class="container" formControlName="comment" id="commentaire" name="commentaire"
+                    rows="5"></textarea>
+            </div>
+
+            <div class="margin-bottom">
+                <button [disabled]="!commentForm.valid" class="signin-button text-uppercase text-bold"
+                    aria-label="Modifié de votre commentaire" type="submit">Modifé votre commentaire</button>
+            </div>
+            <p class="error-message">{{ errorMessage }}</p>
+        </form>
+    </article>
+
+    } @else if (display === 'editUser') {
+    <article class="flex flex-column flex-align-center margin-vertical">
+        <button class="signin-button" (click)="switchDisplay('home')"> <i class="fa-solid fa-arrow-left-long"></i>
+            Revenir avant
+        </button>
+        <h3 class="adaptative-size text-color-purple">Modifier vos données</h3>
+        <form class="flex flex-column flex-align-center" [formGroup]="userForm" (ngSubmit)="onSubmitUser()">
+            <div class="margin-bottom flex flex-column flex-justify-between">
+                <label for="pseudo" aria-label="Saisissez votre pseudo">Pseudo:*</label>
+                <input class="field" type="text" id="pseudo" formControlName="pseudo">
+            </div>
+            <div class="margin-bottom flex flex-column flex-justify-between">
+                <label for="email" aria-label="Saisissez votre email">Email:*</label>
+                <input class="field" type="text" id="email" formControlName="email">
+            </div>
+            <div class="margin-bottom flex flex-column flex-justify-between">
+                <label for="password" aria-label="Saisissez un mot de passe">Mot de passe:*</label>
+                <input class="field" class="margin-bottom" type="password" id="password" formControlName="password"
+                    (input)="checkPassword()">
+                <ul class="margin-list no-padding">
+                    <li [ngClass]="verifyArray.min === true ? 'text-color-green' : 'text-color-red'">Formé d'un minimum
+                        de 8 caractères</li>
+                    <li [ngClass]="verifyArray.upper === true ? 'text-color-green' : 'text-color-red'">Au moins une
+                        lettre majuscule</li>
+                    <li [ngClass]="verifyArray.lower === true ? 'text-color-green' : 'text-color-red'">Au moins une
+                        lettre minuscle</li>
+                    <li [ngClass]="verifyArray.num === true ? 'text-color-green' : 'text-color-red'">Au moins un chiffre
+                    </li>
+                    <li [ngClass]="verifyArray.special === true ? 'text-color-green' : 'text-color-red'">Au moins un
+                        caractère spécial, parmi ceux-là : [#?!$%^&*-]</li>
+                </ul>
+            </div>
+            <div class="margin-bottom flex flex-column flex-justify-between">
+                <p class="medium-size">Choisissez votre image d'avatar:</p>
+                <div class="flex flex-wrap flex-justify-center">
+                    @for(image of imageArray ; track image) {
+                    <img [src]="image" alt="Avatar" (click)="selectAvatar(image)" class="logo-image-form pointer"
+                        [ngClass]="imageAvatar === image ? 'border-green' : ''">
+                    }
+                </div>
+            </div>
+            <div class="margin-bottom">
+                <button [disabled]="!userForm.valid" class="signin-button text-uppercase text-bold"
+                    aria-label="Bouton pour modifier son compte" type="submit">Modifier son compte</button>
+            </div>
+            <p class="error-message">{{ errorMessage }}</p>
+        </form>
+    </article>
+    }
 </section>

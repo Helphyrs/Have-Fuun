@@ -14,7 +14,7 @@
                 <p class="medium-size">Choisissez votre image d'avatar:</p>
                 <div class="flex flex-justify-between">
                     @for(image of imageArray ; track image) {
-                    <img [src]="image" alt="Avatar" (click)="selectAvatar(image)" class="logo-image pointer"
+                    <img [src]="image" alt="Avatar" (click)="selectAvatar(image)" class="logo-image-form pointer"
                         [ngClass]="imageAvatar === image ? 'border-green' : ''">
                     }
                 </div>

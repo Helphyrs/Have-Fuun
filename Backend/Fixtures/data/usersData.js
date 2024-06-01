@@ -5,14 +5,14 @@ exports.users = [
         pseudo: 'meow',
         email: 'user1@example.com',
         password: 'password1',
-        avatar: 'avatar1.jpg',
+        avatar: 'assets/public/bishop.webp',
         role: 3
     },
     {
-        pseudo: 'wouf',
+        pseudo: 'Maxime',
         email: 'user2@example.com',
         password: 'password2',
-        avatar: 'avatar2.jpg',
+        avatar: 'assets/public/king.webp',
         role: 1
     }
 ];

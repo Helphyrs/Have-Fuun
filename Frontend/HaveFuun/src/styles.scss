@@ -85,8 +85,17 @@ section {
     max-width: 10rem;
 }
 
+.logo-image-table {
+    max-width: 5rem;
+}
+
 .logo-image-home {
     max-width: 25rem;
+}
+
+.logo-image-form {
+    max-width: 5rem;
+    border: 0.5rem solid #E0CDA5;
 }
 
 // MARGIN PADDING 
@@ -184,6 +193,10 @@ section {
 }
 
 // TAILLES ; COULEURS ; STYLES DE TEXTES
+.error-message {
+    color: red;
+    text-align: center;
+}
 
 .text-color-gray {
     color: #37332A;
@@ -195,6 +208,14 @@ section {
 
 .text-color-purple {
     color: #7D0293;
+}
+
+.text-color-green {
+    color: green;
+}
+
+.text-color-red {
+    color: red;
 }
 
 .background-color {
@@ -271,6 +292,51 @@ section {
     border: 0.5rem solid #E0CDA5;
 }
 
+.border-green {
+    border: 0.5rem solid green;
+    border-radius: 1rem;
+}
+
+// TABLES
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+thead {
+    background-color: #F1F1F1;
+    color: #E0CDA5;
+}
+
+thead th {
+    padding: 0.25rem;
+    border: 0.1rem solid #E0CDA5;
+}
+
+tbody {
+    background-color: #E0CDA5;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f4f0e0;
+}
+
+tbody td {
+    padding: 0.25rem;
+    border: 0.1rem solid #37332A;
+}
+
+tr:hover {
+    background-color: #d4c495;
+}
+
+td {
+    color: #37332A;
+}
+
 // BOUTONS 
 
 button {
@@ -283,6 +349,23 @@ button {
 
 .shadow-box {
     box-shadow: 0.4rem 0.4rem 0.4rem 0rem rgba(0, 0, 0, 0.1);
+}
+
+.signin-button {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1.4rem;
+    border: 0.3rem solid #7D0293;
+    border-radius: 1.8rem;
+    background-color: #E0CDA5;
+    color: #37332A;
+    transition: all 0.5s linear
+}
+
+.signin-button:hover {
+    background-color: #37332A;
+    color: #E0CDA5;
+    border-color: #ffffff;
 }
 
 

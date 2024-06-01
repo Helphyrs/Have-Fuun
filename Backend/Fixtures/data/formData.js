@@ -1,10 +1,10 @@
 exports.forms = [
     {
-        name: 'Formulaire 1',
-        question: 'Question 1, Question 2, Question 3, Question 4, Question 5, Question 6, Question 7, Question 8',
-        topic_A: 'Réponse A1, Réponse A2, Réponse A3, Réponse A4, Réponse A5, Réponse A6, Réponse A7, Réponse A8',
-        topic_B: 'Réponse B1, Réponse B2, Réponse B3, Réponse B4, Réponse B5, Réponse B6, Réponse B7, Réponse B8',
-        topic_C: 'Réponse C1, Réponse C2, Réponse C3, Réponse C4, Réponse C5, Réponse C6, Réponse C7, Réponse C8',
-        avatar: "assets/public/forms/chaises.webp"
+        name: 'Formulaire Chaises',
+        question: 'Quelle est l\'importance du design dans une chaise?, Quels matériaux sont les plus durables pour les chaises?, Comment choisir une chaise ergonomique?, Quelle est la différence entre une chaise et un fauteuil?, Quelles sont les tendances actuelles en design de chaises?, Pourquoi les chaises en bois sont-elles populaires?, Comment entretenir une chaise en cuir?, Quelles caractéristiques rechercher dans une chaise de bureau?',
+        topicA: 'Le design influence le confort et l\'esthétique., Le bois massif et le métal sont très durables., Une chaise ergonomique doit soutenir le dos et ajuster la hauteur., Un fauteuil est généralement plus rembourré et confortable., Les chaises minimalistes et colorées sont à la mode., Le bois est apprécié pour sa chaleur et son naturel., Utiliser des produits spécifiques pour le cuir et éviter l\'exposition au soleil., Un bon soutien lombaire et une hauteur ajustable sont essentiels.',
+        topicB: 'Un bon design améliore la posture et le bien-être., Le métal et le plastique renforcé sont également durables., Elle doit avoir un siège réglable et un bon soutien lombaire., Les fauteuils sont souvent plus larges et moelleux., Les designs écologiques et recyclés sont populaires., Elles sont robustes et peuvent être restaurées., Nettoyer régulièrement et nourrir le cuir avec des crèmes spéciales., Les accoudoirs ajustables sont importants pour le confort.',
+        topicC: 'Le design peut transformer l\'ambiance d\'une pièce., Le plastique de haute qualité peut aussi être très durable., Il est important de tester la chaise avant de l\'acheter., Les chaises sont plus simples et moins rembourrées., Les chaises vintage et rétro sont également en vogue., Le bois peut être sculpté pour des designs uniques., Protéger le cuir des liquides et des griffures., Une chaise de bureau doit permettre de bouger facilement.',
+        avatar: "assets/forms-articles/chaises.webp"
     }
 ];

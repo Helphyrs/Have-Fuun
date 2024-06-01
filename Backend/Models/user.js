@@ -8,6 +8,15 @@ module.exports = {
             throw error;
         }
     },
+    getRoleById: async (db, userId) => {
+        try {
+            const [results] = await db.execute('SELECT role FROM Users WHERE ID = ?', [userId]);
+            return results[0];
+        } catch (error) {
+            console.error('Erreur lors de la récupération de l\'utilisateur :', error);
+            throw error;
+        }
+    },
     getUserPassword: async (db, userId) => {
         try {
             const [results] = await db.execute('SELECT password FROM Users WHERE ID = ?', [userId]);
@@ -78,6 +87,15 @@ module.exports = {
     //     }
     // },
 
+    getAllUsers: async (db) => {
+        try {
+            const [results] = await db.execute('SELECT ID, pseudo, email, avatar FROM Users')
+            return results
+        } catch (error) {
+            console.error('Erreur lors de la création de l\'utilisateur :', error);
+            throw error;
+        }
+    },
     addUser: async (db, user, role) => {
         try {
             const [results] = await db.execute('INSERT INTO Users (pseudo, email, password, role, avatar) VALUES (?, ?, ?, ?, ?)',

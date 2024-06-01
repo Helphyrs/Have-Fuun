@@ -27,20 +27,8 @@ export class HeaderComponent implements OnInit {
     });
 
     this.aS.isAuth$.subscribe(isAuthenticated => {
-      console.log(isAuthenticated)
       this.isAuth = isAuthenticated;
     });
-
-    // this.aS.loginWithToken().subscribe((response) => {
-    //   this.isAuth = response
-    // },
-    //   (error) => {
-    //     if (error.status === 403 && error.error.error === 'Access forbidden token unvalid') {
-    //       this.isAuth = false;
-    //       this.treatmentJWT.handle403Error(error.error.error);
-    //     }
-    //   }
-    // );
   }
 
   display(event: any): void {

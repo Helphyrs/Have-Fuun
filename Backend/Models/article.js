@@ -2,8 +2,8 @@ module.exports = {
 
     addArticle: async (db, article) => {
         try {
-            const { name, description, tags } = article;
-            const [results] = await db.execute('INSERT INTO Articles (name, description, tags) VALUES (?, ?, ?)', [name, description, tags]);
+            const { name, description, tags, avatar } = article;
+            const [results] = await db.execute('INSERT INTO Articles (name, description, tags, avatar) VALUES (?, ?, ?, ?)', [name, description, tags, avatar]);
             return results.insertId;
         } catch (error) {
             console.error('Error while adding article:', error);

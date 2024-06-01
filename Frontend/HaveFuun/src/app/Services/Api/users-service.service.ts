@@ -25,11 +25,29 @@ export class UsersServiceService {
   getUserAllInformationByToken(): Observable<any> {
     return this.http.get<any>(`${this.apiUrlUsers}/allInfo/`);
   }
-  editUserById(userId: number, user: User | UserWithoutPassword): Observable<any> {
-    return this.http.put<any>(`${this.apiUrlUsers}/${userId}`, user)
+  editUserByToken(user: User | UserWithoutPassword): Observable<any> {
+    return this.http.put<any>(`${this.apiUrlUsers}/edit`, user)
   }
   deleteUserById(userId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrlUsers}/${userId}`)
+  }
+  deleteUserByToken(): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrlUsers}/delete/`)
+  }
+  getAllUsers(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlUsers}/admin/all/`)
+  }
+  getUserByIdAdmin(userId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlUsers}/admin/user/${userId}`)
+  }
+  getAllUserInfoAdmin(userId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlUsers}/admin/user/all/${userId}`)
+  }
+  deleteUserByIdAdmin(userId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrlUsers}/admin/delete/${userId}`)
+  }
+  isAdmin(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlUsers}/admin/isAdmin/`)
   }
 
 }

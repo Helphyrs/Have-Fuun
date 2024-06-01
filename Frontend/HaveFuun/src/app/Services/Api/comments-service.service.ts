@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Comment } from '../../Models/commentModel';
+import { Comment, CommentEdit } from '../../Models/commentModel';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class CommentsServiceService {
     return this.http.post<any>(`${this.apiUrlComment}/`, comment)
   }
 
-  editComment(comment: Comment, commentId: number): Observable<any> {
+  editComment(comment: CommentEdit, commentId: number): Observable<any> {
     return this.http.put<any>(`${this.apiUrlComment}/${commentId}`, comment)
   }
   deleteComment(commentId: number): Observable<any> {

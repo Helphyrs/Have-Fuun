@@ -36,4 +36,12 @@ export class AuthServiceService {
   loginWithToken(): Observable<boolean> {
     return this.http.get<boolean>(`${this.apiUrlConnect}/`,)
   }
+  logout(): Observable<any> {
+    localStorage.clear;
+    this.isAuth.next(false);
+    return new Observable(observer => {
+      observer.next();
+      observer.complete();
+    });
+  }
 }
