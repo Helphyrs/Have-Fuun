@@ -36,7 +36,15 @@ module.exports = {
             throw error;
         }
     },
-
+    getCommentsByUserAdmin: async (db, commentId) => {
+        try {
+            const [comments] = await db.query('SELECT ID_user FROM Comments WHERE ID_comment = ?', [commentId]);
+            return comments;
+        } catch (error) {
+            console.error('Error while getting comments by user:', error);
+            throw error;
+        }
+    },
     getAllComments: async (db) => {
         try {
             const [comments] = await db.query('SELECT ID_user, ID_article, content FROM Comments');

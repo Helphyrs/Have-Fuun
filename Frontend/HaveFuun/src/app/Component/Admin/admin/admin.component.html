@@ -4,8 +4,8 @@
     @if(display === "home") {
     <div class="flex flex-column flex-align-center">
         <button class="signin-button" (click)="displayUsers('users')">accéder aux informations des utilisateurs</button>
-        <button class="signin-button" routerLink="">accéder aux informations des formulaires </button>
-        <button class="signin-button" routerLink="">accéder aux informations des articles </button>
+        <button class="signin-button" [routerLink]="['/admin/forms']">accéder aux informations des formulaires </button>
+        <button class="signin-button" [routerLink]="['/admin/articles']">accéder aux informations des articles </button>
     </div>
     } @else {
     <article class="flex flex-column flex-align-center">

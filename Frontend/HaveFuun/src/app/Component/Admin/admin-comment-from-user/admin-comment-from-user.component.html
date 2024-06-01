@@ -1,1 +1,66 @@
-<p>admin-comment-from-user works!</p>
+<section class="flex flex-column flex-align-center">
+    <button class="signin-button" [routerLink]="['/admin']"><i class="fa-solid fa-arrow-left-long"></i>
+        Revenir avant</button>
+    <article class="margin-vertical">
+        <h3 class="adaptative-size text-color-purple">Les données personnelles de l'utilisateur:</h3>
+        <p class="adaptative-size text-color-gray">Son pseudo :{{user.pseudo}}</p>
+        <p class="adaptative-size text-color-gray">Son email :{{user.email}}</p>
+        <div class="flex flex-align-center">
+            <p class="adaptative-size text-color-gray">Son avatar :</p>
+            <img class="logo-image" [src]="user.avatar" alt="avatar de profil">
+        </div>
+    </article>
+    <article>
+        @if(comments.length>0) {
+        <h3 class="adaptative-size text-color-purple">Voici tout les commentaires que vous avez réalisés :</h3>
+        <table class="small-size">
+            <thead>
+                <tr>
+                    <td>Contenue du commentaire</td>
+                    <td>Nom de l'article</td>
+                    <td>Supprimer le commentaire</td>
+                </tr>
+            </thead>
+            <tbody>
+                @for(comment of comments ; track comment ; let index =$index) {
+                <tr>
+                    <td>{{ comment.content }}</td>
+                    <td>{{ comment.name }}</td>
+                    <td><i (click)=deleteComment(comment.ID_comment)
+                            class="adaptative-size pointer text-color-purple fa-solid fa-delete-left"></i></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        } @else {
+        <h3 class="adaptative-size text-color-purple margin-vertical">Vous n'avez pas encore écris de commentaires
+        </h3>
+        }
+    </article>
+    <article>
+        @if(forms.length>0) {
+        <h3 class="adaptative-size text-color-purple">Voici tout les résultats de formulaires que vous avez fait :
+        </h3>
+        <table class="medium-size">
+            <thead>
+                <tr>
+                    <td>Résultat du formulaire</td>
+                    <td>Nom du formulaire</td>
+                </tr>
+            </thead>
+            <tbody>
+                @for(results of forms ; track results) {
+                <tr>
+                    <td>{{ results.result }}</td>
+                    <td>{{ results.name }}</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        } @else {
+        <h3 class="adaptative-size text-color-purple">Vous n'avez encore répondu à aucun formulaire</h3>
+        }
+
+
+    </article>
+</section>
