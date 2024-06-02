@@ -35,11 +35,11 @@ export class FormsServiceService {
   }
 
   addForm(form: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrlForms}/`, form);
+    return this.http.post<any>(`${this.apiUrlForms}/admin`, form);
   }
 
   editFormById(formId: number, form: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrlForms}/${formId}`, form);
+    return this.http.put<any>(`${this.apiUrlForms}/admin/${formId}`, form);
   }
 
   deleteFormById(formId: number): Observable<any> {

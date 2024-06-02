@@ -2,8 +2,9 @@
 <section class="flex flex-column flex-align-center">
     <button class="signin-button" [routerLink]="['/admin']"><i class="fa-solid fa-arrow-left-long"></i>
         Revenir avant</button>
-    <h2 class="medium-size text-color-purple text-center margin-bottom">Voici la page d'Articles d'administration</h2>
-    <button class="signin-button" (click)="switchDisplay('addForm')">Ajouter un article <i
+    <h2 class="medium-size text-color-purple text-center margin-bottom">Voici la page des formulaires d'administration
+    </h2>
+    <button class="signin-button" (click)="switchDisplay('addForm')">Ajouter un formulaire <i
             class="adaptative-size pointer text-color-purple fa-solid fa-pen-to-square"></i></button>
     @if(forms.length >0 ) {
     <h3 class="medium-size text-color-purple text-center margin-bottom">Voici la liste des articles :</h3>
@@ -11,7 +12,7 @@
         <table class="adaptative-size">
             <thead>
                 <tr>
-                    <td>ID_article</td>
+                    <td>ID_forms</td>
                     <td>avatar</td>
                     <td>name</td>
                     <td>question</td>
@@ -51,12 +52,50 @@
     </h2>
     <button class="signin-button" (click)="switchDisplay('home')"> <i class="fa-solid fa-arrow-left-long"></i> Revenir
         avant <i class="adaptative-size pointer text-color-purple fa-solid fa-pen-to-square"></i></button>
-    <form class="container-form-comment flex flex-column flex-align-center margin-vertical" [formGroup]="editForm"
-        (ngSubmit)="onSubmitEdit()">
+    <form class="container-form-comment flex flex-column flex-align-center margin-vertical" (ngSubmit)="onSubmit()">
+        <div class="margin-bottom">
+            <label for="editAvatar">Avatar:</label>
+            <input id="editAvatar" type="text" [(ngModel)]="editAvatar" name="editAvatar">
+        </div>
+        <div class="margin-bottom">
+            <label for="editName">Name:</label>
+            <input id="editName" type="text" [(ngModel)]="editName" name="editName">
+        </div>
+        @for (editQuestion of editQuestions ; track editQuestion ; let index =$index) {
+        <div class="margin-bottom">
+            <label for="editQuestion{{index}}">Question Part {{ index + 1 }}:</label>
+            <input id="editQuestion{{index}}" type="text" [(ngModel)]="editQuestions[index]"
+                name="editQuestion{{index}}" [ngModelOptions]="{updateOn: 'blur'}">
+        </div>
+        }
+
+        @for (editTopicA of editTopicsA ; track editTopicA ; let index =$index) {
+        <div class="margin-bottom">
+            <label for="editTopicA{{index}}">topicA Part {{ index + 1 }}:</label>
+            <input id="editTopicA{{index}}" type="text" [(ngModel)]="editTopicsA[index]" name="editTopicA{{index}}"
+                [ngModelOptions]="{updateOn: 'blur'}">
+        </div>
+        }
+
+        @for (editTopicB of editTopicsB ; track editTopicB ; let index =$index) {
+        <div class="margin-bottom">
+            <label for="editTopicB{{index}}">topicB Part {{ index + 1 }}:</label>
+            <input id="editTopicB{{index}}" type="text" [(ngModel)]="editTopicsB[index]" name="editTopicB{{index}}"
+                [ngModelOptions]="{updateOn: 'blur'}">
+        </div>
+        }
+
+        @for (editTopicC of editTopicsC ; track editTopicC ; let index =$index) {
+        <div class="margin-bottom">
+            <label for="editTopicC{{index}}">topicC Part {{ index + 1 }}:</label>
+            <input id="editTopicC{{index}}" type="text" [(ngModel)]="editTopicsC[index]" name="editTopicC{{index}}"
+                [ngModelOptions]="{updateOn: 'blur'}">
+        </div>
+        }
 
         <div class="margin-bottom">
             <button class="signin-button text-uppercase text-bold" aria-label="Modifié de votre commentaire"
-                type="submit">Modifié votre article</button>
+                type="submit">Modifié votre formulaire</button>
         </div>
     </form>
 </section>
@@ -65,12 +104,46 @@
     <h2 class="medium-size text-color-purple text-center margin-bottom">Voici le formulaire d'ajout d'article</h2>
     <button class="signin-button" (click)="switchDisplay('home')"> <i class="fa-solid fa-arrow-left-long"></i> Revenir
         avant <i class="adaptative-size pointer text-color-purple fa-solid fa-pen-to-square"></i></button>
-    <form class="container-form-comment flex flex-column flex-align-center margin-vertical" [formGroup]="addForm"
-        (ngSubmit)="onSubmit()">
-
+    <form class="container-form-comment flex flex-column flex-align-center margin-vertical" (ngSubmit)="onSubmit()">
         <div class="margin-bottom">
-            <button [disabled]="!addForm.valid" class="signin-button text-uppercase text-bold"
-                aria-label="Modifié de votre commentaire" type="submit">Ajouter votre article</button>
+            <label for="addAvatar">Avatar:</label>
+            <input id="addAvatar" type="text" [(ngModel)]="addAvatar" name="addAvatar">
+        </div>
+        <div class="margin-bottom">
+            <label for="addName">Name:</label>
+            <input id="addName" type="text" [(ngModel)]="addName" name="addName">
+        </div>
+        @for (question of addQuestions ; track question ; let index =$index) {
+        <div class="margin-bottom">
+            <label [for]="'addQuestion' + index">Question Part {{ index + 1 }}:</label>
+            <input [id]="'addQuestion' + index" type="text" [(ngModel)]="addQuestions[index]"
+                [name]="'addQuestion' + index" [ngModelOptions]="{updateOn: 'blur'}">
+        </div>
+        }
+        @for (topicA of addTopicsA ; track topicA ; let index =$index) {
+        <div class="margin-bottom">
+            <label [for]="'addTopicA' + index">topicA Part {{ index + 1 }}:</label>
+            <input [id]="'addTopicA' + index" type="text" [(ngModel)]="addTopicsA[index]" [name]="'addTopicA' + index"
+                [ngModelOptions]="{updateOn: 'blur'}">
+        </div>
+        }
+        @for (topicB of addTopicsB ; track topicB ; let index =$index) {
+        <div class="margin-bottom">
+            <label [for]="'addTopicB' + index">topicB Part {{ index + 1 }}:</label>
+            <input [id]="'addTopicB' + index" type="text" [(ngModel)]="addTopicsB[index]" [name]="'addTopicB' + index"
+                [ngModelOptions]="{updateOn: 'blur'}">
+        </div>
+        }
+        @for (topicC of addTopicsC ; track topicC ; let index =$index) {
+        <div class="margin-bottom">
+            <label [for]="'addTopicC' + index">topicC Part {{ index + 1 }}:</label>
+            <input [id]="'addTopicC' + index" type="text" [(ngModel)]="addTopicsC[index]" [name]="'addTopicC' + index"
+                [ngModelOptions]="{updateOn: 'blur'}">
+        </div>
+        }
+        <div class="margin-bottom">
+            <button class="signin-button text-uppercase text-bold" aria-label="Modifié de votre commentaire"
+                type="submit">Ajouter votre article</button>
         </div>
     </form>
 </section>

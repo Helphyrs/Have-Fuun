@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { FormsServiceService } from '../../../Services/Api/forms-service.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Form } from '../../../Models/formModel';
+
 
 @Component({
   selector: 'app-admin-forms',
@@ -11,54 +10,59 @@ import { Form } from '../../../Models/formModel';
   styleUrl: './admin-forms.component.scss'
 })
 export class AdminFormsComponent implements OnInit {
+
   data!: Observable<any>
   forms: any;
   display: string = "home";
   errorMessage: string = "";
   editIndex: number = -1;
   ID_forms: number = -1;
-  addForm!: FormGroup;
-  editForm!: FormGroup;
 
-  constructor(private activatedRoute: ActivatedRoute, private fS: FormsServiceService,
-    private formBuilder: FormBuilder) { }
+
+  addName: string = "";
+  addAvatar: string = "";
+  addQuestions: string[] = Array(8).fill('');
+  addTopicsA: string[] = Array(8).fill('');
+  addTopicsB: string[] = Array(8).fill('');
+  addTopicsC: string[] = Array(8).fill('');
+
+  editName: string = "";
+  editAvatar: string = "";
+  editQuestions: string[] = Array(8).fill('');
+  editTopicsA: string[] = Array(8).fill('');
+  editTopicsB: string[] = Array(8).fill('');
+  editTopicsC: string[] = Array(8).fill('');
+
+  constructor(private activatedRoute: ActivatedRoute, private fS: FormsServiceService) { }
 
   ngOnInit(): void {
     this.data = this.activatedRoute.data.pipe(map((data: { [x: string]: any; }) => data['adminForms']));
     this.data.forEach(info => {
-      console.log(info)
       this.forms = info
-      this.initForm()
     });
   }
 
-
-  initForm(): void {
-    this.addForm = this.formBuilder.group({
-      name: ["", Validators.required],
-      question: ["", Validators.required],
-      topicA: ["", Validators.required],
-      topicB: ["", Validators.required],
-      topicC: ["", Validators.required],
-      avatar: ["", Validators.required]
-
-    })
-
-    this.editForm = this.formBuilder.group({
-      name: [""],
-      question: [""],
-      topicA: [""],
-      topicB: [""],
-      topicC: [""],
-      avatar: [""]
-    })
+  areAllFieldsFilled(): boolean {
+    return this.addQuestions.every(part => part.trim() !== '') &&
+      this.addTopicsA.every(part => part.trim() !== '') &&
+      this.addTopicsB.every(part => part.trim() !== '') &&
+      this.addTopicsC.every(part => part.trim() !== '') &&
+      this.addAvatar != "" && this.addName != "";
   }
+  areAllEditFieldsFilled(): boolean {
+    return this.editQuestions.every(part => part.trim() !== '') &&
+      this.editTopicsA.every(part => part.trim() !== '') &&
+      this.editTopicsB.every(part => part.trim() !== '') &&
+      this.editTopicsC.every(part => part.trim() !== '') &&
+      this.editAvatar != "" && this.editName != "";
+  }
+
   deleteForm(id: number): void {
-    let bool: boolean = confirm("$Etes vous sûr de supprimer cet article ?")
+    let bool: boolean = confirm("Etes vous sûr de supprimer ce formulaire ?")
     if (bool) {
       this.fS.deleteFormById(id).subscribe(data => {
       }, error => {
-        alert("L'article a bien été supprimé, lors de la prochaine actualisation il ne sera plus là.")
+        alert("Le formulaire a bien été supprimé, lors de la prochaine actualisation il ne sera plus là.")
       })
     }
   }
@@ -68,59 +72,83 @@ export class AdminFormsComponent implements OnInit {
       case "home":
         this.display = "home"
         break;
-      case "editArticle":
-        this.display = "editArticle"
+      case "editForm":
+        this.display = "editForm"
         this.ID_forms = id;
         this.editIndex = index;
         break;
-      case "addArticle":
-        this.display = "addArticle";
+      case "addForm":
+        this.display = "addForm";
         break;
     }
   }
   onSubmit(): void {
-    let obj = {
-      name: this.addForm.get('name')!.value,
-      question: this.addForm.get('question')!.value,
-      topicA: this.addForm.get('topicA')!.value,
-      topicB: this.addForm.get('topicB')!.value,
-      topicC: this.addForm.get('topicC')!.value,
-      avatar: this.addForm.get('avatar')!.value,
+    if (this.display === "addForm") {
+      if (this.areAllFieldsFilled()) {
+        let obj = {
+          name: this.addName,
+          avatar: this.addAvatar,
+          questions: this.addQuestions.join(','),
+          topicA: this.addTopicsA.join(','),
+          topicB: this.addTopicsB.join(','),
+          topicC: this.addTopicsC.join(',')
+
+
+        }
+
+        this.fS.addForm(obj).subscribe(response => {
+
+        }, error => {
+          alert("Le formulaire a bien été ajouté, actualisé la page pour le voir")
+          this.display = "home";
+          this.addName = "";
+          this.addAvatar = "";
+          this.addQuestions = Array(8).fill('');
+          this.addTopicsA = Array(8).fill('');
+          this.addTopicsB = Array(8).fill('');
+          this.addTopicsC = Array(8).fill('');
+        })
+      }
+    } else if (this.display === "editForm") {
+      if (this.areAllEditFieldsFilled()) {
+        let obj = {
+          name: this.editName,
+          avatar: this.editAvatar,
+          questions: this.editQuestions.join(','),
+          topicA: this.editTopicsA.join(','),
+          topicB: this.editTopicsB.join(','),
+          topicC: this.editTopicsC.join(',')
+        }
+
+        this.fS.editFormById(this.ID_forms, obj).subscribe(response => {
+
+        }, error => {
+          this.forms[this.editIndex] = {
+            ID_form: this.ID_forms,
+            name: this.editName,
+            question: this.editQuestions,
+            avatar: this.editAvatar,
+            topicA: this.editTopicsA,
+            topicB: this.editTopicsB,
+            topicC: this.editTopicsC
+          }
+          alert("Le formulaire a bien été ajouté, actualisé la page pour le voir")
+          this.display = "home";
+          this.editName = "";
+          this.editAvatar = "";
+          this.editQuestions = Array(8).fill('');
+          this.editTopicsA = Array(8).fill('');
+          this.editTopicsB = Array(8).fill('');
+          this.editTopicsC = Array(8).fill('');
+        })
+      }
+
     }
-    if (obj) {
-      this.fS.addForm(obj).subscribe(data => {
-      }, error => {
-        alert("L'article a bien été ajouté, actualisé la page pour le voir")
-        this.display = "home";
-      })
-    }
+
   }
 
   onSubmitEdit(): void {
-    let obj = {
-      name: this.editForm.get('name')!.value,
-      question: this.editForm.get('question')!.value,
-      topicA: this.editForm.get('topicA')!.value,
-      topicB: this.editForm.get('topicB')!.value,
-      topicC: this.editForm.get('topicC')!.value,
-      avatar: this.editForm.get('avatar')!.value,
-    }
-    if (obj) {
-      this.fS.editFormById(this.ID_forms, obj).subscribe((data) => {
-      }, (error) => {
-        this.forms[this.editIndex] = {
-          ID_forms: this.editIndex + 1,
-          name: this.editForm.get('name')!.value,
-          question: this.editForm.get('question')!.value,
-          topicA: this.editForm.get('topicA')!.value,
-          topicB: this.editForm.get('topicB')!.value,
-          topicC: this.editForm.get('topicC')!.value,
-          avatar: this.editForm.get('avatar')!.value,
-        }
-        alert('Le formulaire a bien été modifiée');
-        this.display = "home"
-        this.editIndex = -1;
-      })
-    }
+
   }
+
 }

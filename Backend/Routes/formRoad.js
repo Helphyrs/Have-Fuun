@@ -9,8 +9,8 @@ router.get('/all', formController.getAllForms);
 router.get('/:formId', formController.getFormById);
 router.get('/name/:name', formController.getFormByName);
 
-router.post('/', auth, admin, sanitize, formController.addForm);
-router.put('/:formId', auth, admin, sanitize, formController.editFormById);
+router.post('/admin', auth, admin, sanitize, formController.addForm);
+router.put('/admin/:formId', auth, admin, sanitize, formController.editFormById);
 router.delete('/:formId', auth, admin, sanitize, formController.deleteFormById);
 router.get('/admin/all', auth, admin, sanitize, formController.getAllFormsAdmin)
 
