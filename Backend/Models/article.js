@@ -74,8 +74,8 @@ module.exports = {
 
     editArticleById: async (db, articleId, article) => {
         try {
-            const { name, description, tags } = article;
-            await db.execute('UPDATE Articles SET name = ?, description = ?, tags = ? WHERE ID_article = ?', [name, description, tags, articleId]);
+            const { name, description, tags, avatar } = article;
+            await db.execute('UPDATE Articles SET name = ?, description = ?, tags = ?, avatar = ? WHERE ID_article = ?', [name, description, tags, avatar, articleId]);
         } catch (error) {
             console.error('Error while editing article by ID:', error);
             throw error;

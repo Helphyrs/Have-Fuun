@@ -10,7 +10,15 @@ module.exports = {
             res.status(500).send('Internal Server Error');
         }
     },
-
+    getAllFormsAdmin: async (req, res) => {
+        try {
+            const forms = await formModel.getAllFormsAdmin(req.app.locals.db);
+            res.status(200).send(forms);
+        } catch (error) {
+            console.error('Error while fetching all forms:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    },
     getFormById: async (req, res) => {
         try {
             const formId = req.params.formId;

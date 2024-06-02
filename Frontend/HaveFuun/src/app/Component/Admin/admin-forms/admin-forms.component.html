@@ -1,1 +1,77 @@
-<p>admin-forms works!</p>
+@if(display ==="home") {
+<section class="flex flex-column flex-align-center">
+    <button class="signin-button" [routerLink]="['/admin']"><i class="fa-solid fa-arrow-left-long"></i>
+        Revenir avant</button>
+    <h2 class="medium-size text-color-purple text-center margin-bottom">Voici la page d'Articles d'administration</h2>
+    <button class="signin-button" (click)="switchDisplay('addForm')">Ajouter un article <i
+            class="adaptative-size pointer text-color-purple fa-solid fa-pen-to-square"></i></button>
+    @if(forms.length >0 ) {
+    <h3 class="medium-size text-color-purple text-center margin-bottom">Voici la liste des articles :</h3>
+    <div class="table-container">
+        <table class="adaptative-size">
+            <thead>
+                <tr>
+                    <td>ID_article</td>
+                    <td>avatar</td>
+                    <td>name</td>
+                    <td>question</td>
+                    <td>topicA</td>
+                    <td>topicB</td>
+                    <td>topicC</td>
+                    <td>modification</td>
+                    <td>suppression</td>
+                </tr>
+            </thead>
+            <tbody>
+                @for(form of forms ; track form ; let index = $index) {
+                <tr>
+                    <td>{{ form.ID_form }}</td>
+                    <td><img class="logo-image-table" [src]="form.avatar" alt="avatar de l'article"></td>
+                    <td>{{ form.name }}</td>
+                    <td>{{ form.question }}</td>
+                    <td>{{ form.topicA }}</td>
+                    <td>{{ form.topicB }}</td>
+                    <td>{{ form.topicC }}</td>
+                    <td><i (click)="switchDisplay('editForm', form.ID_form, index)"
+                            class="adaptative-size pointer text-color-purple fa-solid fa-pen-to-square"></i></td>
+                    <td><i (click)="deleteForm(form.ID_form)"
+                            class="adaptative-size pointer text-color-purple fa-solid fa-delete-left"></i></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    } @else {
+    <h3 class="medium-size text-color-purple text-center margin-bottom">Il n'y a pas d'articles</h3>
+    }
+</section>
+} @else if (display==="editForm") {
+<section class="flex flex-column flex-align-center">
+    <h2 class="medium-size text-color-purple text-center margin-bottom">Voici le formulaire de modification d'article
+    </h2>
+    <button class="signin-button" (click)="switchDisplay('home')"> <i class="fa-solid fa-arrow-left-long"></i> Revenir
+        avant <i class="adaptative-size pointer text-color-purple fa-solid fa-pen-to-square"></i></button>
+    <form class="container-form-comment flex flex-column flex-align-center margin-vertical" [formGroup]="editForm"
+        (ngSubmit)="onSubmitEdit()">
+
+        <div class="margin-bottom">
+            <button class="signin-button text-uppercase text-bold" aria-label="Modifié de votre commentaire"
+                type="submit">Modifié votre article</button>
+        </div>
+    </form>
+</section>
+} @else if (display==="addForm") {
+<section class="flex flex-column flex-align-center">
+    <h2 class="medium-size text-color-purple text-center margin-bottom">Voici le formulaire d'ajout d'article</h2>
+    <button class="signin-button" (click)="switchDisplay('home')"> <i class="fa-solid fa-arrow-left-long"></i> Revenir
+        avant <i class="adaptative-size pointer text-color-purple fa-solid fa-pen-to-square"></i></button>
+    <form class="container-form-comment flex flex-column flex-align-center margin-vertical" [formGroup]="addForm"
+        (ngSubmit)="onSubmit()">
+
+        <div class="margin-bottom">
+            <button [disabled]="!addForm.valid" class="signin-button text-uppercase text-bold"
+                aria-label="Modifié de votre commentaire" type="submit">Ajouter votre article</button>
+        </div>
+    </form>
+</section>
+}

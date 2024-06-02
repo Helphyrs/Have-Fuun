@@ -58,6 +58,16 @@ module.exports = {
         }
     },
 
+    getAllFormsAdmin: async (db) => {
+        try {
+            const [results] = await db.execute('SELECT * FROM Form');
+            return results;
+        } catch (error) {
+            console.error('Error while fetching all forms:', error);
+            throw error;
+        }
+    },
+
     editFormById: async (db, formId, form) => {
         try {
             const { name, question, topicA, topicB, topicC } = form;

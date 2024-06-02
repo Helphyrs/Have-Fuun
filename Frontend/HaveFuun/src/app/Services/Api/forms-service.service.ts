@@ -34,15 +34,18 @@ export class FormsServiceService {
     return this.http.get<Form>(`${this.apiUrlForms}/name/${formName}`);
   }
 
-  addForm(form: Form): Observable<any> {
+  addForm(form: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrlForms}/`, form);
   }
 
-  editFormById(formId: number, form: Form): Observable<any> {
+  editFormById(formId: number, form: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrlForms}/${formId}`, form);
   }
 
   deleteFormById(formId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrlForms}/${formId}`);
+  }
+  getAllFormsAdmin(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlForms}/admin/all`)
   }
 }

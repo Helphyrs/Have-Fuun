@@ -124,7 +124,7 @@ export class ProfilComponent implements OnInit {
   onSubmit(): void {
     let content = this.commentForm.get('comment')!.value;
     if (content.length > 10) {
-      this.errorMessage = "Votre commentaire a bien été envoyée."
+      this.errorMessage = "Votre commentaire a bien été modifiée."
       let comment: CommentEdit = {
         content: content
       };

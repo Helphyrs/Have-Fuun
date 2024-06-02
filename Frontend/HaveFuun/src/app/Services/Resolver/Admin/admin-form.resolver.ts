@@ -9,6 +9,6 @@ export class adminFormResolver implements Resolve<any> {
   constructor(private fS: FormsServiceService) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
-    return this.fS.getAllForms();
+    return this.fS.getAllFormsAdmin();
   }
 }
