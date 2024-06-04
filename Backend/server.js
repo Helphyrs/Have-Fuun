@@ -9,6 +9,9 @@ const startServer = async port => {
     try {
         const connection = await bd.connectDB();
         app.locals.db = connection
+        setInterval(function () {
+            connection.query('SELECT 1');
+        }, 10000);
         app.listen(port, () => {
             console.log(`Server is listening on http://localhost:${port}/api`);
         }).on('error', (err) => {

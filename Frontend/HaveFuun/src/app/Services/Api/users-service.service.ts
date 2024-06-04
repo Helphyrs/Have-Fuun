@@ -23,10 +23,10 @@ export class UsersServiceService {
     return this.http.get<UserWithoutPassword>(`${this.apiUrlUsers}/token/`)
   }
   getUserAllInformationByToken(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrlUsers}/allInfo/`);
+    return this.http.get<any>(`${this.apiUrlUsers}/allInfo/token/`);
   }
   editUserByToken(user: User | UserWithoutPassword): Observable<any> {
-    return this.http.put<any>(`${this.apiUrlUsers}/edit`, user)
+    return this.http.put<any>(`${this.apiUrlUsers}/edit/`, user)
   }
   deleteUserById(userId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrlUsers}/${userId}`)

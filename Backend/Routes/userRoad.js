@@ -9,7 +9,7 @@ const { admin } = require('../Middlewares/admin');
 router.post('/', sanitize, userController.addUser);
 
 router.get('/token/', auth, userController.getUserByToken)
-router.get('/allInfo/', auth, verifyUserOwnership, userController.getAllInfoUser)
+router.get('/allInfo/token/', auth, userController.getAllInfoUser)
 router.get('/:userId', auth, sanitize, verifyUserOwnership, userController.getUserById);
 router.put('/edit/', auth, sanitize, userController.editUserByToken)
 router.put('/:userId', auth, sanitize, verifyUserOwnership, userController.editUserById);
