@@ -1,35 +1,30 @@
 <header class="flex flex-column flex-align-center">
     <div class="flex flex-justify-between flex-align-center container">
-        <div class="flex flex-align-center" routerLink="/">
+        <div class="flex flex-align-center pointer" routerLink="/">
             <img src="../../../../assets/public/Have_Fuun_Doggo.webp" alt="Logo du site, chien dans une borne de jeu"
                 class="logo-image">
             <h1 class="large-size text-capitalize text-color-purple">have fuun!</h1>
         </div>
         @if (isAuth) {
-        <div class="flex flex-align-center">
-            <a class="pointer adaptative-size text-color-gray text-bold text-capitalize" routerLink="/profil">profil</a>
-            <i (click)="logout()"
-                class="fa-solid fa-power-off margin-horizontal text-color-purple large-size pointer"></i>
-        </div>
+        <nav class="flex flex-align-center">
+            <a routerLink="/" href=""><i class="fa-solid fa-house text-color-purple large-size pointer"></i>
+            </a>
+            <a class="pointer adaptative-size text-color-gray text-bold text-capitalize margin-horizontal"
+                routerLink="/profil">profil</a>
+            <a (click)="logout()" href=""> <i
+                    class="fa-solid fa-power-off margin-right text-color-purple large-size pointer"></i>
+            </a>
+        </nav>
         }
         @else {
-        <div class="flex flex-align-center">
-            <i class="fa-solid fa-user margin-right text-color-purple large-size pointer" (click)="displayModal()"></i>
-        </div>
+        <nav class="flex flex-align-center">
+            <a href="" routerLink="/"><i class="fa-solid fa-house text-color-purple large-size pointer"></i></a>
+            <i (click)="displayModal()"
+                class="fa-solid fa-user margin-horizontal text-color-purple large-size pointer"></i>
+        </nav>
         }
 
     </div>
-    <nav class="flex flex-column flex-align-center container-nav margin-top">
-        <div class="container border-nav-a border-radius margin-bottom">
-            <a class="block pointer adaptative-size text-color-gray text-bold text-center text-capitalize border-radius"
-                routerLink="/forms">formulaires</a>
-        </div>
-        <div class="container border-nav-a border-radius margin-bottom ">
-            <a class="block pointer adaptative-size text-color-gray text-bold text-center text-capitalize border-radius"
-                routerLink="/articles">articles</a>
-        </div>
-    </nav>
-
     @if(displayLogIn) {
     <app-login (displaySignInChange)="display($event)" (displaySignUpChange)="startDisplaySignUp($event)"></app-login>
     }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map } from 'rxjs';
-import { Article, ArticleAll } from '../../../Models/articleModel';
-import { ArticlesServiceService } from '../../../Services/Api/articles-service.service';
+import { Article } from '../../../Models/articleModel';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AdminServiceService } from '../../../Services/Api/admin-service.service';
 
 @Component({
   selector: 'app-admin-articles',
@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './admin-articles.component.scss'
 })
 export class AdminArticlesComponent implements OnInit {
+
   data!: Observable<any>;
   articles: any;
   display: string = "home";
@@ -21,7 +22,7 @@ export class AdminArticlesComponent implements OnInit {
   editArticleForm!: FormGroup;
 
   constructor(
-    private activatedRoute: ActivatedRoute, private aS: ArticlesServiceService,
+    private activatedRoute: ActivatedRoute, private adminS: AdminServiceService,
     private formBuilder: FormBuilder
   ) { }
 
@@ -51,7 +52,7 @@ export class AdminArticlesComponent implements OnInit {
   deleteArticle(id: number): void {
     let bool: boolean = confirm("$Etes vous sûr de supprimer cet article ?")
     if (bool) {
-      this.aS.deleteArticle(id).subscribe(data => {
+      this.adminS.deleteArticleById(id).subscribe(data => {
       }, error => {
         alert("L'article a bien été supprimé, lors de la prochaine actualisation il ne sera plus là.")
       })
@@ -74,6 +75,15 @@ export class AdminArticlesComponent implements OnInit {
     })
   }
 
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.addArticleForm.patchValue({
+        avatar: file
+      });
+    }
+  }
+
   onSubmit(): void {
     let obj: Article = {
       name: this.addArticleForm.get('name')!.value,
@@ -82,16 +92,16 @@ export class AdminArticlesComponent implements OnInit {
       avatar: this.addArticleForm.get('avatar')!.value,
     }
     if (obj) {
-      this.aS.addArticle(obj).subscribe(data => {
+      this.adminS.addArticle(obj).subscribe(data => {
 
       }, error => {
         alert("L'article a bien été ajouté, actualisé la page pour le voir")
+        this.initForm()
         this.display = "home";
       })
     }
   }
   onSubmitEdit(): void {
-    console.log(this.editArticleForm.get('name')!.value, this.editArticleForm.get('name')!.value, this.editArticleForm.get('tags')!.value, this.editArticleForm.get('avatar')!.value)
     let obj: Article = {
       name: this.editArticleForm.get('name')!.value,
       description: this.editArticleForm.get('description')!.value,
@@ -99,7 +109,7 @@ export class AdminArticlesComponent implements OnInit {
       avatar: this.editArticleForm.get('avatar')!.value,
     }
     if (obj) {
-      this.aS.editArticleById(obj, this.ID_article).subscribe((data) => {
+      this.adminS.editArticleById(obj, this.ID_article).subscribe((data) => {
       }, (error) => {
         this.articles[this.editIndex] = {
           ID_article: this.editIndex + 1,
@@ -109,6 +119,7 @@ export class AdminArticlesComponent implements OnInit {
           avatar: this.editArticleForm.get('avatar')!.value
         }
         alert('Le formulaire a bien été modifiée');
+        this.initForm()
         this.display = "home"
         this.editIndex = -1;
       })

@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { ArticleAll } from '../../../Models/articleModel';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-articles',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './articles.component.html',
   styleUrl: './articles.component.scss'
 })

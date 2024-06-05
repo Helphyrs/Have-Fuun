@@ -55,7 +55,7 @@ export class ArticleComponent implements OnInit {
 
       },
         (error) => {
-          if (error.status === 403 && error.error.error === 'Access forbidden token unvalid') {
+          if ((error.status === 403 && error.error.error === 'Access forbidden token unvalid') || (error.status === 401 && error.error.error === "Access unauthorized")) {
             this.errorMessage = "Votre commentaire ne respecte pas les normes pour l'envoie"
             this.treatmentJWT.handle403Error(error.error.error);
           }

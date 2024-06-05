@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map } from 'rxjs';
-import { FormsServiceService } from '../../../Services/Api/forms-service.service';
+import { AdminServiceService } from '../../../Services/Api/admin-service.service';
 
 
 @Component({
@@ -33,7 +33,7 @@ export class AdminFormsComponent implements OnInit {
   editTopicsB: string[] = Array(8).fill('');
   editTopicsC: string[] = Array(8).fill('');
 
-  constructor(private activatedRoute: ActivatedRoute, private fS: FormsServiceService) { }
+  constructor(private activatedRoute: ActivatedRoute, private adminS: AdminServiceService) { }
 
   ngOnInit(): void {
     this.data = this.activatedRoute.data.pipe(map((data: { [x: string]: any; }) => data['adminForms']));
@@ -60,7 +60,7 @@ export class AdminFormsComponent implements OnInit {
   deleteForm(id: number): void {
     let bool: boolean = confirm("Etes vous sûr de supprimer ce formulaire ?")
     if (bool) {
-      this.fS.deleteFormById(id).subscribe(data => {
+      this.adminS.deleteFormById(id).subscribe(data => {
       }, error => {
         alert("Le formulaire a bien été supprimé, lors de la prochaine actualisation il ne sera plus là.")
       })
@@ -96,7 +96,7 @@ export class AdminFormsComponent implements OnInit {
 
         }
 
-        this.fS.addForm(obj).subscribe(response => {
+        this.adminS.addForm(obj).subscribe(response => {
 
         }, error => {
           alert("Le formulaire a bien été ajouté, actualisé la page pour le voir")
@@ -120,7 +120,7 @@ export class AdminFormsComponent implements OnInit {
           topicC: this.editTopicsC.join(',')
         }
 
-        this.fS.editFormById(this.ID_forms, obj).subscribe(response => {
+        this.adminS.editFormById(this.ID_forms, obj).subscribe(response => {
 
         }, error => {
           this.forms[this.editIndex] = {
@@ -147,8 +147,5 @@ export class AdminFormsComponent implements OnInit {
 
   }
 
-  onSubmitEdit(): void {
-
-  }
 
 }

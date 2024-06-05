@@ -4,5 +4,6 @@ export const environment = {
     apiUrlUsers: 'http://localhost:4912/api/users',
     apiUrlForms: 'http://localhost:4912/api/forms',
     apiUrlFormResult: 'http://localhost:4912/api/form-result',
-    apiUrlComments: 'http://localhost:4912/api/comments'
+    apiUrlComments: 'http://localhost:4912/api/comments',
+    apiUrlAdmin: 'http://localhost:4912/api/admin'
 };

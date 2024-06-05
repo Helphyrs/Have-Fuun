@@ -1,18 +1,10 @@
 const formModel = require('../Models/form');
 
 module.exports = {
+
     getAllForms: async (req, res) => {
         try {
             const forms = await formModel.getAllForms(req.app.locals.db);
-            res.status(200).send(forms);
-        } catch (error) {
-            console.error('Error while fetching all forms:', error);
-            res.status(500).send('Internal Server Error');
-        }
-    },
-    getAllFormsAdmin: async (req, res) => {
-        try {
-            const forms = await formModel.getAllFormsAdmin(req.app.locals.db);
             res.status(200).send(forms);
         } catch (error) {
             console.error('Error while fetching all forms:', error);
@@ -39,39 +31,6 @@ module.exports = {
             console.error('Error while fetching form by name:', error);
             res.status(500).send('Internal Server Error');
         }
-    },
-
-    addForm: async (req, res) => {
-        try {
-            const form = req.body;
-            const formId = await formModel.addForm(req.app.locals.db, form);
-            res.status(201).send(`Form added with ID: ${formId}`);
-        } catch (error) {
-            console.error('Error while adding form:', error);
-            res.status(500).send('Internal Server Error');
-        }
-    },
-
-    editFormById: async (req, res) => {
-        try {
-            const formId = req.params.formId;
-            const form = req.body;
-            await formModel.editFormById(req.app.locals.db, formId, form);
-            res.status(200).send('Form updated successfully');
-        } catch (error) {
-            console.error('Error while updating form:', error);
-            res.status(500).send('Internal Server Error');
-        }
-    },
-
-    deleteFormById: async (req, res) => {
-        try {
-            const formId = req.params.formId;
-            await formModel.deleteFormById(req.app.locals.db, formId);
-            res.status(200).send('Form deleted successfully');
-        } catch (error) {
-            console.error('Error while deleting form:', error);
-            res.status(500).send('Internal Server Error');
-        }
     }
+
 };

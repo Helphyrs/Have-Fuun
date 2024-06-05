@@ -56,26 +56,6 @@ module.exports = {
             console.error(error);
             res.status(500).send('Internal Server Error');
         }
-    },
-
-    deleteCommentByAdmin: async (req, res) => {
-        try {
-            const commentId = req.params.commentId;
-            await commentModel.deleteComment(req.app.locals.db, commentId);
-            res.status(200).send('Comment deleted successfully by admin');
-        } catch (error) {
-            console.error(error);
-            res.status(500).send('Internal Server Error');
-        }
-    },
-
-    getAllComments: async (req, res) => {
-        try {
-            const comments = await commentModel.getAllComments(req.app.locals.db);
-            res.status(200).send(comments);
-        } catch (error) {
-            console.error(error);
-            res.status(500).send('Internal Server Error');
-        }
     }
+
 };

@@ -1,14 +1,29 @@
-<section class="flex flex-column flex-align-center">
+<section class="flex flex-column flex-align-center ">
+    <button routerLink="/" class="margin-vertical"> <i class="fa-solid fa-arrow-left-long"></i> Revenir à
+        l'accueil</button>
     <h2 class="medium-size text-color-purple text-center margin-bottom">Voici la page d'Articles</h2>
     @for(article of articles ; track article ; let index = $index) {
-    <div class="position-relative pointer parent" [routerLink]="'/articles/' + article.name">
-        <img [src]="article.avatar" [alt]="article.name">
-        <div class="child">
-            {{article.name}}
-            <span>{{article.tags}}</span>
+    <div class="container-article padding margin-vertical flex flex-justify-around flex-align-center border-bottom-beige"
+        [ngClass]="index%2!==0 ? 'flex-column-change-reverse' : 'flex-column-change' ">
+        <div class="position-relative pointer parent" [routerLink]="'/articles/' + article.name">
+            <div class="position-absolute border-beige pointer border-radius"
+                [ngClass]="index%2!==0 ? 'icon-image-click-pair' :'icon-image-click-impair'"><i
+                    class="fa-solid fa-hand-pointer large-size"></i>
+            </div>
+            <img class="border-radius" [src]="'http://localhost:4912/'+article.avatar" [alt]="article.name">
+            <div class="child">
+                {{article.name}}
+                <span class="margin-top">{{article.tags}}</span>
+            </div>
+            <div class="border-child"></div>
         </div>
-        <div class="border-child"></div>
+        <div class="flex flex-column flex-align-center container-paragraph">
+            <h3 class="adaptative-size margin-vertical">{{article.name}}</h3>
+            <p class="adaptative-size text-color-gray">{{article.description}}</p>
+            <button [routerLink]="['/articles', article.name]" class="margin-vertical">En savoir plus <i
+                    class="margin-left fa-solid fa-hand-pointer"></i></button>
+        </div>
     </div>
-    <p class="adaptative-size text-color-gray">{{article.description}}</p>
     }
+
 </section>

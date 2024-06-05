@@ -1,6 +1,6 @@
 <div class="modal-overlay" #modal>
-    <section class="container" #container>
-        <h2 class="text-uppercase">Se connecter</h2>
+    <section id="login" class="container-auth" #container>
+        <h2 class="text-uppercase text-center adaptative-size">Se connecter</h2>
         <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
             <div class="margin-bottom">
                 <label class="label-size" for="email" aria-label="Écrire votre email">Email:*</label>

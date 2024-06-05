@@ -14,12 +14,7 @@ export class AuthResolver implements Resolve<boolean> {
   resolve(): Observable<boolean> {
     return this.authService.loginWithToken().pipe(
       map(response => {
-        console.log(response)
-        if (response) {
-          return true;
-        } else {
-          return false;
-        }
+        return response ? true : false;
       }),
       catchError(() => {
         return of(false);

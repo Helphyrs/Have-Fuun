@@ -3,18 +3,41 @@
     font-family: Montserrat, sans-serif;
 }
 
-a {
-    text-decoration: none;
-}
-
 html {
     font-size: 62.5%; // le font-size est à 10 px maintenant par défaut donc en faisant 1.2rem on obtient 12px
     box-sizing: content-box;
 }
 
-section {
-    background: linear-gradient(180deg, rgba(241, 240, 241, 1) 0%, hsl(36, 100%, 90%) 50%, rgba(241, 240, 241, 1) 100%);
-    min-height: 50vh
+body {
+    background-image: radial-gradient(circle at 66% 40%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 3%, transparent 3%, transparent 100%), radial-gradient(circle at 48% 3%, rgba(224, 205, 165, 0.45) 0%, rgba(224, 205, 165, 0.45) 3%, transparent 3%, transparent 100%), radial-gradient(circle at 64% 14%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 3%, transparent 3%, transparent 100%), radial-gradient(circle at 28% 95%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 3%, transparent 3%, transparent 100%), radial-gradient(circle at 44% 75%, rgba(224, 205, 165, 0.45) 0%, rgba(224, 205, 165, 0.45) 3%, transparent 3%, transparent 100%), radial-gradient(circle at 34% 71%, rgba(241, 240, 241, 0.17) 0%, rgba(241, 240, 241, 0.17) 7%, transparent 7%, transparent 100%), radial-gradient(circle at 59% 30%, rgba(241, 240, 241, 0.17) 0%, rgba(241, 240, 241, 0.17) 7%, transparent 7%, transparent 100%), radial-gradient(circle at 2% 90%, rgba(241, 240, 241, 0.17) 0%, rgba(241, 240, 241, 0.17) 7%, transparent 7%, transparent 100%), radial-gradient(circle at 21% 85%, rgba(241, 240, 241, 0.17) 0%, rgba(241, 240, 241, 0.17) 7%, transparent 7%, transparent 100%), radial-gradient(circle at 76% 27%, rgba(224, 205, 165, 0.45) 0%, rgba(224, 205, 165, 0.45) 7%, transparent 7%, transparent 100%), radial-gradient(circle at 97% 12%, rgba(241, 240, 241, 0.17) 0%, rgba(241, 240, 241, 0.17) 7%, transparent 7%, transparent 100%), radial-gradient(circle at 55% 89%, rgba(241, 240, 241, 0.17) 0%, rgba(241, 240, 241, 0.17) 7%, transparent 7%, transparent 100%), radial-gradient(circle at 11% 47%, rgba(241, 240, 241, 0.17) 0%, rgba(241, 240, 241, 0.17) 7%, transparent 7%, transparent 100%), radial-gradient(circle at 65% 40%, rgba(224, 205, 165, 0.45) 0%, rgba(224, 205, 165, 0.45) 5%, transparent 5%, transparent 100%), radial-gradient(circle at 98% 38%, rgba(224, 205, 165, 0.45) 0%, rgba(224, 205, 165, 0.45) 5%, transparent 5%, transparent 100%), radial-gradient(circle at 46% 88%, rgba(241, 240, 241, 0.17) 0%, rgba(241, 240, 241, 0.17) 5%, transparent 5%, transparent 100%), radial-gradient(circle at 47% 39%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 5%, transparent 5%, transparent 100%), linear-gradient(182deg, rgba(224, 205, 165, 0.45), rgb(125, 2, 147));
+}
+
+@font-face {
+    font-family: 'DelaGoth';
+    src: url('./assets/fonts/DelaGothicOne-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:active {
+    color: #37332A;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Delagoth', sans-serif;
+    font-weight: 100;
+}
+
+section:not(#login):not(#sign-up) {
+    min-height: 70vh;
 }
 
 // DISPLAY
@@ -56,9 +79,20 @@ section {
 }
 
 .container-home,
+.container-article,
 .container-nav,
 .container-form-comment {
     width: 95%;
+}
+
+.container-form {
+    width: 75%;
+}
+
+.container-paragraph,
+.container-comment,
+.container-paragraph-article {
+    width: 25rem;
 }
 
 .max-width {
@@ -85,7 +119,8 @@ section {
     max-width: 10rem;
 }
 
-.logo-image-table {
+.logo-image-table,
+.logo-image-form {
     max-width: 5rem;
 }
 
@@ -93,9 +128,11 @@ section {
     max-width: 25rem;
 }
 
-.logo-image-form {
-    max-width: 5rem;
-    border: 0.5rem solid #E0CDA5;
+.field {
+    width: 100%;
+    padding: 0.75rem 0;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #ccc;
 }
 
 // MARGIN PADDING 
@@ -141,6 +178,14 @@ section {
     margin: 1rem;
 }
 
+.small-margin-left {
+    margin-left: 0.2rem;
+}
+
+.margin-list {
+    margin: 1rem 1rem 0 2rem;
+}
+
 .no-padding {
     padding: 0;
 }
@@ -160,7 +205,9 @@ section {
 
 // FLEX 
 
-.flex-column {
+.flex-column,
+.flex-column-change,
+.flex-column-change-reverse {
     flex-direction: column;
 }
 
@@ -193,6 +240,7 @@ section {
 }
 
 // TAILLES ; COULEURS ; STYLES DE TEXTES
+
 .error-message {
     color: red;
     text-align: center;
@@ -230,6 +278,18 @@ section {
     background-color: #7D0293;
 }
 
+.pâtisserie {
+    background-color: pink;
+}
+
+.sucrerie {
+    background-color: #e016e063;
+}
+
+.chaise {
+    background-color: beige;
+}
+
 .text-center {
     text-align: center;
 }
@@ -244,6 +304,10 @@ section {
 
 .text-right {
     text-align: right;
+}
+
+.label-size {
+    font-size: 1.2rem;
 }
 
 .small-size {
@@ -280,6 +344,7 @@ section {
 
 // BORDER
 
+
 .border-radius {
     border-radius: 2rem;
 }
@@ -295,6 +360,18 @@ section {
 .border-green {
     border: 0.5rem solid green;
     border-radius: 1rem;
+}
+
+.border-purple {
+    border: 0.1rem solid #7D0293;
+    border-radius: 50%;
+}
+
+.logo-image,
+.logo-image-form,
+.logo-image-home,
+.logo-image-table {
+    border-radius: 2rem;
 }
 
 // TABLES
@@ -346,35 +423,134 @@ td {
 
 button {
     cursor: pointer;
+    padding: 1rem 5rem;
+    font-size: 1.4rem;
+    border: 0.3rem solid #7D0293;
+    border-radius: 1.8rem;
+    background-color: #E0CDA5;
+    color: #37332A;
+    transition: all 0.5s linear;
+    box-shadow: 0.4rem 0.4rem 0.4rem 0rem rgba(0, 0, 0, 0.1);
 }
 
 .pointer {
     cursor: pointer;
 }
 
-.shadow-box {
-    box-shadow: 0.4rem 0.4rem 0.4rem 0rem rgba(0, 0, 0, 0.1);
-}
 
 .signin-button {
     width: 100%;
-    padding: 0.5rem 1rem;
-    font-size: 1.4rem;
-    border: 0.3rem solid #7D0293;
-    border-radius: 1.8rem;
-    background-color: #E0CDA5;
-    color: #37332A;
-    transition: all 0.5s linear
+    padding: 0.5rem 1rem
 }
 
-.signin-button:hover {
+.signin-button:hover,
+button:hover {
     background-color: #37332A;
     color: #E0CDA5;
     border-color: #ffffff;
 }
 
+// ICONES
+.icon-image-click-pair,
+.icon-image-click-impair {
+    top: -1.2rem;
+    padding: 0.5rem;
+    background-color: #f1f0f1;
+    z-index: 21;
+}
 
-@media screen and (min-width: 540px) {
+.icon-image-click-pair {
+    left: -1.2rem;
+}
+
+.icon-image-click-impair {
+    right: -1.2rem;
+}
+
+// SCROLLBAR 
+
+::-webkit-scrollbar {
+    width: 1rem;
+    border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f0f1;
+    border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #E0CDA5;
+    border-radius: 0.2rem;
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #aa9b7bf6;
+}
+
+// ARTICLES - FORMS
+
+.parent:hover .child {
+    background-color: rgba(76, 67, 67, .9);
+    color: white;
+}
+
+.parent:hover .border-child {
+    margin: 2rem;
+    border: 0.5rem solid white;
+}
+
+.child,
+.border-child {
+    font-size: 1.5rem;
+    text-align: justify;
+    position: absolute;
+    padding: 3rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    transition: all 0.4s linear;
+}
+
+
+// LOGIN SIGN-UP
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    color: #37332A;
+}
+
+.dotWhite {
+    display: block;
+    width: 0.4rem;
+    height: 0.15rem;
+    background-color: #F1F1F1;
+    margin: 0 0.25rem;
+}
+
+.container-auth {
+    background-color: #E0CDA5;
+    padding: 2rem 2.5rem;
+    border-radius: 0.5rem;
+}
+
+@media screen and (min-width: 600px) {
 
     .adaptative-size {
         font-size: 1.8rem;
@@ -386,6 +562,26 @@ button {
 
     .adaptative-margin {
         margin: 1.5rem;
+    }
+
+    .flex-column-change {
+        flex-direction: row;
+    }
+
+    .flex-column-change-reverse {
+        flex-direction: row-reverse;
+    }
+
+    .container-paragraph {
+        width: 45%;
+    }
+
+    .container-paragraph-article {
+        width: 90%;
+    }
+
+    .logo-image-home {
+        max-width: 30rem;
     }
 }
 
@@ -401,5 +597,22 @@ button {
 
     .adaptative-margin {
         margin: 1.5rem;
+    }
+
+    .container-home,
+    .container-paragraph-article {
+        width: 75%;
+    }
+
+    .logo-image-home {
+        max-width: 35rem;
+    }
+
+    .table-container {
+        overflow-x: hidden;
+    }
+
+    .flex-align-items-change {
+        align-items: center;
     }
 }

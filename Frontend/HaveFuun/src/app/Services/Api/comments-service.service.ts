@@ -23,17 +23,14 @@ export class CommentsServiceService {
   editComment(comment: CommentEdit, commentId: number): Observable<any> {
     return this.http.put<any>(`${this.apiUrlComment}/${commentId}`, comment)
   }
+
   deleteComment(commentId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrlComment}/${commentId}`)
   }
+
   getCommentsByUser(userId: number): Observable<Comment[]> {
     return this.http.get<Comment[]>(`${this.apiUrlComment}/comment/${userId}`)
   }
 
-  deleteCommentByAdmin(commentId: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrlComment}/admin/${commentId}`)
-  }
-  getAllComments(): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${this.apiUrlComment}/admin/all`)
-  }
+
 }

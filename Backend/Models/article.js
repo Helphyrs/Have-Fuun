@@ -13,7 +13,7 @@ module.exports = {
 
     getArticleById: async (db, articleId) => {
         try {
-            const [results] = await db.execute('SELECT * FROM Articles WHERE ID_article = ?', [articleId]);
+            const [results] = await db.execute('SELECT name, description, tags, avatar FROM Articles WHERE ID_article = ?', [articleId]);
             return results[0];
         } catch (error) {
             console.error('Error while fetching article by ID:', error);
@@ -32,6 +32,15 @@ module.exports = {
     },
 
     getAllArticles: async (db) => {
+        try {
+            const [results] = await db.execute('SELECT name, description, tags, avatar FROM Articles');
+            return results;
+        } catch (error) {
+            console.error('Error while fetching all articles:', error);
+            throw error;
+        }
+    },
+    getAllArticlesAdmin: async (db) => {
         try {
             const [results] = await db.execute('SELECT * FROM Articles');
             return results;

@@ -23,14 +23,4 @@ export class ArticlesServiceService {
     return this.http.get<ArticleAll>(`${this.apiUrlArticle}/name/${name}`)
   }
 
-  addArticle(article: Article): Observable<any> {
-    return this.http.post<any>(`${this.apiUrlArticle}/admin`, article)
-  }
-  editArticleById(article: Article, articleId: number): Observable<any> {
-    return this.http.put<any>(`${this.apiUrlArticle}/admin/${articleId}`, article)
-  }
-  deleteArticle(articleId: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrlArticle}/admin/${articleId}`)
-  }
-
 }

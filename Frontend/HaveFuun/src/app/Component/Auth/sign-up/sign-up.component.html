@@ -1,32 +1,34 @@
 <div class="modal-overlay" #modalSignUp>
-    <section class=" container" #containerSignUp>
-        <h2 class="text-uppercase">S'inscrire</h2>
+    <section id="sign-up" class=" container-auth" #containerSignUp>
+        <h2 class="text-uppercase text-center adaptative-size">S'inscrire</h2>
         <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
             <div class="margin-bottom flex flex-column flex-justify-between">
                 <label for="pseudo" aria-label="Saisissez votre pseudo">Pseudo:*</label>
-                <input class="field" type="text" id="pseudo" formControlName="pseudo">
+                <input class="fields" type="text" id="pseudo" formControlName="pseudo">
             </div>
             <div class="margin-bottom">
                 <label for="email" aria-label="Saisissez votre email">Email:*</label>
-                <input class="field" type="text" id="email" formControlName="email">
+                <input class="fields" type="text" id="email" formControlName="email">
             </div>
             <div class="margin-bottom flex flex-column flex-justify-between">
                 <p class="medium-size">Choisissez votre image d'avatar:</p>
                 <div class="flex flex-justify-between">
                     @for(image of imageArray ; track image) {
-                    <img [src]="image" alt="Avatar" (click)="selectAvatar(image)" class="logo-image-form pointer"
+                    <img [src]="image" alt="Avatar" (click)="selectAvatar(image)"
+                        class="logo-image-form pointer border-beige"
                         [ngClass]="imageAvatar === image ? 'border-green' : ''">
                     }
                 </div>
             </div>
             <div class="margin-bottom">
                 <label for="password" aria-label="Saisissez un mot de passe">Mot de passe:*</label>
-                <input class="field" type="password" id="password" formControlName="password" (input)="checkPassword()">
+                <input class="fields" type="password" id="password" formControlName="password"
+                    (input)="checkPassword()">
             </div>
             <div class="margin-bottom">
                 <label for="confirmPassword" aria-label="Saisissez à nouveau votre mot de passe">Confirmer le mot de
                     passe:*</label>
-                <input class="field" type="password" id="confirmPassword" formControlName="confirmPassword"
+                <input class="fields" type="password" id="confirmPassword" formControlName="confirmPassword"
                     (input)="checkConfirmPassword()">
                 <ul class="margin-list no-padding">
                     <li [ngClass]="verifyArray.min === true ? 'text-color-green' : 'text-color-red'">Formé d'un minimum

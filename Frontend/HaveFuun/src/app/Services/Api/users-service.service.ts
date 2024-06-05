@@ -34,20 +34,6 @@ export class UsersServiceService {
   deleteUserByToken(): Observable<any> {
     return this.http.delete<any>(`${this.apiUrlUsers}/delete/`)
   }
-  getAllUsers(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrlUsers}/admin/all/`)
-  }
-  getUserByIdAdmin(userId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrlUsers}/admin/user/${userId}`)
-  }
-  getAllUserInfoAdmin(userId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrlUsers}/admin/user/all/${userId}`)
-  }
-  deleteUserByIdAdmin(userId: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrlUsers}/admin/delete/${userId}`)
-  }
-  isAdmin(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrlUsers}/admin/isAdmin/`)
-  }
+
 
 }

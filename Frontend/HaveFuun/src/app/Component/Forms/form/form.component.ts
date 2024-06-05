@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { Observable, map } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { Form, FormResult } from '../../../Models/formModel';
@@ -10,7 +11,7 @@ import { TreatmentJwtErrorService } from '../../../Services/Website/treatment-jw
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, FormsModule],
+  imports: [RouterModule, ReactiveFormsModule, FormsModule, CommonModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })

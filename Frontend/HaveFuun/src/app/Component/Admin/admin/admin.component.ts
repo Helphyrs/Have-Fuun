@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
-import { UsersServiceService } from '../../../Services/Api/users-service.service';
+import { AdminServiceService } from '../../../Services/Api/admin-service.service';
 
 @Component({
   selector: 'app-admin',
@@ -14,7 +14,7 @@ export class AdminComponent implements OnInit {
   users!: any;
   display: string = "home";
 
-  constructor(private activatedRoute: ActivatedRoute, private uS: UsersServiceService, private router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private adminS: AdminServiceService) { }
 
   ngOnInit(): void {
     this.data = this.activatedRoute.data.pipe(map((data: { [x: string]: any; }) => data['adminUsers']));
@@ -29,7 +29,7 @@ export class AdminComponent implements OnInit {
   deleteComment(id: number) {
     let bool: boolean = confirm('Êtes vous sûr de supprimer cet user ?');
     if (bool) {
-      this.uS.deleteUserByIdAdmin(id).subscribe((response) => { }, (error) => {
+      this.adminS.deleteUserByIdAdmin(id).subscribe((response) => { }, (error) => {
         if (error.error === "Access forbidden : you cannot delete another admin") {
           alert('Vous ne supprimez pas un autre administrateur')
         } else {

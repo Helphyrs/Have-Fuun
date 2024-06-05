@@ -31,25 +31,7 @@ module.exports = {
             res.status(500).send('Internal Server Error');
         }
     },
-    getAllInfoUserAdmin: async (req, res) => {
-        try {
-            const userId = req.params.userId;
-            const user = await userModel.getUserById(req.app.locals.db, userId);
-            const comment = await userModel.getCommentsWithArticleNameByUserId(req.app.locals.db, userId);
-            const formResult = await userModel.getFormResultsWithFormNameByUserId(req.app.locals.db, userId);
-            user ? res.status(200).send({ user, comment, formResult }) : res.status(404).send('Info user not found');
-        } catch (error) {
-            res.status(500).send('Internal Server Error');
-        }
-    },
-    getAllUsers: async (req, res) => {
-        try {
-            const user = await userModel.getAllUsers(req.app.locals.db);
-            user ? res.status(200).send(user) : res.status(404).send('Info user not found');
-        } catch (error) {
-            res.status(500).send('Internal Server Error');
-        }
-    },
+
 
     addUser: async (req, res) => {
         try {
@@ -122,12 +104,5 @@ module.exports = {
             res.status(500).send('Internal Server Error');
         }
     },
-    isAdmin: async (req, res) => {
-        try {
-            res.status(200).send(true);
-        } catch (error) {
-            res.status(500).send('Internal Server Error');
 
-        }
-    }
 };

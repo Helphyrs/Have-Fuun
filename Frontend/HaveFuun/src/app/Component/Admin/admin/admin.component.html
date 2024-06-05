@@ -1,15 +1,18 @@
-<section class="flex flex-column flex-align-center">
+<section class="flex flex-column flex-align-center flex-justify-center">
     <h2 class="adaptative-size text-color-purple text-center margin-bottom">Voici le tableau de bord d'administration
     </h2>
     @if(display === "home") {
     <div class="flex flex-column flex-align-center">
-        <button class="signin-button" (click)="displayUsers('users')">accéder aux informations des utilisateurs</button>
-        <button class="signin-button" [routerLink]="['/admin/forms']">accéder aux informations des formulaires </button>
-        <button class="signin-button" [routerLink]="['/admin/articles']">accéder aux informations des articles </button>
+        <button class="margin-vertical" (click)="displayUsers('users')">Informations des
+            utilisateurs</button>
+        <button class="margin-vertical" [routerLink]="['/admin/forms']">Informations des formulaires
+        </button>
+        <button class="margin-vertical" [routerLink]="['/admin/articles']">Informations des articles
+        </button>
     </div>
     } @else {
     <article class="flex flex-column flex-align-center">
-        <button class="signin-button" (click)="displayUsers('home')"><i class="fa-solid fa-arrow-left-long"></i>
+        <button class="" (click)="displayUsers('home')"><i class="fa-solid fa-arrow-left-long"></i>
             Revenir avant</button>
         <h3 class="adaptative-size text-color-purple">Tables des users</h3>
         <table class="adaptative-size">

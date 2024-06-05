@@ -1,13 +1,13 @@
 @if(display ==="home") {
 <section class="flex flex-column flex-align-center">
-    <button class="signin-button" [routerLink]="['/admin']"><i class="fa-solid fa-arrow-left-long"></i>
+    <button class="margin-vertical" [routerLink]="['/admin']"><i class="fa-solid fa-arrow-left-long"></i>
         Revenir avant</button>
     <h2 class="medium-size text-color-purple text-center margin-bottom">Voici la page d'Articles d'administration</h2>
-    <button class="signin-button" (click)="switchDisplay('addArticle')">Ajouter un article <i
-            class="adaptative-size pointer text-color-purple fa-solid fa-pen-to-square"></i></button>
+    <button class="margin-vertical" (click)="switchDisplay('addArticle')">Ajouter un article <i
+            class="adaptative-size pointer text-color-purple fa-solid fa-plus border-purple"></i></button>
     @if(articles.length >0 ) {
     <h3 class="medium-size text-color-purple text-center margin-bottom">Voici la liste des articles :</h3>
-    <div class="table-container">
+    <div class="flex flex-column table-container flex-align-items-change">
         <table class="adaptative-size">
             <thead>
                 <tr>
@@ -24,7 +24,8 @@
                 @for(article of articles ; track article ; let index = $index) {
                 <tr>
                     <td>{{ article.ID_article }}</td>
-                    <td><img class="logo-image-table" [src]="article.avatar" alt="avatar de l'article"></td>
+                    <td><img class="logo-image-table" [src]="'http://localhost:4912/'+article.avatar"
+                            alt="avatar de l'article"></td>
                     <td>{{ article.name }}</td>
                     <td>{{ article.tags }}</td>
                     <td>{{ article.description }}</td>
@@ -45,59 +46,60 @@
 <section class="flex flex-column flex-align-center">
     <h2 class="medium-size text-color-purple text-center margin-bottom">Voici le formulaire de modification d'article
     </h2>
-    <button class="signin-button" (click)="switchDisplay('home')"> <i class="fa-solid fa-arrow-left-long"></i> Revenir
-        avant <i class="adaptative-size pointer text-color-purple fa-solid fa-pen-to-square"></i></button>
+    <button class="" (click)="switchDisplay('home')"> <i class="fa-solid fa-arrow-left-long"></i> Revenir
+        avant </button>
     <form class="container-form-comment flex flex-column flex-align-center margin-vertical"
         [formGroup]="editArticleForm" (ngSubmit)="onSubmitEdit()">
-        <div class='container flex flex-column flex-align-center margin-bottom'>
-            <label for="name">Nom ( titre ) :</label>
-            <input type="text" formControlName="name" id="name">
+        <div class='flex flex-column flex-align-center margin-bottom'>
+            <label class="medium-size" for="name">Nom ( titre ) :</label>
+            <input class="field border-radius padding" type="text" formControlName="name" id="name">
         </div>
-        <div class='container flex flex-column flex-align-center margin-bottom'>
-            <label for="avatar">Chemin vers l'image :</label>
-            <input type="text" formControlName="avatar" id="avatar">
+        <div class='flex flex-column flex-align-center margin-bottom'>
+            <label class="medium-size" for="avatar">Chemin vers l'image :</label>
+            <input class="field border-radius padding" type="text" formControlName="avatar" id="avatar">
         </div>
-        <div class='container flex flex-column flex-align-center margin-bottom'>
-            <label for="description">Description de l'article</label>
-            <textarea class="container" formControlName="description" id="description" name="description"
-                rows="5"></textarea>
+        <div class='flex flex-column flex-align-center margin-bottom'>
+            <label class="medium-size" for="description">Description de l'article</label>
+            <textarea class="container-home padding border-radius" formControlName="description" id="description"
+                name="description" rows="5" cols="40"></textarea>
         </div>
-        <div class='container flex flex-column flex-align-center margin-bottom'>
-            <label for="tags">Tags : (ex : sucré, salé, etc)</label>
-            <input type="text" formControlName="tags" id="tags">
+        <div class='flex flex-column flex-align-center margin-bottom'>
+            <label class="medium-size" for="tags">Tags : (ex : sucré, salé, etc)</label>
+            <input class="field border-radius padding" type="text" formControlName="tags" id="tags">
         </div>
         <div class="margin-bottom">
-            <button class="signin-button text-uppercase text-bold" aria-label="Modifié de votre commentaire"
-                type="submit">Modifié votre article</button>
+            <button class=" text-uppercase text-bold" aria-label="Modifié de votre commentaire" type="submit">Modifié
+                votre article</button>
         </div>
     </form>
 </section>
 } @else if (display==="addArticle") {
 <section class="flex flex-column flex-align-center">
-    <h2 class="medium-size text-color-purple text-center margin-bottom">Voici le formulaire d'ajout d'article</h2>
-    <button class="signin-button" (click)="switchDisplay('home')"> <i class="fa-solid fa-arrow-left-long"></i> Revenir
-        avant <i class="adaptative-size pointer text-color-purple fa-solid fa-pen-to-square"></i></button>
+    <h2 class="medium-size text-color-purple text-center margin-vertical">Voici le formulaire d'ajout d'article</h2>
+    <button class="margin-vertical" (click)="switchDisplay('home')"> <i class="fa-solid fa-arrow-left-long"></i> Revenir
+        avant </button>
     <form class="container-form-comment flex flex-column flex-align-center margin-vertical" [formGroup]="addArticleForm"
-        (ngSubmit)="onSubmit()">
-        <div class='container flex flex-column flex-align-center margin-bottom'>
-            <label for="commentaire">Nom ( titre ) :</label>
-            <input type="text" formControlName="name" id="commentaire">
+        (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+        <div class='flex flex-column flex-align-center margin-bottom'>
+            <label class="medium-size" for="commentaire">Nom ( titre ) :</label>
+            <input class="field border-radius padding" type="text" formControlName="name" id="commentaire">
         </div>
-        <div class='container flex flex-column flex-align-center margin-bottom'>
-            <label for="avatar">Chemin vers l'image :</label>
-            <input type="text" formControlName="avatar" id="avatar">
+        <div class='flex flex-column flex-align-center margin-bottom'>
+            <label class="medium-size" for="avatar">Image :</label>
+            <input class="field border-radius padding" type="file" (change)="onFileChange($event)" id="avatar"
+                name="avatar">
         </div>
-        <div class='container flex flex-column flex-align-center margin-bottom'>
-            <label for="description">Description de l'article</label>
-            <textarea class="container" formControlName="description" id="description" name="description"
-                rows="5"></textarea>
+        <div class='flex flex-column flex-align-center margin-bottom'>
+            <label class="medium-size" for="description">Description de l'article</label>
+            <textarea class="border-radius padding container-home" formControlName="description" id="description"
+                name="description" rows="5" cols="40"></textarea>
         </div>
-        <div class='container flex flex-column flex-align-center margin-bottom'>
-            <label for="tags">Tags : (ex : sucré, salé, etc)</label>
-            <input type="text" formControlName="tags" id="tags">
+        <div class='flex flex-column flex-align-center margin-bottom'>
+            <label class="medium-size" for="tags">Tags : (ex : sucré, salé, etc)</label>
+            <input class="field border-radius padding" type="text" formControlName="tags" id="tags">
         </div>
         <div class="margin-bottom">
-            <button [disabled]="!addArticleForm.valid" class="signin-button text-uppercase text-bold"
+            <button [disabled]="!addArticleForm.valid" class=" text-uppercase text-bold"
                 aria-label="Modifié de votre commentaire" type="submit">Ajouter votre article</button>
         </div>
     </form>

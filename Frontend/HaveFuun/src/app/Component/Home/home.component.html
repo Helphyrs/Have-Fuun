@@ -1,23 +1,37 @@
 <section class="flex flex-column flex-align-center">
-    <h2 class="medium-size text-color-purple text-center margin-bottom">Voici la page d'accueil d'HaveFuun !</h2>
-    <div class="container-home flex flex-column flex-justify-between flex-align-center margin-bottom">
-        <a class="pointer" routerLink="articles">
-            <img class="logo-image-home text-justify margin-bottom" src="assets/public/article.webp"
-                alt="image d'article">
+    <h2 class="medium-size text-color-purple text-center margin-bottom">Bienvenue sur HaveFuun !</h2>
+    <div
+        class="container-home padding border-bottom-beige flex flex-column-change flex-justify-between flex-align-center margin-vertical">
+        <a class="pointer position-relative" routerLink="articles">
+            <div class="position-absolute border-beige pointer border-radius icon-image-click-impair"><i
+                    class="fa-solid fa-hand-pointer large-size"></i>
+            </div>
+            <img class="logo-image-home" src="assets/public/article.webp" alt="image d'article">
         </a>
-        <p class="adaptative-size text-justify">
-            Si vous souhaitez découvrir les articles passionnants de nos fondateurs,
-            n'hésitez pas à laisser un commentaire pour partager votre avis.
-        </p>
+        <div class="flex flex-column flex-align-center container-paragraph">
+            <h3 class="adaptative-size  margin-vertical text-color-gray">Nos articles intéressants</h3>
+            <p class="adaptative-size text-justify">
+                Si vous souhaitez découvrir les articles passionnants de nos fondateurs,
+                n'hésitez pas à laisser un commentaire pour partager votre avis.
+            </p>
+            <button routerLink="articles" class="margin-vertical">Nos articles</button>
+        </div>
     </div>
-    <div class="container-home flex flex-column flex-justify-between flex-align-center margin-bottom">
-        <a class="pointer" routerLink="forms">
-            <img class="logo-image-home text-justify margin-bottom" src="assets/public/laptop.webp"
-                alt="image de formulaire">
+    <div
+        class="container-home padding border-bottom-beige flex flex-column-change-reverse flex-justify-between flex-align-center margin-bottom">
+        <a class="pointer position-relative" routerLink="forms">
+            <div class="position-absolute border-beige pointer border-radius icon-image-click-pair"><i
+                    class="fa-solid fa-hand-pointer large-size"></i>
+            </div>
+            <img class="logo-image-home text-justify" src="assets/public/laptop.webp" alt="image de formulaire">
         </a>
-        <p class="adaptative-size text-justify">
-            Avez-vous toujours voulu savoir si vous seriez une chaise,
-            ou quel type de phare vous seriez ? Découvrez-le en répondant à notre quiz amusant !
-        </p>
+        <div class="flex flex-column flex-align-center container-paragraph">
+            <h3 class="adaptative-size  margin-vertical text-color-gray">Nos quizs intriguants</h3>
+            <p class="adaptative-size text-justify">
+                Avez-vous toujours voulu savoir si vous seriez une chaise,
+                ou quel type de phare vous seriez ? Découvrez-le en répondant à notre quiz amusant !
+            </p>
+            <button routerLink="forms" class="margin-vertical">Nos quizs</button>
+        </div>
     </div>
 </section>

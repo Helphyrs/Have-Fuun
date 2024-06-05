@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { Form } from '../../../Models/formModel';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-forms',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './forms.component.html',
   styleUrl: './forms.component.scss'
 })

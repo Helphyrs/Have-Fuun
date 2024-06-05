@@ -12,8 +12,9 @@ const articleRoads = require('./Routes/articleRoad');
 const commentRoads = require('./Routes/commentRoad');
 const formRoads = require('./Routes/formRoad');
 const formResultRoads = require('./Routes/formResultRoad');
+const adminRoads = require('./Routes/adminRoad');
 
-app.use(express.static('public'))
+app.use('/public', express.static('public'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
@@ -21,6 +22,7 @@ app.use(helmet())
 
 
 // app.use des routes //
+app.use('/api/admin/', adminRoads)
 app.use('/api/connect', authRoads);
 app.use('/api/users', userRoads);
 app.use('/api/articles', articleRoads);

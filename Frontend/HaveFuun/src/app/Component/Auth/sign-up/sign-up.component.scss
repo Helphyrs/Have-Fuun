@@ -1,57 +1,8 @@
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 20;
-    color: #37332A;
-}
-
-.container {
-    background-color: #E0CDA5;
-    padding: 10px 5px;
-    margin-left: -10px;
-    max-width: 95%;
-    border-radius: 5px;
-}
-
-h2 {
-    text-align: center;
-    font-size: 1.6rem;
-    font-weight: lighter;
-}
-
-
-.field {
+.fields {
     width: 95%;
     padding: 10px 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
-}
-
-.small-margin-left {
-    margin-left: 0.2rem;
-}
-
-.margin-list {
-    margin: 1rem 1rem 0 2rem;
-}
-
-.fortyFive {
-    width: 45%;
-}
-
-.dotWhite {
-    display: block;
-    width: 4px;
-    height: 1.5px;
-    background-color: #F1F1F1;
-    margin: 0 2.5px;
 }
 
 input[type="radio"],
@@ -82,9 +33,8 @@ input[type="radio"]:checked::before,
     display: block;
 }
 
-
 @media screen and (min-width:391px) {
-    .container {
+    .container-sign-up {
         padding: 15px 20px;
         margin-left: 0;
         max-width: 100%;
@@ -92,7 +42,7 @@ input[type="radio"]:checked::before,
 }
 
 @media screen and (min-width:700px) {
-    .container {
+    .container-sign-up {
         padding: 40px 45px;
     }
 }

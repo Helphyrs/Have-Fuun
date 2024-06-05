@@ -1,10 +1,24 @@
 <section class="flex flex-column flex-align-center">
+    <button routerLink="/" class="margin-vertical"> <i class="fa-solid fa-arrow-left-long"></i> Revenir à
+        l'accueil</button>
     <h2 class="medium-size text-color-purple text-center margin-bottom">Voici la page de Formulaire</h2>
-    @for(form of forms ; track form) {
-    <div class="position-relative pointer parent" [routerLink]="'/forms/' + form.name">
-        <img [src]="form.avatar" [alt]="form.name">
-        <div class="child">{{form.name}}</div>
-        <div class="border-child"></div>
+    @for(form of forms ; track form ; let index = $index) {
+    <div class="container-form padding margin-vertical flex flex-column-change flex-justify-around flex-align-center border-bottom-beige"
+        [ngClass]="index%2!==0 ? 'flex-column-change-reverse' : 'flex-column-change' ">
+        <div class="position-relative pointer parent" [routerLink]="'/forms/' + form.name">
+            <div class="position-absolute border-beige pointer border-radius"
+                [ngClass]="index%2!==0 ? 'icon-image-click-pair' :'icon-image-click-impair'"><i
+                    class="fa-solid fa-hand-pointer large-size"></i>
+            </div>
+            <img [src]="'http://localhost:4912/'+form.avatar" [alt]="form.name">
+            <div class="child">{{form.name}}</div>
+            <div class="border-child"></div>
+        </div>
+        <div class="flex flex-column flex-align-center container-paragraph">
+            <h3 class="adaptative-size margin-vertical">{{form.name}}</h3>
+            <button [routerLink]="['/forms', form.name]" class="margin-vertical">Faire le quiz ! <i
+                    class="margin-left fa-solid fa-hand-pointer"></i></button>
+        </div>
     </div>
     }
 </section>

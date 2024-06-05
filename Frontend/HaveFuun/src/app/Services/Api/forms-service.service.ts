@@ -34,18 +34,4 @@ export class FormsServiceService {
     return this.http.get<Form>(`${this.apiUrlForms}/name/${formName}`);
   }
 
-  addForm(form: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrlForms}/admin`, form);
-  }
-
-  editFormById(formId: number, form: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrlForms}/admin/${formId}`, form);
-  }
-
-  deleteFormById(formId: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrlForms}/${formId}`);
-  }
-  getAllFormsAdmin(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrlForms}/admin/all`)
-  }
 }
