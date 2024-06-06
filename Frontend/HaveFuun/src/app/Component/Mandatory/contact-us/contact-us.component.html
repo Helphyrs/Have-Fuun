@@ -1,0 +1,26 @@
+<section class="flex flex-column flex-align-center flex-justify-center">
+    <h2 class="adaptative-size">Contactez-nous</h2>
+    <form [formGroup]="contactForm" (submit)="submitForm()">
+        <div class="margin-vertical flex flex-column">
+            <label class="adaptative-size text-color-white" for="objet">L'objet de votre requête :</label>
+            <input class="adaptative-size border-radius padding " type="text" id="objet" formControlName="objet"
+                required>
+        </div>
+        <div class="margin-vertical flex flex-column">
+            <label class="adaptative-size text-color-white" for="email">Votre email :</label>
+            <input class="adaptative-size border-radius padding " type="email" id="email" formControlName="email"
+                required>
+        </div>
+        <div class="margin-vertical flex flex-column">
+            <label class="adaptative-size text-color-white" for="message">Votre message :</label>
+            <textarea class="container border-radius padding adaptative-size " id="message" formControlName="message"
+                required></textarea>
+        </div>
+        <p class="message text-color-red">
+            {{sendMessage}}
+        </p>
+        <div class="flex flex-column flex-align-center">
+            <button type="submit">Envoyer</button>
+        </div>
+    </form>
+</section>

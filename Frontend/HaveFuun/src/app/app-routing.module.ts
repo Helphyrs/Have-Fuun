@@ -18,8 +18,12 @@ import { AdminFormsComponent } from './Component/Admin/admin-forms/admin-forms.c
 import { AdminArticlesComponent } from './Component/Admin/admin-articles/admin-articles.component';
 import { adminFormResolver } from './Services/Resolver/Admin/admin-form.resolver';
 import { adminArticleResolver } from './Services/Resolver/Admin/admin-article.resolver';
+import { ContactUsComponent } from './Component/Mandatory/contact-us/contact-us.component';
+import { LegalNoticeComponent } from './Component/Mandatory/legal-notice/legal-notice.component';
 
 const routes: Routes = [
+  { path: "contact", component: ContactUsComponent },
+  { path: "legal-notice", component: LegalNoticeComponent },
   { path: "articles", component: ArticlesComponent, resolve: { articles: ArticlesResolver } },
   { path: "articles/:name", component: ArticleComponent, resolve: { articleInfo: ArticlesResolver } },
   { path: "forms", component: FormsComponent, resolve: { forms: FormsResolverService } },

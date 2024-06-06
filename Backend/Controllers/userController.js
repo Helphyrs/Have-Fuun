@@ -58,10 +58,13 @@ module.exports = {
         try {
             const userId = req.params.userId;
             const user = req.body;
+            let userEmail = await userModel.getUserByMail(req.app.locals.db, user.email)
+            if (userEmail) return res.status(409).send("Adresse e-mail déjà utilisée. Veuillez choisir une autre adresse e-mail.");
             if (!user.password) {
                 const currentUser = await userModel.getUserPassword(req.app.locals.db, userId);
                 user.password = currentUser.password;
             } else {
+                if (!(regex.test(user.password))) return res.status(400).send("Le mot de passe doit contenir au moins 12 caractères, incluant au moins un chiffre, une minuscule, une majuscule et un caractère spécial.");
                 const hashedPassword = await bcrypt.hash(user.password, 10);
                 user.password = hashedPassword;
             }
@@ -75,10 +78,13 @@ module.exports = {
         try {
             const userId = req.userInfo.userId;
             const user = req.body;
+            let userEmail = await userModel.getUserByMail(req.app.locals.db, user.email)
+            if (userEmail) return res.status(409).send("Adresse e-mail déjà utilisée. Veuillez choisir une autre adresse e-mail.");
             if (!user.password) {
                 const currentUser = await userModel.getUserPassword(req.app.locals.db, userId);
                 user.password = currentUser.password;
             } else {
+                if (!(regex.test(user.password))) return res.status(400).send("Le mot de passe doit contenir au moins 12 caractères, incluant au moins un chiffre, une minuscule, une majuscule et un caractère spécial.");
                 const hashedPassword = await bcrypt.hash(user.password, 10);
                 user.password = hashedPassword;
             }

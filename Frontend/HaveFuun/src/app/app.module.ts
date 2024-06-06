@@ -16,6 +16,9 @@ import { AdminComponent } from './Component/Admin/admin/admin.component';
 import { AdminCommentFromUserComponent } from './Component/Admin/admin-comment-from-user/admin-comment-from-user.component';
 import { AdminFormsComponent } from './Component/Admin/admin-forms/admin-forms.component';
 import { AdminArticlesComponent } from './Component/Admin/admin-articles/admin-articles.component';
+import { LegalNoticeComponent } from './Component/Mandatory/legal-notice/legal-notice.component';
+import { ContactUsComponent } from './Component/Mandatory/contact-us/contact-us.component';
+
 
 
 @NgModule({
@@ -29,7 +32,9 @@ import { AdminArticlesComponent } from './Component/Admin/admin-articles/admin-a
     AdminComponent,
     AdminCommentFromUserComponent,
     AdminFormsComponent,
-    AdminArticlesComponent
+    AdminArticlesComponent,
+    LegalNoticeComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,
