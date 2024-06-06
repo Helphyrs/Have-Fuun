@@ -75,12 +75,18 @@ export class AdminArticlesComponent implements OnInit {
     })
   }
 
-  onFileChange(event: any) {
+  onFileChange(event: any, elem: string) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.addArticleForm.patchValue({
-        avatar: file
-      });
+      if (elem === 'add') {
+        this.addArticleForm.patchValue({
+          avatar: file
+        });
+      } else if (elem === 'edit') {
+        this.editArticleForm.patchValue({
+          avatar: file
+        });
+      }
     }
   }
 
@@ -95,8 +101,8 @@ export class AdminArticlesComponent implements OnInit {
       this.adminS.addArticle(obj).subscribe(data => {
 
       }, error => {
-        alert("L'article a bien été ajouté, actualisé la page pour le voir")
         this.initForm()
+        alert("L'article a bien été ajouté, actualisé la page pour le voir")
         this.display = "home";
       })
     }
@@ -111,15 +117,8 @@ export class AdminArticlesComponent implements OnInit {
     if (obj) {
       this.adminS.editArticleById(obj, this.ID_article).subscribe((data) => {
       }, (error) => {
-        this.articles[this.editIndex] = {
-          ID_article: this.editIndex + 1,
-          name: this.editArticleForm.get('name')!.value,
-          description: this.editArticleForm.get('description')!.value,
-          tags: this.editArticleForm.get('tags')!.value,
-          avatar: this.editArticleForm.get('avatar')!.value
-        }
-        alert('Le formulaire a bien été modifiée');
         this.initForm()
+        alert('Le formulaire a bien été modifiée, actualisé la page pour le voir');
         this.display = "home"
         this.editIndex = -1;
       })

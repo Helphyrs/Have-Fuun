@@ -11,7 +11,7 @@ const upload = require('../Middlewares/multFile');
 
 router.get('/articles/all/', auth, admin, adminController.getAllArticlesInfo);
 router.post('/articles/', auth, sanitize, admin, upload.single('avatar'), adminController.addArticle);
-router.put('/articles/:articleId', auth, sanitize, admin, adminController.editArticleById);
+router.put('/articles/:articleId', auth, sanitize, admin, upload.single('avatar'), adminController.editArticleById);
 router.delete('/articles/:articleId', auth, sanitize, admin, adminController.deleteArticleById);
 
 // COMMENTS
@@ -31,7 +31,7 @@ router.delete('/users/delete/:userId', auth, sanitize, admin, verifyAdmin, admin
 
 router.get('/forms/all/', auth, admin, adminController.getAllFormsAdmin);
 router.post('/forms/', auth, sanitize, admin, upload.single('avatar'), adminController.addForm);
-router.put('/forms/:formId', auth, sanitize, admin, adminController.editFormById);
+router.put('/forms/:formId', auth, sanitize, admin, upload.single('avatar'), adminController.editFormById);
 router.delete('/forms/:formId', auth, sanitize, admin, adminController.deleteFormById);
 
 module.exports = router;

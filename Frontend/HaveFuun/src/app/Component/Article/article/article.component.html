@@ -6,10 +6,12 @@
     <h2 class="medium-size text-color-purple text-center margin-vertical"> Vous êtes sur l'article : {{article.name}}
     </h2>
 
-    <div class="container-article flex flex-column-change flex-justify-around flex-align-center border-bottom-beige">
-        <img class="logo-image-home" [src]="'http://localhost:4912/'+article.avatar" [alt]="article.name">
+    <div
+        class="container-article flex flex-column-change flex-justify-around flex-align-center border-bottom-beige margin-vertical">
+        <img class="logo-image-home margin-vertical" [src]="'http://localhost:4912/'+article.avatar"
+            [alt]="article.name">
         <div class="flex flex-column flex-align-center">
-            <p class="container-paragraph-article adaptative-size text-justify margin-vertical text-color-gray">
+            <p class="container-paragraph-article adaptative-size text-justify margin-vertical text-color-white">
                 {{article.description}}</p>
             @for( tag of tags ; track tag ) {
             <button class="margin-bottom text-capitalize text-bold text-color-gray adaptative-size "
@@ -17,29 +19,32 @@
             }
         </div>
     </div>
-
+    @if(comments[0].content !== null) {
     <article class="flex flex-column flex-align-center">
-
-        <h2 class="medium-size text-color-purple text-center margin-vertical">Les commentaires de l'article</h2>
-
+        <h2 class="medium-size text-center margin-vertical">Les commentaires de l'article</h2>
         @for (comment of comments; track comment) {
         <div
             class="container-comment border-radius background-color border-beige flex flex-column flex-align-center margin-vertical">
-            <h3>{{comment.pseudo}}</h3>
+            <h3 class="text-color-purple adaptative-size">{{comment.pseudo}}</h3>
             <img class="logo-image margin-vertical" [src]="comment.avatar" [alt]="comment.pseudo">
             <p class="adaptative-size margin-vertical text-justify">{{comment.content}}</p>
         </div>
         }
     </article>
-
+    }
     <article class="flex flex-column flex-align-center">
-        <h2 class="adaptative-size text-color-gray text-center margin-vertical">Vous avez aimé l'article ? Alors
+        <h2 class="adaptative-size text-center margin-vertical">Vous avez aimé l'article ? Alors
             n'hésitez
             pas à donner votre avis !</h2>
+        @if (sendMessage !== "" ) {
+        <p class="message text-center text-bold" [ngClass]="messageBool ? 'text-color-green' : 'text-color-red '">{{
+            sendMessage }}
+        </p>
+        }
         <form class="container-form-comment flex flex-column flex-align-center margin-vertical"
             [formGroup]="commentForm" (ngSubmit)="onSubmit()">
             <div class='container flex flex-column flex-align-center margin-bottom'>
-                <label class="adaptative-size" for="commentaire">Écrivez votre commentaire</label>
+                <label class="adaptative-size text-color-white" for="commentaire">Écrivez votre commentaire</label>
                 <textarea class="border-radius container padding" formControlName="comment" id="commentaire"
                     name="commentaire" rows="5"></textarea>
             </div>
@@ -48,7 +53,7 @@
                 <button [disabled]="!commentForm.valid" class=" text-uppercase text-bold"
                     aria-label="Ajout de votre commentaire" type="submit">Ajouter votre commentaire</button>
             </div>
-            <p class="error-message">{{ errorMessage }}</p>
+
         </form>
     </article>
 

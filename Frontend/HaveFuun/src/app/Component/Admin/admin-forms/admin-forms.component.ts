@@ -20,14 +20,14 @@ export class AdminFormsComponent implements OnInit {
 
 
   addName: string = "";
-  addAvatar: string = "";
+  addAvatar: any = "";
   addQuestions: string[] = Array(8).fill('');
   addTopicsA: string[] = Array(8).fill('');
   addTopicsB: string[] = Array(8).fill('');
   addTopicsC: string[] = Array(8).fill('');
 
   editName: string = "";
-  editAvatar: string = "";
+  editAvatar: any = "";
   editQuestions: string[] = Array(8).fill('');
   editTopicsA: string[] = Array(8).fill('');
   editTopicsB: string[] = Array(8).fill('');
@@ -57,6 +57,17 @@ export class AdminFormsComponent implements OnInit {
       this.editAvatar != "" && this.editName != "";
   }
 
+  onFileChange(event: any, elem: string) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      if (elem === "editAvatar") {
+        this.editAvatar = file
+
+      } else if (elem === "addAvatar") {
+        this.addAvatar = file
+      }
+    }
+  }
   deleteForm(id: number): void {
     let bool: boolean = confirm("Etes vous sûr de supprimer ce formulaire ?")
     if (bool) {
@@ -92,10 +103,7 @@ export class AdminFormsComponent implements OnInit {
           topicA: this.addTopicsA.join(','),
           topicB: this.addTopicsB.join(','),
           topicC: this.addTopicsC.join(',')
-
-
         }
-
         this.adminS.addForm(obj).subscribe(response => {
 
         }, error => {

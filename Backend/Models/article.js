@@ -20,7 +20,24 @@ module.exports = {
             throw error;
         }
     },
-
+    getAvatarById: async (db, articleId) => {
+        try {
+            const [results] = await db.execute('SELECT avatar FROM Articles WHERE ID_article = ?', [articleId]);
+            return results[0];
+        } catch (error) {
+            console.error('Error while fetching article by ID:', error);
+            throw error;
+        }
+    },
+    getArticlesCountByAvatar: async (db, avatar) => {
+        try {
+            const [results] = await db.execute('SELECT COUNT(*) as count FROM Articles WHERE avatar = ?', [avatar]);
+            return results[0].count;
+        } catch (error) {
+            console.error('Error while fetching form by ID:', error);
+            throw error;
+        }
+    },
     getArticleByName: async (db, articleName) => {
         try {
             const [results] = await db.execute('SELECT * FROM Articles WHERE name = ?', [articleName]);

@@ -2,12 +2,14 @@ const articleModel = require('../Models/article');
 const commentModel = require('../Models/comment');
 const userModel = require('../Models/user');
 const formModel = require('../Models/form');
-
+const fs = require('fs');
+const path = require('path');
 
 
 module.exports = {
 
     // ARTICLES
+
 
     getAllArticlesInfo: async (req, res) => {
         try {
@@ -33,16 +35,38 @@ module.exports = {
     editArticleById: async (req, res) => {
         try {
             const articleId = req.params.articleId;
+            const avatar = req.file ? req.file.filename : null;
+            let article = await articleModel.getArticleById(req.app.locals.db, articleId);
+            if (!article) return res.status(404).send('Article not found');
+
+            const articlesCount = await articleModel.getArticlesCountByAvatar(req.app.locals.db, article.avatar);
+
             if (req.body.name === "" || req.body.description === "" || req.body.tags === "" || req.body.avatar === "") {
-                let article = await articleModel.getArticleById(req.app.locals.db, articleId);
                 if (req.body.name === "") req.body.name = article.name;
                 if (req.body.description === "") req.body.description = article.description;
                 if (req.body.tags === "") req.body.tags = article.tags;
-                if (req.body.avatar === "") req.body.avatar = article.avatar;
+                if (req.body.avatar === undefined) req.body.avatar = avatar ? `public/assets/forms-articles/${avatar}` : null;
             }
-            const article = req.body;
-            await articleModel.editArticleById(req.app.locals.db, articleId, article);
-            res.status(200).send('Article updated successfully');
+            const articleBody = req.body
+            if (articlesCount <= 1) {
+                const filePath = path.join(__dirname, '../', article.avatar);
+                fs.unlink(filePath, async (err) => {
+                    if (err) {
+                        console.error('Error while deleting file:', err);
+                        return res.status(500).send('Internal Server Error');
+                    }
+                    try {
+                        await articleModel.editArticleById(req.app.locals.db, articleId, articleBody);
+                        res.status(200).send('Article edited successfully');
+                    } catch (error) {
+                        console.error('Error while editing article from database:', error);
+                        res.status(500).send('Internal Server Error');
+                    }
+                });
+            } else {
+                await articleModel.editArticleById(req.app.locals.db, articleId, articleBody)
+                res.status(200).send('Article updated successfully');
+            }
         } catch (error) {
             res.status(500).send('Internal Server Error');
         }
@@ -51,8 +75,29 @@ module.exports = {
     deleteArticleById: async (req, res) => {
         try {
             const articleId = req.params.articleId;
-            await articleModel.deleteArticleById(req.app.locals.db, articleId);
-            res.status(200).send('Article deleted successfully');
+            const article = await articleModel.getAvatarById(req.app.locals.db, articleId);
+            if (!article) return res.status(404).send('Article not found');
+            const articlesCount = await articleModel.getArticlesCountByAvatar(req.app.locals.db, article.avatar);
+            if (articlesCount <= 1) {
+                const filePath = path.join(__dirname, '../', article.avatar);
+                fs.unlink(filePath, async (err) => {
+                    if (err) {
+                        console.error('Error while deleting file:', err);
+                        return res.status(500).send('Internal Server Error');
+                    }
+                    try {
+                        await articleModel.deleteArticleById(req.app.locals.db, articleId);
+                        res.status(200).send('Article deleted successfully');
+                    } catch (error) {
+                        console.error('Error while deleting article from database:', error);
+                        res.status(500).send('Internal Server Error');
+                    }
+                });
+            } else {
+                await articleModel.deleteArticleById(req.app.locals.db, articleId);
+                res.status(200).send('Article deleted successfully');
+            }
+
         } catch (error) {
             res.status(500).send('Internal Server Error');
         }
@@ -146,6 +191,8 @@ module.exports = {
     addForm: async (req, res) => {
         try {
             const form = req.body;
+            const avatar = req.file ? req.file.filename : null;
+            form.avatar = avatar ? `public/assets/forms-articles/${avatar}` : null;
             const formId = await formModel.addForm(req.app.locals.db, form);
             res.status(201).send(`Form added with ID: ${formId}`);
         } catch (error) {
@@ -156,9 +203,33 @@ module.exports = {
     editFormById: async (req, res) => {
         try {
             const formId = req.params.formId;
-            const form = req.body;
-            await formModel.editFormById(req.app.locals.db, formId, form);
-            res.status(200).send('Form updated successfully');
+            const avatar = req.file ? req.file.filename : null;
+            console.log(avatar)
+            const form = await formModel.getFormById(req.app.locals.db, formId);
+            if (!form) return res.status(400).send('Form not found');
+            const formCount = await formModel.getFormCountByAvatar(req.app.locals.db, form.avatar);
+            req.body.avatar = avatar ? `public/assets/forms-articles/${avatar}` : null;
+            const formBody = req.body;
+            console.log(formBody)
+            if (formCount <= 1) {
+                const filePath = path.join(__dirname, '../', form.avatar);
+                fs.unlink(filePath, async (err) => {
+                    if (err) {
+                        console.error('Error while deleting file:', err);
+                        return res.status(500).send('Internal Server Error');
+                    }
+                    try {
+                        await formModel.editFormById(req.app.locals.db, formId, formBody);
+                        res.status(200).send('Form edited successfully');
+                    } catch (error) {
+                        console.error('Error while editing form from database:', error);
+                        res.status(500).send('Internal Server Error');
+                    }
+                });
+            } else {
+                await articleModel.editArticleById(req.app.locals.db, formId, formBody)
+                res.status(200).send('Form updated successfully');
+            }
         } catch (error) {
             console.error('Error while updating form:', error);
             res.status(500).send('Internal Server Error');
@@ -168,8 +239,23 @@ module.exports = {
     deleteFormById: async (req, res) => {
         try {
             const formId = req.params.formId;
-            await formModel.deleteFormById(req.app.locals.db, formId);
-            res.status(200).send('Form deleted successfully');
+            let form = await formModel.getFormAvatarById(req.app.locals.db, formId);
+            if (!form) return res.status(404).send('Form not found');
+            const formCount = await articleModel.getFormCountByAvatar(req.app.locals.db, form.avatar);
+            if (formCount <= 1) {
+                const filePath = path.join(__dirname, '../', form.avatar);
+                fs.unlink(filePath, async (err) => {
+                    if (err) {
+                        console.error('Error while deleting file:', err);
+                        return res.status(500).send('Internal Server Error');
+                    }
+                    await formModel.deleteFormById(req.app.locals.db, formId);
+                    res.status(200).send('Form deleted successfully');
+                });
+            } else {
+                await formModel.deleteFormById(req.app.locals.db, formId);
+                res.status(200).send('Form deleted successfully');
+            }
         } catch (error) {
             console.error('Error while deleting form:', error);
             res.status(500).send('Internal Server Error');

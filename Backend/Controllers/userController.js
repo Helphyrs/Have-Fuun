@@ -1,5 +1,6 @@
 const userModel = require('../Models/user');
 const bcrypt = require('bcrypt');
+const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?\/\\-]).{12,}$/;
 
 module.exports = {
     getUserById: async (req, res) => {
@@ -38,6 +39,9 @@ module.exports = {
             const user = req.body;
             const role = 3;
             if (user.hasAcceptedTerms === 'true') {
+                let userEmail = await userModel.getUserByMail(req.app.locals.db, user.email)
+                if (userEmail) return res.status(409).send("Adresse e-mail déjà utilisée. Veuillez choisir une autre adresse e-mail.");
+                if (!(regex.test(user.password))) return res.status(400).send("Le mot de passe doit contenir au moins 12 caractères, incluant au moins un chiffre, une minuscule, une majuscule et un caractère spécial.");
                 const hashedPassword = await bcrypt.hash(user.password, 10);
                 user.password = hashedPassword
                 const userId = await userModel.addUser(req.app.locals.db, user, role);
@@ -45,7 +49,6 @@ module.exports = {
             } else {
                 res.status(403).send('Terms have not been accepted')
             }
-
         } catch (error) {
             res.status(500).send('Internal Server Error');
         }

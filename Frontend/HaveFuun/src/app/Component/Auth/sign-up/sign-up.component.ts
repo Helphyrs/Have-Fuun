@@ -100,9 +100,13 @@ export class SignupComponent implements AfterViewInit {
       } else if (this.signUpForm.valid) {
         this.errorMessage = "";
         let account = this.createUser();
-        this.uS.addUser(account).subscribe(data => {
+        this.uS.addUser(account).subscribe((data) => {
           this.stopDisplay();
           this.router.navigate(['home']);
+        }, (error) => {
+          if (error.status === 409) this.errorMessage = "E-mail déjà utilisé";
+          if (error.status === 400) this.errorMessage = "Mot de passe invalide";
+          setTimeout(() => this.errorMessage = "", 2500)
         })
       } else {
         this.errorMessage = "Tout les champs ne sont pas remplis"

@@ -30,7 +30,25 @@ module.exports = {
             throw error;
         }
     },
-
+    getFormAvatarById: async (db, formId) => {
+        try {
+            const [results] = await db.execute('SELECT avatar FROM Form WHERE ID_form = ?', [formId]);
+            const form = results[0]
+            return form
+        } catch (error) {
+            console.error('Error while fetching form by ID:', error);
+            throw error;
+        }
+    },
+    getFormCountByAvatar: async (db, avatar) => {
+        try {
+            const [results] = await db.execute('SELECT COUNT(*) as count FROM Form WHERE avatar = ?', [avatar]);
+            return results[0].count;
+        } catch (error) {
+            console.error('Error while fetching form by ID:', error);
+            throw error;
+        }
+    },
     getFormByName: async (db, formName) => {
         try {
             const [results] = await db.execute('SELECT * FROM Form WHERE name = ?', [formName]);

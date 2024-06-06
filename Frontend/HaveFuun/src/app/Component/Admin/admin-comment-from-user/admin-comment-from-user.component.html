@@ -2,17 +2,17 @@
     <button class="margin-vertical" [routerLink]="['/admin']"><i class="fa-solid fa-arrow-left-long"></i>
         Revenir avant</button>
     <article class="flex flex-column margin">
-        <h3 class="adaptative-size text-color-purple margin-vertical">Les données personnelles de l'utilisateur:</h3>
-        <p class="adaptative-size text-color-gray">Son pseudo :{{user.pseudo}}</p>
-        <p class="adaptative-size text-color-gray">Son email :{{user.email}}</p>
+        <h3 class="adaptative-size margin-vertical">Les données personnelles de l'utilisateur:</h3>
+        <p class="adaptative-size text-color-white">Son pseudo :{{user.pseudo}}</p>
+        <p class="adaptative-size text-color-white">Son email :{{user.email}}</p>
         <div class="flex flex-align-center">
-            <p class="adaptative-size text-color-gray">Son avatar :</p>
+            <p class="adaptative-size text-color-white">Son avatar :</p>
             <img class="logo-image" [src]="user.avatar" alt="avatar de profil">
         </div>
     </article>
     <article class="flex flex-column flex-align-center margin">
         @if(comments.length>0) {
-        <h3 class="adaptative-size text-color-purple">Voici tout les commentaires que vous avez réalisés :</h3>
+        <h3 class="adaptative-size">Voici tout les commentaires que vous avez réalisés :</h3>
         <table class="small-size">
             <thead>
                 <tr>
@@ -33,13 +33,13 @@
             </tbody>
         </table>
         } @else {
-        <h3 class="adaptative-size text-color-purple margin-vertical">Vous n'avez pas encore écris de commentaires
+        <h3 class="adaptative-size  margin-vertical">Vous n'avez pas encore écris de commentaires
         </h3>
         }
     </article>
     <article class="flex flex-column flex-align-center margin">
         @if(forms.length>0) {
-        <h3 class="adaptative-size text-color-purple">Voici tout les résultats de formulaires que vous avez fait :
+        <h3 class="adaptative-size ">Voici tout les résultats de formulaires que vous avez fait :
         </h3>
         <table class="medium-size">
             <thead>
@@ -58,7 +58,7 @@
             </tbody>
         </table>
         } @else {
-        <h3 class="adaptative-size text-color-purple">Vous n'avez encore répondu à aucun formulaire</h3>
+        <h3 class="adaptative-size ">Vous n'avez encore répondu à aucun formulaire</h3>
         }
 
 

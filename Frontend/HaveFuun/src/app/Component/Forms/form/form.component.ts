@@ -93,7 +93,7 @@ export class FormComponent implements OnInit {
     this.fS.addResult(formResult).subscribe(() => {
     },
       (error) => {
-        if (error.status === 403 && error.error.error === 'Access forbidden token unvalid') this.treatmentJWT.handle403Error(error.error.error);
+        if ((error.status === 403 && error.error.error === 'Access forbidden token unvalid') || (error.status === 401 && error.error.error === "Access unauthorized")) this.treatmentJWT.handle403Error(error.error.error);
       }
     );
 

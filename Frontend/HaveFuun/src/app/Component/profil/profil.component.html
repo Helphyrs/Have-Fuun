@@ -1,8 +1,8 @@
 <section class="flex flex-column flex-align-center">
     @if(display === "home") {
-    <h2 class="medium-size text-color-purple text-center margin-bottom">Bonjour utilisateur : {{user.pseudo}}</h2>
+    <h2 class="medium-size  text-center margin-bottom">Bonjour utilisateur : {{user.pseudo}}</h2>
     <div class="container-home flex flex-column flex-justify-between flex-align-center">
-        <p class="container-paragraph adaptative-size text-justify">
+        <p class="container-paragraph adaptative-size text-justify text-color-white">
             Vous êtes sur votre page de profil, ou vous pouvez librement,
             voir les résultats de vos formulaires, ou les commentaires que vous avez écris.
             Sans oublier la possibilité d'à la fois modifié et supprimer votre compte.
@@ -11,11 +11,11 @@
 
 
         <article class="flex flex-column  margin-vertical">
-            <h3 class="adaptative-size text-color-purple margin-vertical">Vos données personnelles :</h3>
-            <p class="adaptative-size text-color-gray">Votre pseudo : {{user.pseudo}}</p>
-            <p class="adaptative-size text-color-gray">Votre email : {{user.email}}</p>
+            <h3 class="adaptative-size  margin-vertical">Vos données personnelles :</h3>
+            <p class="adaptative-size text-color-white">Votre pseudo : {{user.pseudo}}</p>
+            <p class="adaptative-size text-color-white">Votre email : {{user.email}}</p>
             <div class="flex flex-align-center">
-                <p class="adaptative-size text-color-gray">Votre avatar : </p>
+                <p class="adaptative-size text-color-white">Votre avatar : </p>
                 <img class="margin logo-image" [src]="user.avatar" alt="avatar de profil">
             </div>
             <button class="margin-vertical" (click)="switchDisplay('editUser')">Modifier vos données ? <i
@@ -25,7 +25,7 @@
         </article>
         <article class="flex flex-column flex-align-center margin-vertical">
             @if(comments.length>0) {
-            <h3 class="adaptative-size text-color-purple">Voici tout les commentaires que vous avez réalisés :</h3>
+            <h3 class="adaptative-size ">Voici tout les commentaires que vous avez réalisés :</h3>
             <table class="small-size">
                 <thead>
                     <tr>
@@ -49,7 +49,7 @@
                 </tbody>
             </table>
             } @else {
-            <h3 class="adaptative-size text-color-purple margin-vertical">Vous n'avez pas encore écris de commentaires
+            <h3 class="adaptative-size margin-vertical">Vous n'avez pas encore écris de commentaires
             </h3>
             }
         </article>
@@ -74,7 +74,7 @@
                 </tbody>
             </table>
             } @else {
-            <h3 class="adaptative-size text-color-purple">Vous n'avez encore répondu à aucun formulaire</h3>
+            <h3 class="adaptative-size ">Vous n'avez encore répondu à aucun formulaire</h3>
             }
 
 
@@ -85,11 +85,11 @@
         <button class="margin-vertical" (click)="switchDisplay('home')"> <i class="fa-solid fa-arrow-left-long"></i>
             Revenir avant
         </button>
-        <h3 class="adaptative-size text-color-purple">Modifier votre commentaire</h3>
+        <h3 class="adaptative-size ">Modifier votre commentaire</h3>
         <form class="container-form-comment flex flex-column flex-align-center margin-vertical"
             [formGroup]="commentForm" (ngSubmit)="onSubmit()">
             <div class='container flex flex-column flex-align-center margin-bottom'>
-                <label class="adaptative-size" for="commentaire">Écrivez votre commentaire</label>
+                <label class="adaptative-size text-color-white" for="commentaire">Écrivez votre commentaire</label>
                 <textarea class="border-radius padding container-home" formControlName="comment" id="commentaire"
                     name="commentaire" rows="5"></textarea>
             </div>
@@ -107,36 +107,40 @@
         <button class="" (click)="switchDisplay('home')"> <i class="fa-solid fa-arrow-left-long"></i>
             Revenir avant
         </button>
-        <h3 class="adaptative-size text-color-purple margin-vertical">Modifier vos données</h3>
+        <h3 class="adaptative-size  margin-vertical">Modifier vos données</h3>
         <form class="flex flex-column margin" [formGroup]="userForm" (ngSubmit)="onSubmitUser()">
             <div class="margin-bottom flex flex-column flex-justify-between">
-                <label for="pseudo" aria-label="Saisissez votre pseudo">Pseudo:*</label>
+                <label class="text-color-white medium-size" for="pseudo"
+                    aria-label="Saisissez votre pseudo">Pseudo:*</label>
                 <input class="field" type="text" id="pseudo" formControlName="pseudo">
             </div>
             <div class="margin-bottom flex flex-column flex-justify-between">
-                <label for="email" aria-label="Saisissez votre email">Email:*</label>
+                <label class="text-color-white medium-size" for="email"
+                    aria-label="Saisissez votre email">Email:*</label>
                 <input class="field" type="text" id="email" formControlName="email">
             </div>
             <div class="margin-bottom flex flex-column flex-justify-between">
-                <label for="password" aria-label="Saisissez un mot de passe">Mot de passe:*</label>
+                <label class="text-color-white medium-size" for="password" aria-label="Saisissez un mot de passe">Mot de
+                    passe:*</label>
                 <input class="field margin-bottom" type="password" id="password" formControlName="password"
                     (input)="checkPassword()">
                 <ul class="margin-list no-padding adaptative-size">
-                    <li [ngClass]="verifyArray.min === true ? 'text-color-green' : 'text-color-gray'">Formé d'un minimum
+                    <li [ngClass]="verifyArray.min === true ? 'text-color-green' : 'text-color-white'">Formé d'un
+                        minimum
                         de 8 caractères</li>
-                    <li [ngClass]="verifyArray.upper === true ? 'text-color-green' : 'text-color-gray'">Au moins une
+                    <li [ngClass]="verifyArray.upper === true ? 'text-color-green' : 'text-color-white'">Au moins une
                         lettre majuscule</li>
-                    <li [ngClass]="verifyArray.lower === true ? 'text-color-green' : 'text-color-gray'">Au moins une
+                    <li [ngClass]="verifyArray.lower === true ? 'text-color-green' : 'text-color-white'">Au moins une
                         lettre minuscle</li>
-                    <li [ngClass]="verifyArray.num === true ? 'text-color-green' : 'text-color-gray'">Au moins un
+                    <li [ngClass]="verifyArray.num === true ? 'text-color-green' : 'text-color-white'">Au moins un
                         chiffre
                     </li>
-                    <li [ngClass]="verifyArray.special === true ? 'text-color-green' : 'text-color-gray'">Au moins un
+                    <li [ngClass]="verifyArray.special === true ? 'text-color-green' : 'text-color-white'">Au moins un
                         caractère spécial, parmi ceux-là : [#?!$%^&*-]</li>
                 </ul>
             </div>
             <div class="margin-bottom flex flex-column flex-justify-between">
-                <p class="medium-size">Choisissez votre image d'avatar:</p>
+                <p class="medium-size text-color-white">Choisissez votre image d'avatar:</p>
                 <div class="flex flex-wrap flex-justify-center">
                     @for(image of imageArray ; track image) {
                     <img [src]="image" alt="Avatar" (click)="selectAvatar(image)"

@@ -6,11 +6,12 @@ import { CommentWithUserInfo, Comment } from '../../../Models/commentModel';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentsServiceService } from '../../../Services/Api/comments-service.service';
 import { TreatmentJwtErrorService } from '../../../Services/Website/treatment-jwt-error.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-article',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule],
   templateUrl: './article.component.html',
   styleUrl: './article.component.scss'
 })
@@ -21,7 +22,9 @@ export class ArticleComponent implements OnInit {
   comments: CommentWithUserInfo[] = [];
   tags: string[] = []
   commentForm!: FormGroup;
-  errorMessage: string = "";
+
+  messageBool: boolean = true;
+  sendMessage: string = "";
   constructor(
     private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder,
     private cS: CommentsServiceService, private treatmentJWT: TreatmentJwtErrorService
@@ -46,7 +49,7 @@ export class ArticleComponent implements OnInit {
   onSubmit(): void {
     let content = this.commentForm.get('comment')!.value;
     if (content.length > 10) {
-      this.errorMessage = "Votre commentaire a bien été envoyée."
+      this.sendMessage = "Votre commentaire a bien été envoyée."
       let comment: Comment = {
         articleId: this.article.ID_article,
         content: content
@@ -56,13 +59,19 @@ export class ArticleComponent implements OnInit {
       },
         (error) => {
           if ((error.status === 403 && error.error.error === 'Access forbidden token unvalid') || (error.status === 401 && error.error.error === "Access unauthorized")) {
-            this.errorMessage = "Votre commentaire ne respecte pas les normes pour l'envoie"
+            this.sendMessage = "Votre commentaire ne respecte pas les normes pour l'envoie"
+            this.messageBool = false;
             this.treatmentJWT.handle403Error(error.error.error);
           }
+          this.messageBool = true
         }
       );
     } else {
-      this.errorMessage = "Votre commentaire est inférieur à 10 caractères"
+      this.sendMessage = "Votre commentaire est inférieur à 10 caractères"
+      this.messageBool = false;
     }
+    this.initForm()
+    setTimeout(() => this.sendMessage = "", 2500);
+
   }
 }

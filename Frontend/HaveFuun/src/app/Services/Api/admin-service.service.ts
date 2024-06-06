@@ -31,7 +31,15 @@ export class AdminServiceService {
     return this.http.post<any>(`${this.apiUrlAdmin}/articles/`, formData)
   }
   editArticleById(article: Article, articleId: number): Observable<any> {
-    return this.http.put<any>(`${this.apiUrlAdmin}/articles/${articleId}`, article)
+    const formData: FormData = new FormData();
+    formData.append('name', article.name);
+    formData.append('description', article.description);
+    formData.append('tags', article.tags);
+    if (article.avatar) {
+      formData.append('avatar', article.avatar);
+    }
+    console.log(formData)
+    return this.http.put<any>(`${this.apiUrlAdmin}/articles/${articleId}`, formData)
   }
   deleteArticleById(articleId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrlAdmin}/articles/${articleId}`)
@@ -53,10 +61,28 @@ export class AdminServiceService {
     return this.http.get<any>(`${this.apiUrlAdmin}/forms/all/`)
   }
   addForm(form: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrlAdmin}/forms/`, form);
+    const formData: FormData = new FormData();
+    formData.append('name', form.name);
+    formData.append('questions', form.questions);
+    formData.append('topicA', form.topicA);
+    formData.append('topicB', form.topicB);
+    formData.append('topicC', form.topicC);
+    if (form.avatar) {
+      formData.append('avatar', form.avatar);
+    }
+    return this.http.post<any>(`${this.apiUrlAdmin}/forms/`, formData);
   }
   editFormById(formId: number, form: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrlAdmin}/forms/${formId}`, form);
+    const formData: FormData = new FormData();
+    formData.append('name', form.name);
+    formData.append('questions', form.questions);
+    formData.append('topicA', form.topicA);
+    formData.append('topicB', form.topicB);
+    formData.append('topicC', form.topicC);
+    if (form.avatar) {
+      formData.append('avatar', form.avatar);
+    }
+    return this.http.put<any>(`${this.apiUrlAdmin}/forms/${formId}`, formData);
   }
   deleteFormById(formId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrlAdmin}/forms/${formId}`);

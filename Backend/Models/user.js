@@ -8,6 +8,15 @@ module.exports = {
             throw error;
         }
     },
+    getUserByMail: async (db, mail) => {
+        try {
+            const [results] = await db.execute('SELECT email FROM Users WHERE ID = ?', [mail]);
+            return results;
+        } catch (error) {
+            console.error('Erreur lors de la récupération de l\'utilisateur :', error);
+            throw error;
+        }
+    },
     getRoleById: async (db, userId) => {
         try {
             const [results] = await db.execute('SELECT role FROM Users WHERE ID = ?', [userId]);
