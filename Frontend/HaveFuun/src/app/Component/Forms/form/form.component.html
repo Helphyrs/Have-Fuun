@@ -2,7 +2,7 @@
     <button [routerLink]="['/forms']" class="margin-vertical"> <i
             class="fa-solid fa-arrow-left-long margin-right"></i>Revenir aux quizs</button>
 
-    <h2 class="medium-size  text-color-purple text-center margin-vertical">{{form.name}}</h2>
+    <h2 class="medium-size text-center margin-vertical">{{form.name}}</h2>
     <form (ngSubmit)="onSubmit()" class="container flex flex-column flex-align-center">
         @for(question of questions; track question ; let index =$index){
         <h3 class="medium-size text-color-beige margin">{{question}}
@@ -28,6 +28,11 @@
                     }}</label>
             </div>
         </div>
+        }
+        @if (sendMessage !== "" ) {
+        <p class="message text-center text-bold" [ngClass]="messageBool ? 'text-color-green' : 'text-color-red '">{{
+            sendMessage }}
+        </p>
         }
 
         <div class="flex flex-justify-center margin-vertical">

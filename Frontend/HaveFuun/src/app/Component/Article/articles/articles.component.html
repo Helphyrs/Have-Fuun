@@ -1,7 +1,7 @@
 <section class="flex flex-column flex-align-center ">
     <button routerLink="/" class="margin-vertical"> <i class="fa-solid fa-arrow-left-long"></i> Revenir à
         l'accueil</button>
-    <h2 class="medium-size text-color-purple text-center margin-bottom">Voici la page d'Articles</h2>
+    <h2 class="medium-size  text-center margin-bottom">Voici la page d'Articles</h2>
     @for(article of articles ; track article ; let index = $index) {
     <div class="container-article padding margin-vertical flex flex-justify-around flex-align-center border-bottom-beige"
         [ngClass]="index%2!==0 ? 'flex-column-change-reverse' : 'flex-column-change' ">

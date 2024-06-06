@@ -10,6 +10,7 @@ import { MailerServiceService } from '../../../Services/Api/mailer-service.servi
 export class ContactUsComponent {
   contactForm!: FormGroup;
   sendMessage: string = "";
+  messageBool: boolean = true;
   constructor(private formBuilder: FormBuilder, private mailS: MailerServiceService) {
     this.createContactForm();
   }
@@ -23,31 +24,32 @@ export class ContactUsComponent {
   }
 
   submitForm() {
+
     if (this.contactForm.valid) {
       let obj = {
         objet: this.contactForm.get('objet')!.value,
         email: this.contactForm.get('email')!.value,
         message: this.contactForm.get('message')!.value
       }
+
       this.mailS.sendMail(obj).subscribe((data) => {
-        this.sendMessage = "Votre email a bien été envoyée"
-        setTimeout(() => {
-          this.sendMessage = ""
-        }, 2500);
-        this.contactForm.reset()
       }, (error) => {
-        this.sendMessage = "Votre mail n'est pas valide"
-        setTimeout(() => {
-          this.sendMessage = ""
-        }, 2500)
+        if (error.status === 500) {
+          this.sendMessage = "Votre mail n'est pas valide"
+          this.messageBool = false;
+        } else if (error.status === 200) {
+          this.sendMessage = "Votre email a bien été envoyée"
+          this.messageBool = true;
+        }
       })
-      this.contactForm.reset();
     } else {
       this.sendMessage = "Vous n'avez pas rempli tout les champs"
-      this.contactForm.reset()
-      setTimeout(() => {
-        this.sendMessage = ""
-      }, 2500);
+      this.messageBool = false;
     }
+    this.contactForm.reset();
+    setTimeout(() => {
+      this.sendMessage = ""
+      this.messageBool = true;
+    }, 3500);
   }
 }

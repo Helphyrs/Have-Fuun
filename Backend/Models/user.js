@@ -10,8 +10,8 @@ module.exports = {
     },
     getUserByMail: async (db, mail) => {
         try {
-            const [results] = await db.execute('SELECT email FROM Users WHERE ID = ?', [mail]);
-            return results;
+            const [results] = await db.execute('SELECT email FROM Users WHERE email = ?', [mail]);
+            return results[0];
         } catch (error) {
             console.error('Erreur lors de la récupération de l\'utilisateur :', error);
             throw error;

@@ -1,4 +1,6 @@
 <section class="flex flex-column flex-align-center flex-justify-center">
+    <button routerLink="/" class="margin-vertical"> <i class="fa-solid fa-arrow-left-long"></i> Revenir à
+        l'accueil</button>
     <h2 class="adaptative-size">Contactez-nous</h2>
     <form [formGroup]="contactForm" (submit)="submitForm()">
         <div class="margin-vertical flex flex-column">
@@ -16,9 +18,11 @@
             <textarea class="container border-radius padding adaptative-size " id="message" formControlName="message"
                 required></textarea>
         </div>
-        <p class="message text-color-red">
-            {{sendMessage}}
+        @if (sendMessage !== "" ) {
+        <p class="message text-center text-bold" [ngClass]="messageBool ? 'text-color-green' : 'text-color-red '">{{
+            sendMessage }}
         </p>
+        }
         <div class="flex flex-column flex-align-center">
             <button type="submit">Envoyer</button>
         </div>

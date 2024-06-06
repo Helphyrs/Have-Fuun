@@ -17,7 +17,8 @@ export class SignupComponent implements AfterViewInit {
   @ViewChild('modalSignUp', { static: true }) modal!: ElementRef;
 
   signUpForm!: FormGroup;
-  errorMessage: string = "";
+  sendMessage: string = "";
+  messageBool: boolean = true;
   account!: UserWithCcg;
   imageArray: string[] = ['assets/public/bishop.webp', 'assets/public/rook.webp', 'assets/public/knight.webp', 'assets/public/queen.webp', 'assets/public/king.webp']
   imageAvatar: string = '';
@@ -96,24 +97,39 @@ export class SignupComponent implements AfterViewInit {
   onSubmit(): void {
     if (this.signUpForm.get('ccg')!.value === "true") {
       if (this.signUpForm.get("password")?.value != this.signUpForm.get("confirmPassword")?.value) {
-        this.errorMessage = "Mot de passe non correspondant";
+        this.sendMessage = "Mot de passe non correspondant";
+        this.messageBool = false;
       } else if (this.signUpForm.valid) {
-        this.errorMessage = "";
+        this.sendMessage = "";
         let account = this.createUser();
         this.uS.addUser(account).subscribe((data) => {
           this.stopDisplay();
           this.router.navigate(['home']);
         }, (error) => {
-          if (error.status === 409) this.errorMessage = "E-mail déjà utilisé";
-          if (error.status === 400) this.errorMessage = "Mot de passe invalide";
-          setTimeout(() => this.errorMessage = "", 2500)
+          if (error.status === 201) {
+            this.sendMessage = "Votre compte est créée, connectez-vous maintenant";
+            this.messageBool = true
+          } else if (error.status === 409) {
+            this.sendMessage = "E-mail déjà utilisé";
+            this.messageBool = false
+          } else if (error.status === 400) {
+            this.sendMessage = "Mot de passe invalide";
+            this.messageBool = false
+          }
+
         })
       } else {
-        this.errorMessage = "Tout les champs ne sont pas remplis"
+        this.sendMessage = "Tout les champs ne sont pas remplis"
+        this.messageBool = false
       }
     } else {
-      this.errorMessage = "Les CGU n'ont pas été remplis"
+      this.sendMessage = "Les CGU n'ont pas été remplis"
+      this.messageBool = false;
     }
+    setTimeout(() => {
+      this.sendMessage = ""
+      this.initInscription()
+    }, 2500)
   }
 
   createUser(): UserWithCcg {

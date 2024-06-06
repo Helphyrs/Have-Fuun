@@ -55,15 +55,17 @@ export class ArticleComponent implements OnInit {
         content: content
       };
       this.cS.addComment(comment).subscribe((response) => {
-
       },
         (error) => {
+          if (error.status === 201) {
+            this.sendMessage = "Votre commentaire a bien été envoyée"
+            this.messageBool = true;
+          }
           if ((error.status === 403 && error.error.error === 'Access forbidden token unvalid') || (error.status === 401 && error.error.error === "Access unauthorized")) {
             this.sendMessage = "Votre commentaire ne respecte pas les normes pour l'envoie"
             this.messageBool = false;
             this.treatmentJWT.handle403Error(error.error.error);
           }
-          this.messageBool = true
         }
       );
     } else {
@@ -71,7 +73,10 @@ export class ArticleComponent implements OnInit {
       this.messageBool = false;
     }
     this.initForm()
-    setTimeout(() => this.sendMessage = "", 2500);
+    setTimeout(() => {
+      this.sendMessage = "";
+      this.messageBool = true;
+    }, 2500);
 
   }
 }

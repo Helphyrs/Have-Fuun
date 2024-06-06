@@ -31,6 +31,8 @@ export class FormComponent implements OnInit {
   answer: string[] = []
   answerNumber: number[] = []
 
+  sendMessage: string = "";
+  messageBool: boolean = true
   constructor(
     private activatedRoute: ActivatedRoute, private fS: FormsServiceService,
     private treatmentJWT: TreatmentJwtErrorService
@@ -93,9 +95,21 @@ export class FormComponent implements OnInit {
     this.fS.addResult(formResult).subscribe(() => {
     },
       (error) => {
-        if ((error.status === 403 && error.error.error === 'Access forbidden token unvalid') || (error.status === 401 && error.error.error === "Access unauthorized")) this.treatmentJWT.handle403Error(error.error.error);
+        if (error.status === 201) {
+          this.sendMessage = "Le résultat du formulaire a bien été envoyée"
+          this.messageBool = true
+        }
+        if ((error.status === 403 && error.error.error === 'Access forbidden token unvalid') || (error.status === 401 && error.error.error === "Access unauthorized")) {
+          this.sendMessage = "Vous n'êtes pas connecté";
+          this.messageBool = false;
+          this.treatmentJWT.handle403Error(error.error.error);
+        }
       }
     );
+    setTimeout(() => {
+      this.sendMessage = "";
+      this.messageBool = true;
+    }, 2500)
 
   }
 }
