@@ -96,7 +96,7 @@ export class FormComponent implements OnInit {
     },
       (error) => {
         if (error.status === 201) {
-          this.sendMessage = "Le résultat du formulaire a bien été envoyée"
+          this.sendMessage = `Votre note d'absurde est de : ${resultForm} / 16`
           this.messageBool = true
         }
         if ((error.status === 403 && error.error.error === 'Access forbidden token unvalid') || (error.status === 401 && error.error.error === "Access unauthorized")) {

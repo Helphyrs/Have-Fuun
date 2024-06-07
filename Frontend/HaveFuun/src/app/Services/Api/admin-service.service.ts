@@ -38,7 +38,6 @@ export class AdminServiceService {
     if (article.avatar) {
       formData.append('avatar', article.avatar);
     }
-    console.log(formData)
     return this.http.put<any>(`${this.apiUrlAdmin}/articles/${articleId}`, formData)
   }
   deleteArticleById(articleId: number): Observable<any> {

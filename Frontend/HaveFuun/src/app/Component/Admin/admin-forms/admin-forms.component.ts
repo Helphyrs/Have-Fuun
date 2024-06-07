@@ -33,6 +33,8 @@ export class AdminFormsComponent implements OnInit {
   editTopicsB: string[] = Array(8).fill('');
   editTopicsC: string[] = Array(8).fill('');
 
+
+
   constructor(private activatedRoute: ActivatedRoute, private adminS: AdminServiceService) { }
 
   ngOnInit(): void {
@@ -62,18 +64,17 @@ export class AdminFormsComponent implements OnInit {
       const file = event.target.files[0];
       if (elem === "editAvatar") {
         this.editAvatar = file
-
       } else if (elem === "addAvatar") {
         this.addAvatar = file
       }
     }
   }
   deleteForm(id: number): void {
-    let bool: boolean = confirm("Etes vous sûr de supprimer ce formulaire ?")
+    let bool: boolean = confirm("Etes vous sûr de supprimer ce quizz ?")
     if (bool) {
       this.adminS.deleteFormById(id).subscribe(data => {
       }, error => {
-        alert("Le formulaire a bien été supprimé, lors de la prochaine actualisation il ne sera plus là.")
+        alert("Le quizz a bien été supprimé, lors de la prochaine actualisation il ne sera plus là.")
       })
     }
   }
@@ -84,6 +85,11 @@ export class AdminFormsComponent implements OnInit {
         this.display = "home"
         break;
       case "editForm":
+        this.editName = this.forms[index].name;
+        this.editQuestions = this.forms[index].question.split(', ')
+        this.editTopicsA = this.forms[index].topicA.split(', ')
+        this.editTopicsB = this.forms[index].topicB.split(', ')
+        this.editTopicsC = this.forms[index].topicC.split(', ')
         this.display = "editForm"
         this.ID_forms = id;
         this.editIndex = index;
@@ -107,7 +113,7 @@ export class AdminFormsComponent implements OnInit {
         this.adminS.addForm(obj).subscribe(response => {
 
         }, error => {
-          alert("Le formulaire a bien été ajouté, actualisé la page pour le voir")
+          alert("Le quizz a bien été ajouté, actualisé la page pour le voir")
           this.display = "home";
           this.addName = "";
           this.addAvatar = "";
@@ -140,7 +146,7 @@ export class AdminFormsComponent implements OnInit {
             topicB: this.editTopicsB,
             topicC: this.editTopicsC
           }
-          alert("Le formulaire a bien été ajouté, actualisé la page pour le voir")
+          alert("Le quizz a bien été ajouté, actualisé la page pour le voir")
           this.display = "home";
           this.editName = "";
           this.editAvatar = "";

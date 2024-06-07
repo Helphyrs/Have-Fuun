@@ -60,14 +60,14 @@
             <table class="medium-size">
                 <thead>
                     <tr>
-                        <td>Résultat du formulaire</td>
+                        <td>Notes d'absurdes</td>
                         <td>Nom du formulaire</td>
                     </tr>
                 </thead>
                 <tbody>
                     @for(results of forms ; track results) {
                     <tr>
-                        <td>{{ results.result }}</td>
+                        <td>{{ results.result }} / 16</td>
                         <td>{{ results.name }}</td>
                     </tr>
                     }
@@ -98,7 +98,11 @@
                 <button [disabled]="!commentForm.valid" class=" text-uppercase text-bold"
                     aria-label="Modifié  votre commentaire" type="submit">Modifié votre commentaire</button>
             </div>
-            <p class="error-message">{{ errorMessage }}</p>
+            @if (sendMessage !== "" ) {
+            <p class="message text-center text-bold" [ngClass]="messageBool ? 'text-color-green' : 'text-color-red '">{{
+                sendMessage }}
+            </p>
+            }
         </form>
     </article>
 
@@ -127,7 +131,7 @@
                 <ul class="margin-list no-padding adaptative-size">
                     <li [ngClass]="verifyArray.min === true ? 'text-color-green' : 'text-color-white'">Formé d'un
                         minimum
-                        de 8 caractères</li>
+                        de 12 caractères</li>
                     <li [ngClass]="verifyArray.upper === true ? 'text-color-green' : 'text-color-white'">Au moins une
                         lettre majuscule</li>
                     <li [ngClass]="verifyArray.lower === true ? 'text-color-green' : 'text-color-white'">Au moins une
@@ -153,7 +157,11 @@
                 <button [disabled]="!userForm.valid" class=" text-uppercase text-bold"
                     aria-label="Bouton pour modifier son compte" type="submit">Modifier son compte</button>
             </div>
-            <p class="error-message">{{ errorMessage }}</p>
+            @if (sendMessage !== "" ) {
+            <p class="message text-center text-bold" [ngClass]="messageBool ? 'text-color-green' : 'text-color-red '">{{
+                sendMessage }}
+            </p>
+            }
         </form>
     </article>
     }

@@ -29,7 +29,10 @@ export class ProfilComponent implements OnInit {
   contentCommActual: string = '';
   editIndex: number = -1;
   display: string = "home";
-  errorMessage: string = "";
+
+  sendMessage: string = "";
+  messageBool: boolean = true;
+
   imageArray: string[] = ['assets/public/bishop.webp', 'assets/public/rook.webp', 'assets/public/knight.webp', 'assets/public/queen.webp', 'assets/public/king.webp'];
   imageAvatar: string = '';
 
@@ -66,6 +69,7 @@ export class ProfilComponent implements OnInit {
         this.display = 'home';
         break;
       case 'editComment':
+        this.commentForm.patchValue({ 'comment': contentComm })
         this.display = 'editComment';
         this.editForm = value;
         this.editIndex = index;
@@ -75,6 +79,8 @@ export class ProfilComponent implements OnInit {
         this.deleteComment(value);
         break;
       case 'editUser':
+        this.userForm.patchValue({ 'pseudo': this.user.pseudo })
+        this.userForm.patchValue({ 'email': this.user.email })
         this.display = 'editUser';
         break;
     }
@@ -98,7 +104,7 @@ export class ProfilComponent implements OnInit {
       avatar: ["", Validators.required],
       pseudo: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
-      password: ["", Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!$%^&*-]).{8,}$/)],
+      password: ["", Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!$%^&*-]).{12,}$/)],
     })
   }
   selectAvatar(avatar: string): void {
@@ -107,7 +113,7 @@ export class ProfilComponent implements OnInit {
   }
   checkPassword(): void {
     let password = this.userForm.get('password')!.value;
-    const minLength: boolean = password.length >= 8;
+    const minLength: boolean = password.length >= 12;
     const hasUpperCase: boolean = /[A-Z]/.test(password);
     const hasLowerCase: boolean = /[a-z]/.test(password);
     const hasNumber: boolean = /[0-9]/.test(password);
@@ -124,7 +130,6 @@ export class ProfilComponent implements OnInit {
   onSubmit(): void {
     let content = this.commentForm.get('comment')!.value;
     if (content.length > 10) {
-      this.errorMessage = "Votre commentaire a bien été modifiée."
       let comment: CommentEdit = {
         content: content
       };
@@ -132,17 +137,27 @@ export class ProfilComponent implements OnInit {
       this.cS.editComment(comment, this.editForm).subscribe((response) => {
       },
         (error) => {
+          if (error.status === 200) {
+            this.sendMessage = "Votre commentaire a bien été modifiée."
+            this.messageBool = true;
+          }
           if (error.status === 403 && error.error.error === 'Access forbidden token unvalid') {
             this.comments[this.editIndex].content = this.contentCommActual;
             this.contentCommActual = "";
-            this.errorMessage = "Votre commentaire ne respecte pas les normes pour l'envoie"
+            this.sendMessage = "Votre commentaire ne respecte pas les normes pour l'envoie"
+            this.messageBool = false;
             this.treatmentJWT.handle403Error(error.error.error);
           }
         }
       );
     } else {
-      this.errorMessage = "Votre commentaire est inférieur à 10 caractères"
+      this.sendMessage = "Votre commentaire est inférieur à 10 caractères"
+      this.messageBool = false;
     }
+    setTimeout(() => {
+      this.messageBool = true;
+      this.sendMessage = ""
+    }, 2500)
   }
   onSubmitUser(): void {
     if (this.userForm.get('password')!.value && this.userForm.get('password')!.value !== "") {
@@ -152,11 +167,16 @@ export class ProfilComponent implements OnInit {
         password: this.userForm.get('password')!.value,
         avatar: this.userForm.get('avatar')!.value,
       }
-      this.errorMessage = "Modification du compte avec MDP";
-      this.uS.editUserByToken(obj).subscribe((response) => {
+
+      this.uS.editUserByToken(obj).subscribe((data) => {
       }, (error) => {
+        if (error.status === 200) {
+          this.sendMessage = "Modification du compte avec MDP";
+          this.messageBool = true
+        }
         if (error.status === 403 && error.error.error === 'Access forbidden token unvalid') {
-          this.errorMessage = "Votre compte n'a pas été modifié"
+          this.sendMessage = "Votre compte n'a pas été modifié"
+          this.messageBool = false;
           this.treatmentJWT.handle403Error(error.error.error);
         }
       })
@@ -166,16 +186,26 @@ export class ProfilComponent implements OnInit {
         email: this.userForm.get('email')!.value,
         avatar: this.userForm.get('avatar')!.value,
       }
-      this.errorMessage = "Modification du compte sans MDP";
-      this.uS.editUserByToken(objWithoutPassword).subscribe((response) => {
+
+      this.uS.editUserByToken(objWithoutPassword).subscribe((data) => {
+
       }, (error) => {
+        if (error.status === 200) {
+          this.sendMessage = "Modification du compte sans MDP";
+          this.messageBool = true
+        }
         if (error.status === 403 && error.error.error === 'Access forbidden token unvalid') {
-          this.errorMessage = "Votre compte n'a pas été modifié"
+          this.sendMessage = "Votre compte n'a pas été modifié"
+          this.messageBool = false;
           this.treatmentJWT.handle403Error(error.error.error);
         }
       })
 
     }
+    setTimeout(() => {
+      this.messageBool = true;
+      this.sendMessage = ""
+    }, 2500)
   }
   deleteUser(): void {
     let bool: boolean = confirm('Êtes vous sûr de vouloir supprimer votre compte, tout les commentaires et résultats de formulaires que vous ayez fait seront aussi supprimés')

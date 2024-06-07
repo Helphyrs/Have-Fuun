@@ -90,8 +90,8 @@ export class SignupComponent implements AfterViewInit {
       email: ["", [Validators.required, Validators.email]],
       newlestter: [false],
       ccg: [false, Validators.required],
-      password: ["", [Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!$%^&*-]).{8,}$/)]],
-      confirmPassword: ["", [Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!$%^&*-]).{8,}$/)]]
+      password: ["", [Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!$%^&*-]).{12,}$/)]],
+      confirmPassword: ["", [Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!$%^&*-]).{12,}$/)]]
     })
   }
   onSubmit(): void {

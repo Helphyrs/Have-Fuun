@@ -17,7 +17,7 @@ body {
 }
 
 img:not(#dog, #logo-footer) {
-    border: 0.2rem solid #7D0293;
+    border: 0.5rem solid #7D0293;
 }
 
 @font-face {
@@ -366,7 +366,7 @@ section:not(#login):not(#sign-up) {
 }
 
 .border-green {
-    border: 0.5rem solid green;
+    border: 0.5rem solid green !important;
     border-radius: 1rem;
 }
 

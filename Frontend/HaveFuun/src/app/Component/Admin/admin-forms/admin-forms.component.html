@@ -61,8 +61,8 @@
         </div>
         <div class="flex flex-column flex-align-center margin-bottom">
             <label class="text-color-white medium-size" for="editAvatar">Avatar:</label>
-            <input class="field border-radius padding text-color-white" id="editAvatar" type="file"
-                [(ngModel)]="editAvatar" name="editAvatar" (change)="onFileChange($event, 'editAvatar')">
+            <input class="field border-radius padding text-color-white" id="editAvatar" type="file" name="editAvatar"
+                (change)="onFileChange($event, 'editAvatar')">
         </div>
         @for (editQuestion of editQuestions ; track editQuestion ; let index =$index) {
         <div class="flex flex-column flex-align-center margin-bottom">
@@ -116,8 +116,8 @@
         </div>
         <div class="flex flex-column margin-bottom">
             <label class="text-color-white medium-size" for="addAvatar">Avatar:</label>
-            <input class="text-color-white field border-radius padding" id="addAvatar" type="file"
-                [(ngModel)]="addAvatar" name="addAvatar" (change)="onFileChange($event , 'addAvatar')">
+            <input class="text-color-white field border-radius padding" id="addAvatar" type="file" name="addAvatar"
+                (change)="onFileChange($event , 'addAvatar')">
         </div>
         @for (question of addQuestions ; track question ; let index =$index) {
         <div class="flex flex-column margin-bottom">

@@ -78,6 +78,8 @@ module.exports = {
         try {
             const userId = req.userInfo.userId;
             const user = req.body;
+            console.log(userId, user)
+
             let userEmail = await userModel.getUserByMail(req.app.locals.db, user.email)
             if (userEmail) return res.status(409).send("Adresse e-mail déjà utilisée. Veuillez choisir une autre adresse e-mail.");
             if (!user.password) {

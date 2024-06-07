@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   initForm(): void {
     this.signInForm = this.formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
+      password: ["", [Validators.required]]
     });
   }
 
@@ -54,11 +54,13 @@ export class LoginComponent implements OnInit {
       password: password
     }
     this.lS.clearLocalStorage();
-    this.aS.login(login).subscribe(data => {
+    this.aS.login(login).subscribe((data) => {
       this.lS.setLocalStorage("token", data.token);
       this.aS.isAuth.next(true);
       this.stopDisplay();
-      this.router.navigate(['/']);
+    }, (error) => {
+      this.errorMessage = "Informations incorrects"
+      setTimeout(() => this.errorMessage = "", 2500)
     })
   }
 

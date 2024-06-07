@@ -32,7 +32,7 @@
                     (input)="checkConfirmPassword()">
                 <ul class="margin-list no-padding">
                     <li [ngClass]="verifyArray.min === true ? 'text-color-green' : 'text-color-red'">Formé d'un minimum
-                        de 8 caractères</li>
+                        de 12 caractères</li>
                     <li [ngClass]="verifyArray.upper === true ? 'text-color-green' : 'text-color-red'">Au moins une
                         lettre majuscule</li>
                     <li [ngClass]="verifyArray.lower === true ? 'text-color-green' : 'text-color-red'">Au moins une
@@ -65,7 +65,7 @@
             </div>
         </form>
         @if (sendMessage !== "" ) {
-        <p class="message-auth text-center text-bold" [ngClass]="messageBool ? 'text-color-green' : 'text-color-red '">
+        <p class="medium-size text-center text-bold" [ngClass]="messageBool ? 'text-color-green' : 'text-color-red '">
             {{
             sendMessage }}
         </p>

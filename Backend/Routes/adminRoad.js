@@ -17,7 +17,7 @@ router.delete('/articles/:articleId', auth, sanitize, admin, adminController.del
 // COMMENTS
 
 router.get('/comments/all/', auth, admin, adminController.getAllComments);
-router.delete('/comments/:commentId', auth, sanitize, admin, verifyAdmin, adminController.deleteCommentByAdmin);
+router.delete('/comments/:commentId', auth, sanitize, admin, adminController.deleteCommentByAdmin);
 
 // USERS
 
@@ -25,7 +25,7 @@ router.get('/users/all/', auth, admin, adminController.getAllUsers);
 router.get('/users/user/:userId', auth, admin, adminController.getUserById);
 router.get('/users/user/all/:userId', auth, admin, adminController.getAllInfoUserAdmin);
 router.get('/users/isAdmin/', auth, admin, adminController.isAdmin);
-router.delete('/users/delete/:userId', auth, sanitize, admin, verifyAdmin, adminController.deleteUserById);
+router.delete('/users/delete/:userId', auth, sanitize, admin, adminController.deleteUserById);
 
 // FORMS
 

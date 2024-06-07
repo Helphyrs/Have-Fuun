@@ -38,7 +38,7 @@ export class AdminCommentFromUserComponent implements OnInit {
         if (error.error === "Access forbidden : you cannot delete another admin") {
           alert("Vous ne supprimez pas un commentaire d'administrateur")
         } else {
-          alert("L'utilisateur a bien été supprimé vous le verrez lors de la prochaine actualisation");
+          alert("Le commentaire de l'utilisateur a bien été supprimé vous le verrez lors de la prochaine actualisation");
           this.router.navigate(["admin"]);
         }
       })

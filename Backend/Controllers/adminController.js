@@ -40,13 +40,12 @@ module.exports = {
             if (!article) return res.status(404).send('Article not found');
 
             const articlesCount = await articleModel.getArticlesCountByAvatar(req.app.locals.db, article.avatar);
-
             if (req.body.name === "" || req.body.description === "" || req.body.tags === "" || req.body.avatar === "") {
                 if (req.body.name === "") req.body.name = article.name;
                 if (req.body.description === "") req.body.description = article.description;
                 if (req.body.tags === "") req.body.tags = article.tags;
-                if (req.body.avatar === undefined) req.body.avatar = avatar ? `public/assets/forms-articles/${avatar}` : null;
             }
+            req.body.avatar = avatar ? `public/assets/forms-articles/${avatar}` : null;
             const articleBody = req.body
             if (articlesCount <= 1) {
                 const filePath = path.join(__dirname, '../', article.avatar);
@@ -210,7 +209,6 @@ module.exports = {
             const formCount = await formModel.getFormCountByAvatar(req.app.locals.db, form.avatar);
             req.body.avatar = avatar ? `public/assets/forms-articles/${avatar}` : null;
             const formBody = req.body;
-            console.log(formBody)
             if (formCount <= 1) {
                 const filePath = path.join(__dirname, '../', form.avatar);
                 fs.unlink(filePath, async (err) => {

@@ -40,6 +40,9 @@ export class AdminArticlesComponent implements OnInit {
         this.display = "home"
         break;
       case "editArticle":
+        this.editArticleForm.patchValue({ 'name': this.articles[index].name })
+        this.editArticleForm.patchValue({ 'description': this.articles[index].description })
+        this.editArticleForm.patchValue({ 'tags': this.articles[index].tags })
         this.display = "editArticle"
         this.ID_article = id;
         this.editIndex = index;
@@ -50,7 +53,7 @@ export class AdminArticlesComponent implements OnInit {
     }
   }
   deleteArticle(id: number): void {
-    let bool: boolean = confirm("$Etes vous sûr de supprimer cet article ?")
+    let bool: boolean = confirm("Etes vous sûr de supprimer cet article ?")
     if (bool) {
       this.adminS.deleteArticleById(id).subscribe(data => {
       }, error => {
@@ -118,7 +121,7 @@ export class AdminArticlesComponent implements OnInit {
       this.adminS.editArticleById(obj, this.ID_article).subscribe((data) => {
       }, (error) => {
         this.initForm()
-        alert('Le formulaire a bien été modifiée, actualisé la page pour le voir');
+        alert(" L'article a bien été modifiée, actualisé la page pour le voir");
         this.display = "home"
         this.editIndex = -1;
       })
