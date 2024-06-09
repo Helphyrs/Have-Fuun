@@ -40,6 +40,9 @@ module.exports = {
             if (!article) return res.status(404).send('Article not found');
 
             const articlesCount = await articleModel.getArticlesCountByAvatar(req.app.locals.db, article.avatar);
+            const formCount = await formModel.getFormCountByAvatar(req.app.locals.db, article.avatar);
+            const sum = formCount + articlesCount
+
             if (req.body.name === "" || req.body.description === "" || req.body.tags === "" || req.body.avatar === "") {
                 if (req.body.name === "") req.body.name = article.name;
                 if (req.body.description === "") req.body.description = article.description;
@@ -47,7 +50,7 @@ module.exports = {
             }
             req.body.avatar = avatar ? `public/assets/forms-articles/${avatar}` : null;
             const articleBody = req.body
-            if (articlesCount <= 1) {
+            if (sum <= 1) {
                 const filePath = path.join(__dirname, '../', article.avatar);
                 fs.unlink(filePath, async (err) => {
                     if (err) {
@@ -76,8 +79,12 @@ module.exports = {
             const articleId = req.params.articleId;
             const article = await articleModel.getAvatarById(req.app.locals.db, articleId);
             if (!article) return res.status(404).send('Article not found');
+
             const articlesCount = await articleModel.getArticlesCountByAvatar(req.app.locals.db, article.avatar);
-            if (articlesCount <= 1) {
+            const formCount = await formModel.getFormCountByAvatar(req.app.locals.db, article.avatar);
+            const sum = formCount + articlesCount
+
+            if (sum <= 1) {
                 const filePath = path.join(__dirname, '../', article.avatar);
                 fs.unlink(filePath, async (err) => {
                     if (err) {
@@ -203,13 +210,15 @@ module.exports = {
         try {
             const formId = req.params.formId;
             const avatar = req.file ? req.file.filename : null;
-            console.log(avatar)
             const form = await formModel.getFormById(req.app.locals.db, formId);
             if (!form) return res.status(400).send('Form not found');
+
             const formCount = await formModel.getFormCountByAvatar(req.app.locals.db, form.avatar);
+            const articlesCount = await articleModel.getArticlesCountByAvatar(req.app.locals.db, form.avatar);
+            const sum = formCount + articlesCount
             req.body.avatar = avatar ? `public/assets/forms-articles/${avatar}` : null;
             const formBody = req.body;
-            if (formCount <= 1) {
+            if (sum <= 1) {
                 const filePath = path.join(__dirname, '../', form.avatar);
                 fs.unlink(filePath, async (err) => {
                     if (err) {
@@ -239,8 +248,12 @@ module.exports = {
             const formId = req.params.formId;
             let form = await formModel.getFormAvatarById(req.app.locals.db, formId);
             if (!form) return res.status(404).send('Form not found');
+
             const formCount = await articleModel.getFormCountByAvatar(req.app.locals.db, form.avatar);
-            if (formCount <= 1) {
+            const articlesCount = await articleModel.getArticlesCountByAvatar(req.app.locals.db, article.avatar);
+            const sum = formCount + articlesCount;
+
+            if (sum <= 1) {
                 const filePath = path.join(__dirname, '../', form.avatar);
                 fs.unlink(filePath, async (err) => {
                     if (err) {

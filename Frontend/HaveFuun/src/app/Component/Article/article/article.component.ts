@@ -61,6 +61,11 @@ export class ArticleComponent implements OnInit {
             this.sendMessage = "Votre commentaire a bien été envoyée"
             this.messageBool = true;
           }
+
+          if (error.status === 400) {
+            this.sendMessage = "Votre commentaire n'est pas valide"
+            this.messageBool = false;
+          }
           if ((error.status === 403 && error.error.error === 'Access forbidden token unvalid') || (error.status === 401 && error.error.error === "Access unauthorized")) {
             this.sendMessage = "Votre commentaire ne respecte pas les normes pour l'envoie"
             this.messageBool = false;

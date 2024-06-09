@@ -141,6 +141,10 @@ export class ProfilComponent implements OnInit {
             this.sendMessage = "Votre commentaire a bien été modifiée."
             this.messageBool = true;
           }
+          if (error.status === 400) {
+            this.sendMessage = "Votre commentaire n'est pas valide"
+            this.messageBool = false;
+          }
           if (error.status === 403 && error.error.error === 'Access forbidden token unvalid') {
             this.comments[this.editIndex].content = this.contentCommActual;
             this.contentCommActual = "";

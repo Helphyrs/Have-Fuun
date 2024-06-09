@@ -1,7 +1,7 @@
 <section class="flex flex-column flex-align-center">
     <button routerLink="/" class="margin-vertical"> <i class="fa-solid fa-arrow-left-long"></i> Revenir à
         l'accueil</button>
-    <h2 class="medium-size  text-center margin-bottom">Voici la page de Formulaire</h2>
+    <h2 class="medium-size  text-center margin-bottom">Voici la page des Quizs</h2>
     @for(form of forms ; track form ; let index = $index) {
     <div class="container-form padding margin-vertical flex flex-column-change flex-justify-around flex-align-center border-bottom-beige"
         [ngClass]="index%2!==0 ? 'flex-column-change-reverse' : 'flex-column-change' ">

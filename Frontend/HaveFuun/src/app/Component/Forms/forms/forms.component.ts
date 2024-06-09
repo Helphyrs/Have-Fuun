@@ -21,8 +21,7 @@ export class FormsComponent implements OnInit {
   ngOnInit(): void {
     this.data = this.activatedRoute.data.pipe(map((data: { [x: string]: any; }) => data['forms']));
     this.data.forEach(info => {
-      this.forms = info
-
+      this.forms = info;
     });
   }
 

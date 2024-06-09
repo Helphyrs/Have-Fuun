@@ -5,6 +5,7 @@ module.exports = {
         try {
             const userId = req.userInfo.userId
             const { content, articleId } = req.body;
+            if (content.length < 10) return res.status(400).send("Comment can't be less than 10 characters")
             const commentId = await commentModel.addComment(req.app.locals.db, userId, articleId, content);
             res.status(201).send(`Comment added with ID: ${commentId}`);
         } catch (error) {
@@ -17,6 +18,7 @@ module.exports = {
         try {
             const commentId = req.params.commentId;
             const { content } = req.body;
+            if (content.length < 10) return res.status(400).send("Comment can't be less than 10 characters")
             await commentModel.editComment(req.app.locals.db, commentId, content);
             res.status(200).send('Comment updated successfully');
         } catch (error) {
