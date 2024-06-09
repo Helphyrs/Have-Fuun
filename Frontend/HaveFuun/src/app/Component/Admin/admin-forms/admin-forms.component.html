@@ -7,7 +7,7 @@
     <button class="margin-vertical" (click)="switchDisplay('addForm')">Ajouter un formulaire <i
             class="adaptative-size pointer text-color-purple fa-solid fa-plus border-purple"></i></button>
     @if(forms.length >0 ) {
-    <h3 class="medium-size  text-center margin-vertical">Voici la liste des articles :</h3>
+    <h3 class="medium-size  text-center margin-vertical">Voici la liste des quizs :</h3>
     <div class="flex flex-column table-container margin-vertical flex-align-items-change">
         <table class="adaptative-size">
             <thead>
@@ -44,7 +44,7 @@
         </table>
     </div>
     } @else {
-    <h3 class="medium-size  text-center margin-bottom">Il n'y a pas d'articles</h3>
+    <h3 class="medium-size  text-center margin-bottom">Il n'y a pas de quizs</h3>
     }
 </section>
 } @else if (display==="editForm") {

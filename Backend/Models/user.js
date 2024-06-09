@@ -17,6 +17,18 @@ module.exports = {
             throw error;
         }
     },
+    getUserByMailAndId: async (db, mail, userId) => {
+        try {
+            const [results] = await db.execute(
+                'SELECT email FROM Users WHERE email = ? AND id != ?',
+                [mail, userId]
+            );
+            return results[0];
+        } catch (error) {
+            console.error('Erreur lors de la vérification de l\'utilisateur :', error);
+            throw error;
+        }
+    },
     getRoleById: async (db, userId) => {
         try {
             const [results] = await db.execute('SELECT role FROM Users WHERE ID = ?', [userId]);

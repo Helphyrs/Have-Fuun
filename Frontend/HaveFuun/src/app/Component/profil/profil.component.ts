@@ -178,6 +178,10 @@ export class ProfilComponent implements OnInit {
           this.sendMessage = "Modification du compte avec MDP";
           this.messageBool = true
         }
+        if (error.status === 409) {
+          this.sendMessage = "Adresse mail déjà utilisée";
+          this.messageBool = false
+        }
         if (error.status === 403 && error.error.error === 'Access forbidden token unvalid') {
           this.sendMessage = "Votre compte n'a pas été modifié"
           this.messageBool = false;
@@ -194,9 +198,14 @@ export class ProfilComponent implements OnInit {
       this.uS.editUserByToken(objWithoutPassword).subscribe((data) => {
 
       }, (error) => {
+
         if (error.status === 200) {
           this.sendMessage = "Modification du compte sans MDP";
           this.messageBool = true
+        }
+        if (error.status === 409) {
+          this.sendMessage = "Adresse mail déjà utilisée";
+          this.messageBool = false
         }
         if (error.status === 403 && error.error.error === 'Access forbidden token unvalid') {
           this.sendMessage = "Votre compte n'a pas été modifié"

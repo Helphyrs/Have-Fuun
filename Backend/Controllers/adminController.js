@@ -50,6 +50,7 @@ module.exports = {
             }
             req.body.avatar = avatar ? `public/assets/forms-articles/${avatar}` : null;
             const articleBody = req.body
+            console.log(articleBody, article.avatar)
             if (sum <= 1) {
                 const filePath = path.join(__dirname, '../', article.avatar);
                 fs.unlink(filePath, async (err) => {
@@ -84,7 +85,7 @@ module.exports = {
             const formCount = await formModel.getFormCountByAvatar(req.app.locals.db, article.avatar);
             const sum = formCount + articlesCount
 
-            if (sum <= 1) {
+            if (sum <= 1 && articleBody.avatar !== article.avatar) {
                 const filePath = path.join(__dirname, '../', article.avatar);
                 fs.unlink(filePath, async (err) => {
                     if (err) {
@@ -218,7 +219,7 @@ module.exports = {
             const sum = formCount + articlesCount
             req.body.avatar = avatar ? `public/assets/forms-articles/${avatar}` : null;
             const formBody = req.body;
-            if (sum <= 1) {
+            if (sum <= 1 && formBody.avatar !== form.avatar) {
                 const filePath = path.join(__dirname, '../', form.avatar);
                 fs.unlink(filePath, async (err) => {
                     if (err) {
@@ -234,7 +235,7 @@ module.exports = {
                     }
                 });
             } else {
-                await articleModel.editArticleById(req.app.locals.db, formId, formBody)
+                await formModel.editFormById(req.app.locals.db, formId, formBody)
                 res.status(200).send('Form updated successfully');
             }
         } catch (error) {
@@ -249,7 +250,7 @@ module.exports = {
             let form = await formModel.getFormAvatarById(req.app.locals.db, formId);
             if (!form) return res.status(404).send('Form not found');
 
-            const formCount = await articleModel.getFormCountByAvatar(req.app.locals.db, form.avatar);
+            const formCount = await formModel.getFormCountByAvatar(req.app.locals.db, form.avatar);
             const articlesCount = await articleModel.getArticlesCountByAvatar(req.app.locals.db, article.avatar);
             const sum = formCount + articlesCount;
 

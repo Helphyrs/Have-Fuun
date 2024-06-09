@@ -25,6 +25,7 @@ module.exports = {
     getFormByName: async (req, res) => {
         try {
             const formName = req.params.name;
+            console.log(formName)
             const form = await formModel.getFormByName(req.app.locals.db, formName);
             form ? res.status(200).send(form) : res.status(404).send('Form not found');
         } catch (error) {

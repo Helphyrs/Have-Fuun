@@ -86,10 +86,10 @@ export class AdminFormsComponent implements OnInit {
         break;
       case "editForm":
         this.editName = this.forms[index].name;
-        this.editQuestions = this.forms[index].question.split(', ')
-        this.editTopicsA = this.forms[index].topicA.split(', ')
-        this.editTopicsB = this.forms[index].topicB.split(', ')
-        this.editTopicsC = this.forms[index].topicC.split(', ')
+        this.editQuestions = this.forms[index].question.split(',')
+        this.editTopicsA = this.forms[index].topicA.split(',')
+        this.editTopicsB = this.forms[index].topicB.split(',')
+        this.editTopicsC = this.forms[index].topicC.split(',')
         this.display = "editForm"
         this.ID_forms = id;
         this.editIndex = index;
@@ -146,7 +146,7 @@ export class AdminFormsComponent implements OnInit {
             topicB: this.editTopicsB,
             topicC: this.editTopicsC
           }
-          alert("Le quizz a bien été ajouté, actualisé la page pour le voir")
+          alert("Le quizz a bien été modifié, actualisé la page pour le voir")
           this.display = "home";
           this.editName = "";
           this.editAvatar = "";

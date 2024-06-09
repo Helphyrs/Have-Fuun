@@ -105,7 +105,7 @@ export class AdminArticlesComponent implements OnInit {
 
       }, error => {
         this.initForm()
-        alert("L'article a bien été ajouté, actualisé la page pour le voir")
+        alert("L'article a bien été ajouté, actualisée la page pour le voir")
         this.display = "home";
       })
     }
@@ -121,7 +121,7 @@ export class AdminArticlesComponent implements OnInit {
       this.adminS.editArticleById(obj, this.ID_article).subscribe((data) => {
       }, (error) => {
         this.initForm()
-        alert(" L'article a bien été modifiée, actualisé la page pour le voir");
+        alert(" L'article a bien été modifiée, actualisée la page pour le voir");
         this.display = "home"
         this.editIndex = -1;
       })
