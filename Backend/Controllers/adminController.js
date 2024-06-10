@@ -50,8 +50,8 @@ module.exports = {
             }
             req.body.avatar = avatar ? `public/assets/forms-articles/${avatar}` : null;
             const articleBody = req.body
-            console.log(articleBody, article.avatar)
-            if (sum <= 1) {
+
+            if (sum <= 1 && articleBody.avatar !== article.avatar) {
                 const filePath = path.join(__dirname, '../', article.avatar);
                 fs.unlink(filePath, async (err) => {
                     if (err) {
@@ -85,7 +85,7 @@ module.exports = {
             const formCount = await formModel.getFormCountByAvatar(req.app.locals.db, article.avatar);
             const sum = formCount + articlesCount
 
-            if (sum <= 1 && articleBody.avatar !== article.avatar) {
+            if (sum <= 1) {
                 const filePath = path.join(__dirname, '../', article.avatar);
                 fs.unlink(filePath, async (err) => {
                     if (err) {
