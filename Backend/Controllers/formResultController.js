@@ -5,7 +5,7 @@ module.exports = {
         try {
             const { formId, result } = req.body;
             const userId = req.userInfo.userId
-            if (isNaN(result) || result < -10 || result > 10) {
+            if (isNaN(result) || result < 0 || result > 16) {
                 return res.status(400).send('Invalid result. Must be a number between -10 and 10.');
             }
             const formResultId = await formResultModel.addFormResult(req.app.locals.db, formId, userId, result);

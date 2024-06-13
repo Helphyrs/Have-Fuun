@@ -85,13 +85,14 @@ export class FormComponent implements OnInit {
     for (let i = 0; i < this.answer.length; i++) {
       if (typeof this.answer[i] === "string") this.answerNumber.push(parseInt(this.answer[i]))
     }
-    this.answer = [], this.isVerified = false;
 
     let resultForm: number = this.answerNumber.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
     let formResult: FormResult = {
       formId: this.form.ID_form,
       result: resultForm
     }
+    this.answer = [], this.isVerified = false, this.questions = [], this.topicA = [], this.topicB = [], this.topicC = [], this.answerNumber = [];
+    this.initValue()
     this.fS.addResult(formResult).subscribe(() => {
     },
       (error) => {

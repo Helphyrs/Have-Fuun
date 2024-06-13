@@ -251,7 +251,7 @@ module.exports = {
             if (!form) return res.status(404).send('Form not found');
 
             const formCount = await formModel.getFormCountByAvatar(req.app.locals.db, form.avatar);
-            const articlesCount = await articleModel.getArticlesCountByAvatar(req.app.locals.db, article.avatar);
+            const articlesCount = await articleModel.getArticlesCountByAvatar(req.app.locals.db, form.avatar);
             const sum = formCount + articlesCount;
 
             if (sum <= 1) {
