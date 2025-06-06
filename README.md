@@ -1,4 +1,3 @@
-- commande pour accéder au stockage Mysql : docker exec -it mysql_dev mysql -uuser -ppassword myapp_db
 - commande pour lancer le serveur : docker-compose up --build
 
 Si lors de la création, il y a des soucis, il se pourrait que la persistence des données ne soit plus présentes, donc s'il s'agit des utilisateurs, il faut 
