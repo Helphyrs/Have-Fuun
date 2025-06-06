@@ -1,14 +1,32 @@
 exports.articles = [
     {
         name: 'La Magie de la Pâtisserie : Un Voyage Gourmand',
-        description: "La pâtisserie, cet art délicat et savoureux, séduit nos sens et éveille nos papilles. Elle est bien plus qu'une simple discipline culinaire ; c'est une véritable passion qui se transmet de génération en génération. Chaque pâtisserie raconte une histoire, chaque recette est le fruit d'années de savoir-faire et de créativité",
+        description: "La pâtisserie, cet art délicat et savoureux...",
         tags: 'pâtisserie, sucrerie',
         avatar: 'public/assets/forms-articles/chaises.webp'
     },
     {
         name: "Les Chaises : Éléments Essentiels du Confort et du Design",
-        description: "Les chaises, ces meubles omniprésents dans notre quotidien, jouent un rôle crucial tant en termes de fonctionnalité que de design. Elles ne servent pas seulement à nous asseoir ; elles définissent également l'esthétique et l'atmosphère de nos espaces de vie.",
+        description: "Les chaises, ces meubles omniprésents...",
         tags: 'chaise, mobilier',
+        avatar: 'public/assets/forms-articles/chaises.webp'
+    },
+    {
+        name: "L’Art du Jardinage : Créer un Havre de Paix",
+        description: "Le jardinage est bien plus qu’un simple passe-temps...",
+        tags: 'jardinage, nature, bien-être',
+        avatar: 'public/assets/forms-articles/chaises.webp'
+    },
+    {
+        name: "Voyager Autrement : À la Découverte des Trésors Cachés",
+        description: "Le voyage ne se limite pas aux grandes destinations...",
+        tags: 'voyage, culture, découverte',
+        avatar: 'public/assets/forms-articles/chaises.webp'
+    },
+    {
+        name: "La Photographie : Capturer l’Éphémère",
+        description: "Photographier, c’est figer un instant, une émotion...",
+        tags: 'photographie, art, image',
         avatar: 'public/assets/forms-articles/chaises.webp'
     }
 ];

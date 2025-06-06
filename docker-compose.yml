@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 3s
+      timeout: 3s
+      retries: 2
+    container_name: mysql_dev
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myapp_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_TCP_PORT: 3306
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./HF.sql:/docker-entrypoint-initdb.d/HF.sql
+    networks:
+      - myapp-network
+  frontend:
+    build:
+      context: ./Frontend/HaveFuun
+      dockerfile: Dockerfile
+    container_name: frontend_app
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - myapp-network
+  backend:
+    build: ./Backend
+    container_name: backend_app
+    ports:
+      - "3000:3000" 
+    environment:
+      DOCKER_DB_HOST: mysql
+      DOCKER_DB_PORT: 3306
+      DOCKER_DB_USER: user
+      DOCKER_DB_PASSWORD: password
+      DOCKER_DB_NAME: myapp_db
+    depends_on:
+      mysql :
+        condition: service_healthy
+    networks:
+      - myapp-network
+
+volumes:
+  mysql_data:
+
+networks:
+  myapp-network:

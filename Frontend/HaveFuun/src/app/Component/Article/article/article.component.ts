@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './article.component.html',
   styleUrl: './article.component.scss'
 })
+
 export class ArticleComponent implements OnInit {
 
   data!: Observable<ArticleWithComments>

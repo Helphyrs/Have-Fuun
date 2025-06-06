@@ -24,7 +24,7 @@
                 @for(article of articles ; track article ; let index = $index) {
                 <tr>
                     <td>{{ article.ID_article }}</td>
-                    <td><img class="logo-image-table" [src]="'http://localhost:4912/'+article.avatar"
+                    <td><img class="logo-image-table" [src]="'http://localhost:3000/'+article.avatar"
                             alt="avatar de l'article"></td>
                     <td>{{ article.name }}</td>
                     <td>{{ article.tags }}</td>

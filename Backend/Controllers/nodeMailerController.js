@@ -3,12 +3,12 @@ require('dotenv').config;
 module.exports = {
     sendMail: async (req, res) => {
         try {
-            const transporter = nodemailer.createTransport({
+            var transport = nodemailer.createTransport({
                 host: "sandbox.smtp.mailtrap.io",
                 port: 2525,
                 auth: {
-                    user: "1f0fef8627d9d8",
-                    pass: "20cd8c37dad60b"
+                    user: "c5984f754fc01d",
+                    pass: "eb93ca9131e0cf"
                 }
             });
 
@@ -20,7 +20,7 @@ module.exports = {
                 subject: objet,
                 text: message
             };
-            await transporter.sendMail(mailOptions);
+            await transport.sendMail(mailOptions);
             res.status(200).send("Votre email a bien été envoyé")
         } catch (error) {
             console.error("Erreur lors de l'envoi de l'email :", error);

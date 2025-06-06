@@ -25,3 +25,27 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Utilisation des routes 
+
+Toutes les routes ont une utilisation précises, identifiable par le nom :
+    - adminRoad, traitent toutes les routes qui sont géré par les administrateurs ;
+    - articleRoad, traitent toutes les routes qui sont en lien avec les articles ;
+    - etc
+
+L'architecture, est un modèle MVC, le back gère, le MC, Model/Controller, et le V pour Views est géré par le front via Angular 
+
+L'architecture est segmentée, avant de passer aux controllers dans les routes, les middlewares adaptés vont être enclenchés pour faire la vérification,
+ou traiter certains éléments en amont (sanitization, multer, etc)
+
+BDD : MYSQL / BACK : Express Nodejs / FRONT : Angular
+
+Il faut charger les fixtures par la commande : 
+    - cd Backend/Fixtures
+    - ts-node ./loadFixtures.js
+    - cd ../../ (=> afin de revenir à la racine)
+
+Pour supprimer les fixtures, ou tout simplement réinitialisé la BDD de cette table (sans toucher aux roles)
+    - cd Backend/Fixtures
+    - ts-node ./removeFixtures.js
+    - cd ../../ (=> afin de revenir à la racine)
